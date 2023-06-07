@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from 'src/models/user.class';
-import { Firestore, collection, collectionData, onSnapshot } from '@angular/fire/firestore';
-// import { Observable } from 'rxjs';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
 
 
 
@@ -18,6 +16,7 @@ export class UserComponent {
   allUsers: any = [];
 
   constructor(public dialog: MatDialog, private firestore: Firestore) {
+    // this.getAllDocs();
     this.readData();
   }
 
@@ -26,11 +25,13 @@ export class UserComponent {
     let changes;
     const collectionRef = collection(this.firestore, 'users');
     onSnapshot(collectionRef, (snapshot) => {
-      changes = snapshot.docs.map(doc => doc.data())
+      changes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       this.allUsers = changes;
-      console.log('allUsers', this.allUsers);
     });
   }
+
+
+
 
 
   openDialog(): void {
@@ -38,4 +39,22 @@ export class UserComponent {
   }
 }
 
+
+  // readData() {
+  //   let changes;
+  //   const collectionRef = collection(this.firestore, 'users');
+  //   onSnapshot(collectionRef, (snapshot) => {
+  //     changes = snapshot.docs.map(doc => doc.data())
+  //     this.allUsers = changes;
+  //     console.log('allUsers', this.allUsers);
+  //   });
+  // }
+
+
+  // async getAllDocs() {
+  //   const querySnapshot = await getDocs(collection(this.firestore, "users"));
+  //   querySnapshot.forEach((doc) => {
+  //     console.log(`${doc.id}`);
+  //   });
+  // }
 
