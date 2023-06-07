@@ -25,17 +25,14 @@ export class DialogAddUserComponent {
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     this.loading = true;
-    
-    
+
+
     const usersCollection = collection(this.firestore, 'users');
-    addDoc(usersCollection,this.user.toJson()).then(async (result) => {
+    addDoc(usersCollection, this.user.toJson()).then(async (result) => {
       const docSnap = await getDoc(result);
-      console.log("Document data:", docSnap.data());
       this.loading = false;
       this.dialogRef.close()
     });
 
   }
-
-  onNoClick() { }
 }

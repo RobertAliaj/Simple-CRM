@@ -1,5 +1,4 @@
 <mat-card>
-
     <table>
         <tr>
             <th>Name</th>
@@ -7,20 +6,12 @@
             <th>City</th>
         </tr>
 
-        <tr >
-            <td>Name</td>
-            <td>Email</td>
-            <td>City</td>
-        </tr>
-
-        <tr >
-            <td>Name</td>
-            <td>Email</td>
-            <td>City</td>
+        <tr *ngFor="let user of allUsers">
+            <td>{{ user.firstName }}  {{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.city }}</td>
         </tr>
     </table>
-
-    <!-- <mat-card-content>Simple card</mat-card-content> -->
 </mat-card>
 
 <button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"

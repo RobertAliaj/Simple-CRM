@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from 'src/models/user.class';
+import { Firestore, collection, collectionData, onSnapshot } from '@angular/fire/firestore';
+// import { Observable } from 'rxjs';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 
@@ -11,12 +14,24 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-
-
   user: User = new User();
+  allUsers: any = [];
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private firestore: Firestore) {
+    this.readData();
   }
+
+
+  readData() {
+    let changes;
+    const collectionRef = collection(this.firestore, 'users');
+    onSnapshot(collectionRef, (snapshot) => {
+      changes = snapshot.docs.map(doc => doc.data())
+      this.allUsers = changes;
+      console.log('allUsers', this.allUsers);
+    });
+  }
+
 
   openDialog(): void {
     this.dialog.open(DialogAddUserComponent);

@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="loading" mode="indeterminate" ></mat-progress-bar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
 
 <!-- Der Titel von der Pop-Up Karte -->
@@ -12,21 +12,27 @@
     <div>
         <mat-form-field appearance="outline" class="margin-right-16">
             <mat-label>First Name</mat-label>
-            <input [disabled]="loading" matInput [(ngModel)]="user.firstName" placeholder="Placeholder">
+            <input [disabled]="loading" matInput [(ngModel)]="user.firstName" placeholder="First Name">
             <!-- <mat-hint>Please enter your firstname</mat-hint> -->
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input [disabled]="loading" matInput [(ngModel)]="user.lastName" placeholder="Placeholder">
+            <input [disabled]="loading" matInput [(ngModel)]="user.lastName" placeholder="Last Name">
             <!-- <mat-hint>Please enter your lastname</mat-hint> -->
         </mat-form-field>
     </div>
 
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>E-Mail</mat-label>
+        <input [disabled]="loading" matInput [(ngModel)]="user.email" placeholder="E-Mail">
+        <!-- <mat-hint>Please enter your lastname</mat-hint> -->
+    </mat-form-field>
+
     <div>
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
-            <input [disabled]="loading" matInput [(ngModel)]="birthDate" [matDatepicker]="picker1">
+            <input [disabled]="loading" matInput [(ngModel)]="birthDate" [matDatepicker]="picker1" placeholder="Date">
             <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
             <!-- <mat-hint>Please enter a date</mat-hint> -->
@@ -36,7 +42,7 @@
     <div>
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Street + House No.</mat-label>
-            <input [disabled]="loading" matInput [(ngModel)]="user.street" placeholder="Placeholder">
+            <input [disabled]="loading" matInput [(ngModel)]="user.street" placeholder="Adress">
             <!-- <mat-hint>Please enter your lastname</mat-hint> -->
         </mat-form-field>
     </div>
@@ -44,13 +50,13 @@
     <div>
         <mat-form-field appearance="outline" class="margin-right-16">
             <mat-label>Zip Code</mat-label>
-            <input [disabled]="loading" matInput [(ngModel)]="user.zipCode" placeholder="Placeholder">
+            <input [disabled]="loading" matInput [(ngModel)]="user.zipCode" placeholder="Zip Code">
             <!-- <mat-hint>Please enter your lastname</mat-hint> -->
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
-            <input [disabled]="loading" matInput [(ngModel)]="user.city" placeholder="Placeholder">
+            <input [disabled]="loading" matInput [(ngModel)]="user.city" placeholder="City">
             <!-- <mat-hint>Please enter your lastname</mat-hint> -->
         </mat-form-field>
     </div>
@@ -60,6 +66,6 @@
 
 <!-- Die Buttons von der Pop-Up Karte -->
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="this.dialogRef.close()">Cancel</button>
     <button mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
 </div>
