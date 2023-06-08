@@ -1,0 +1,41 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+
+<!-- Der Titel von der Pop-Up Karte -->
+<h1 mat-dialog-title>Add User</h1>
+
+
+<!-- Das Inputfeld von der Pop-Up Karte -->
+<div mat-dialog-content class="mat-form-field-container">
+
+    <h1 mat-dialog-title>Edit Adress</h1>
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Street + House No.</mat-label>
+            <input [disabled]="loading" matInput [(ngModel)]="user.street" placeholder="Adress">
+            <!-- <mat-hint>Please enter your lastname</mat-hint> -->
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="outline" class="margin-right-16">
+            <mat-label>Zip Code</mat-label>
+            <input [disabled]="loading" matInput [(ngModel)]="user.zipCode" placeholder="Zip Code">
+            <!-- <mat-hint>Please enter your lastname</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input [disabled]="loading" matInput [(ngModel)]="user.city" placeholder="City">
+            <!-- <mat-hint>Please enter your lastname</mat-hint> -->
+        </mat-form-field>
+    </div>
+
+</div>
+
+
+<!-- Die Buttons von der Pop-Up Karte -->
+<div mat-dialog-actions>
+    <button mat-button (click)="this.dialogRef.close()">Cancel</button>
+    <button mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
+</div>

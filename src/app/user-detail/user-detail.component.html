@@ -1,4 +1,15 @@
 <mat-card class="user-detail-header">
+
+
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="detail-btn">
+        <mat-icon>more_horiz</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="editUserDetail()">Edit</button>
+      </mat-menu>
+
+
     <img src="assets/img/man.webp">
 
     <div class="user-details">
@@ -8,7 +19,16 @@
 </mat-card>
 
 
-<mat-card class="mt-32">
+<mat-card class="mt-32 detail-card">
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="detail-btn">
+        <mat-icon>more_horiz</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editMenu()">Edit</button>
+      </mat-menu>
+
     <mat-card-header>
         <mat-card-title>Adress</mat-card-title>
     </mat-card-header>
