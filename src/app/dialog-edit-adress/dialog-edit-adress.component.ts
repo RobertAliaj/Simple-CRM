@@ -24,7 +24,7 @@ export class DialogEditAdressComponent {
     updateDoc(userDoc, this.user.toJson()).then(() => {
       this.loading = false;
       this.dialogRef.close()
-    });
+    }); 
   }
 
   

@@ -20,15 +20,19 @@ export class DialogEditUserComponent {
 
   constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>, private firestore: Firestore) { }
 
+  // ngOnInit() {
+  //   let birthDateNumber = this.user.birthDate; // angenommen, dies ist die Anzahl der Millisekunden seit der Unix-Epoche
+  //   let birthDate = new Date(birthDateNumber); // konvertiert die Anzahl der Millisekunden in ein Datum
+  //   console.log(birthDate); // gibt das Datum aus
+  // }
+
 
   async saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
-
     this.loading = true;
     const userDoc = doc(this.firestore, 'users', this.userId);
     updateDoc(userDoc, this.user.toJson()).then(() => {
       this.loading = false;
       this.dialogRef.close()
-    }); 
+    });
   }
 }

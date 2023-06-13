@@ -16,6 +16,7 @@ import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.co
 export class UserDetailComponent {
   userId!: string;
   user: User = new User();
+  birthDate!:  Date;
 
   constructor(private route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog) { }
 
@@ -44,7 +45,6 @@ export class UserDetailComponent {
     const dialog = this.dialog.open(DialogEditAdressComponent);
     dialog.componentInstance.user = new User(this.user.toJson());
     dialog.componentInstance.userId = this.userId;
-    
   }
 
 

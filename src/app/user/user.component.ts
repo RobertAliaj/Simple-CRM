@@ -12,11 +12,10 @@ import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  user: User = new User();
+  // user: User = new User();
   allUsers: any = [];
 
   constructor(public dialog: MatDialog, private firestore: Firestore) {
-    // this.getAllDocs();
     this.readData();
   }
 
@@ -31,30 +30,7 @@ export class UserComponent {
   }
 
 
-
-
-
   openDialog(): void {
     this.dialog.open(DialogAddUserComponent);
   }
 }
-
-
-  // readData() {
-  //   let changes;
-  //   const collectionRef = collection(this.firestore, 'users');
-  //   onSnapshot(collectionRef, (snapshot) => {
-  //     changes = snapshot.docs.map(doc => doc.data())
-  //     this.allUsers = changes;
-  //     console.log('allUsers', this.allUsers);
-  //   });
-  // }
-
-
-  // async getAllDocs() {
-  //   const querySnapshot = await getDocs(collection(this.firestore, "users"));
-  //   querySnapshot.forEach((doc) => {
-  //     console.log(`${doc.id}`);
-  //   });
-  // }
-
