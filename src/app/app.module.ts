@@ -29,6 +29,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DialogEditAdressComponent } from './dialog-edit-adress/dialog-edit-adress.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { DialogAddTransactionComponent } from './dialog-add-transaction/dialog-add-transaction.component';
 
 
 
@@ -43,7 +45,9 @@ import { HttpClientModule } from '@angular/common/http';
     DialogAddUserComponent,
     UserDetailComponent,
     DialogEditAdressComponent,
-    DialogEditUserComponent
+    DialogEditUserComponent,
+    TransactionsComponent,
+    DialogAddTransactionComponent
   ],
   imports: [
     BrowserModule,

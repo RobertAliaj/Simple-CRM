@@ -1,0 +1,29 @@
+.transaction-card {
+    width: 250px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    
+    .content-row {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 10px;
+    }
+
+    .label {
+        font-weight: 600;
+        color: #333;
+        font-size: 1.1em;
+    }
+
+    .value {
+        color: #777;
+        font-size: 1em;
+    }
+
+}

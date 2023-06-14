@@ -7,7 +7,7 @@
 
     <mat-menu #userMenu="matMenu">
         <button mat-menu-item (click)="editUserDetail()">Edit</button>
-      </mat-menu>
+    </mat-menu>
 
 
     <img src="assets/img/man.webp">
@@ -27,7 +27,7 @@
 
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="editAdress()">Edit</button>
-      </mat-menu>
+    </mat-menu>
 
     <mat-card-header>
         <mat-card-title>Adress</mat-card-title>
@@ -39,3 +39,8 @@
     </mat-card-content>
 
 </mat-card>
+
+<button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"
+    matTooltipPosition="above">
+    <mat-icon>send</mat-icon>
+</button>

@@ -6,6 +6,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { User } from 'src/models/user.class';
 import { DialogEditAdressComponent } from '../dialog-edit-adress/dialog-edit-adress.component';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+import { DialogAddTransactionComponent } from '../dialog-add-transaction/dialog-add-transaction.component';
 
 
 @Component({
@@ -52,5 +53,9 @@ export class UserDetailComponent {
     const dialog = this.dialog.open(DialogEditUserComponent);
     dialog.componentInstance.user = new User(this.user.toJson());
     dialog.componentInstance.userId = this.userId;
+  }
+
+  openDialog(): void {
+    this.dialog.open(DialogAddTransactionComponent);
   }
 }

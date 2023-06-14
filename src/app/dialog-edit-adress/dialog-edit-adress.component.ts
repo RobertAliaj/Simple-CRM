@@ -23,13 +23,7 @@ export class DialogEditAdressComponent {
     const userDoc = doc(this.firestore, 'users', this.userId);
     updateDoc(userDoc, this.user.toJson()).then(() => {
       this.loading = false;
-      this.dialogRef.close()
+      this.dialogRef.close();
     }); 
   }
-
-  
-  // save(){
-  //   this.firestore.collection('users').doc(this.userId).valueChanges()
-  // }
-
 }

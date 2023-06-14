@@ -16,7 +16,7 @@ export class DashboardComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
-    this.gatherAndProcessBTCData();
+    // this.gatherAndProcessBTCData();
   }
 
 
