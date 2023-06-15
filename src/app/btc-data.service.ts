@@ -7,26 +7,37 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BtcDataService {
 
-  btcData: any = {
-    date: [],
-    price: [],
-    market_cap: []
-  };
-
-  httpDate: string = '';
+  btcData: any;
 
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    this.btcData = this.initializeBTCData();
+  }
 
 
-    /**
-   * This asynchronous function fetches data from the API based on a given date.
-   *
-   * @param {string} date - A string representing the day for which data is to be fetched.
-   * The date string should be in the format that the API expects.
-   *
-   * @returns {Promise<Object>} A Promise that resolves to an object containing the JSON response from the API.
-   */
+  initializeBTCData() {
+    return {
+      date: [],
+      price: [],
+      market_cap: []
+    };
+  }
+
+  resetBTCData() {
+    this.btcData = this.initializeBTCData();
+  }
+
+
+
+  /**
+ * This asynchronous function fetches data from the API based on a given date.
+ *
+ * @param {string} date - A string representing the day for which data is to be fetched.
+ * The date string should be in the format that the API expects.
+ *
+ * @returns {Promise<Object>} A Promise that resolves to an object containing the JSON response from the API.
+ */
   async fetchApiData(date: string) {
     let url = `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${date}&localization=false`;
     let responseAsJSON = await this.http.get(url).toPromise();
@@ -65,7 +76,6 @@ export class BtcDataService {
     let date = new Date();
     date.setDate(currentDate.getDate() - i);
     let formattedDate = this.formatDate(date);
-    this.httpDate = formattedDate;
 
     return formattedDate;
   }

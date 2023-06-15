@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { BtcDataService } from '../btc-data.service';
+import { last } from 'rxjs';
 Chart.register(...registerables);
 
 @Component({
@@ -11,26 +12,73 @@ Chart.register(...registerables);
 export class DashboardComponent implements AfterViewInit {
 
 
+  canFetch: boolean = true;
+  timePassed!: number;
+  btcDataCopy: any;
+
   constructor(private btcService: BtcDataService) {
   }
 
 
   ngAfterViewInit() {
-    // this.gatherAndProcessBTCData();
+    this.handleLastFetch();
+    this.gatherAndProcessBTCData()
+  }
+
+
+  handleLastFetch() {
+    let lastFetchDateTimeString = localStorage.getItem('lastFetchDateTime');
+    let lastFetchDateTime = lastFetchDateTimeString ? new Date(lastFetchDateTimeString) : null;
+
+    if (lastFetchDateTime) {
+      let elapsedSeconds = (Date.now() - lastFetchDateTime.getTime()) / 1000;
+
+      if (elapsedSeconds > 30) {
+        this.canFetch = true;
+      } else {
+        this.canFetch = false;
+      }
+    }
+
+    let now = new Date();
+    localStorage.setItem('lastFetchDateTime', now.toString());
   }
 
 
   /**
    *  This Method is used to gather and prozess the BTC Data for the last 7 days from today
-   */
+  */
   async gatherAndProcessBTCData() {
-    for (let i = 0; i < 7; i++) {
-      let date = this.btcService.setDateFortheLastSevenDays(i)
-      let responseAsJSON = await this.btcService.fetchApiData(date);
-      this.btcService.pushDataToBtcData(responseAsJSON, date);
-    }
+    this.btcService.resetBTCData();
+    
+    if (this.canFetch) {
+      for (let i = 0; i < 7; i++) {
+        let date = this.btcService.setDateFortheLastSevenDays(i)
+        let responseAsJSON = await this.btcService.fetchApiData(date);
+        this.btcService.pushDataToBtcData(responseAsJSON, date);
+      }
 
-    this.renderChart(this.btcService.btcData.date, this.btcService.btcData.price, this.btcService.btcData.market_cap);
+      this.saveLastBTCFetchinLocalStorage();
+      this.renderChart(this.btcService.btcData.date, this.btcService.btcData.price, this.btcService.btcData.market_cap);
+
+      console.log('FETCH');
+    } else {
+      this.getLocalStorageData();
+      this.renderChart(this.btcDataCopy.date, this.btcDataCopy.price, this.btcDataCopy.market_cap);
+      console.log('NO FETCH');
+    }
+  }
+
+
+  getLocalStorageData() {
+    let retrievedObject: any = localStorage.getItem('btcDataCopy');
+    this.btcDataCopy = JSON.parse(retrievedObject);
+  }
+
+
+  saveLastBTCFetchinLocalStorage() {
+    this.btcDataCopy = this.btcService.btcData;
+    localStorage.setItem('btcDataCopy', JSON.stringify(this.btcDataCopy));
   }
 
 

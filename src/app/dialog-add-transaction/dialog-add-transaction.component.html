@@ -1,16 +1,12 @@
 <!-- Der Titel von der Pop-Up Karte -->
 <h1 mat-dialog-title>Send Bitcon</h1>
 
-
-<!-- Das Inputfeld von der Pop-Up Karte -->
 <div mat-dialog-content class="mat-form-field-container">
-
     <mat-form-field appearance="outline" class="margin-right-16">
-        <mat-label>BTC Amount</mat-label>
-        <input matInput placeholder="BTC Amount">
-        <!-- <mat-hint>Please enter your firstname</mat-hint> -->
+        <mat-label>USD Amount</mat-label>
+        <input matInput placeholder="USD Amount" type="number" min="0" step="0.01" [(ngModel)]="usdAmount" (ngModelChange)="onUSDAmountChange($event)">
+        <mat-hint>{{ usdAmountAsString }} = {{ btcAmount }} BTC</mat-hint>
     </mat-form-field>
-
 </div>
 
 
