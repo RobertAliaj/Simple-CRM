@@ -19,9 +19,9 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loading = true;
-    this.handleLastFetch();
-    this.gatherAndProcessBTCData();
+    // this.loading = true;
+    // this.handleLastFetch();
+    // this.gatherAndProcessBTCData();
   }
 
 
@@ -47,7 +47,8 @@ export class DashboardComponent implements OnInit {
 
     if (this.canFetch) {
       for (let i = 0; i < 7; i++) {
-        let date = this.btcService.setDateFortheLastSevenDays(i)
+        let date = this.btcService.setDateFortheLastSevenDays(i);
+        console.log(date);
         let responseAsJSON = await this.btcService.fetchApiData(date);
         this.btcService.pushDataToBtcData(responseAsJSON, date);
       }

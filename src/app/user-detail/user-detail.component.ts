@@ -7,6 +7,7 @@ import { User } from 'src/models/user.class';
 import { DialogEditAdressComponent } from '../dialog-edit-adress/dialog-edit-adress.component';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogAddTransactionComponent } from '../dialog-add-transaction/dialog-add-transaction.component';
+import { Transaction } from 'src/models/transaction.class';
 
 
 @Component({
@@ -56,6 +57,7 @@ export class UserDetailComponent {
   }
 
   openDialog(): void {
-    this.dialog.open(DialogAddTransactionComponent);
+    const dialog = this.dialog.open(DialogAddTransactionComponent);
+    dialog.componentInstance.user = new User(this.user.toJson());
   }
 }

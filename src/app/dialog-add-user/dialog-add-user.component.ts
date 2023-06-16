@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from 'src/models/user.class';
-import { Firestore, collection, getDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, getDoc } from '@angular/fire/firestore';
 import { addDoc } from "firebase/firestore";
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -33,6 +33,8 @@ export class DialogAddUserComponent {
       this.loading = false;
       this.dialogRef.close()
     });
-
   }
+
+
+
 }

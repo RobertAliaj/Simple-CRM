@@ -4,20 +4,20 @@
         <h1 class="h1">Transactions Overview</h1>
     </div>
 
-    <mat-card class="transaction-card box-shadow">
-        <h2 class="transaction-title">Transaktionsdetails</h2>
+    <mat-card class="transaction-card box-shadow" *ngFor="let transaction of transactions">
+        <h2 class="transaction-title">Transactiondetails</h2>
         <mat-card-content>
             <div class="content-row">
                 <span class="label">Name:</span>
-                <span class="value">{{ firstName }} {{ lastName }}</span>
+                <span class="value">{{ transaction.firstName }} {{ transaction.lastName }}</span>
             </div>
             <div class="content-row">
                 <span class="label">Amount:</span>
-                <span class="value">{{ amount }} BTC</span>
+                <span class="value"> {{ transaction.btcAmount }} BTC</span>
             </div>
             <div class="content-row">
                 <span class="label">Transaction Date:</span>
-                <span class="value">{{ date }}</span>
+                <span class="value">{{ transaction.date }}</span>
             </div>
         </mat-card-content>
     </mat-card>

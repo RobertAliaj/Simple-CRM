@@ -1,15 +1,15 @@
 export class Transaction {
     firstName!: string;
     lastName!: string;
-    userId!: string;
-    amount!: number;
-    date!: number;
+    usdAmount!: number;
+    btcAmount!: string;
+    date!: string;
 
     constructor(obj?: any) {
         this.firstName = obj ? obj.firstName : '',           
         this.lastName = obj ? obj.lastName : '',               
-        this.userId = obj ? obj.userId : '';
-        this.amount = obj ? obj.amount : '';
+        this.usdAmount = obj ? obj.usdAmount : '';
+        this.btcAmount = obj ? obj.btcAmount : '';
         this.date = obj ? obj.date : '';
     }
 
@@ -17,8 +17,8 @@ export class Transaction {
         return {
             firstName: this.firstName,
             lastName: this.lastName,
-            userId: this.userId,
-            amount: this.amount,
+            usdAmount: this.usdAmount,
+            btcAmount: this.btcAmount,
             date: this.date,
         }
     }
