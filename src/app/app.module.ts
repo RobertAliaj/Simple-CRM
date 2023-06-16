@@ -31,6 +31,8 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
 import { HttpClientModule } from '@angular/common/http';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { DialogAddTransactionComponent } from './dialog-add-transaction/dialog-add-transaction.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 
@@ -68,6 +70,7 @@ import { DialogAddTransactionComponent } from './dialog-add-transaction/dialog-a
     MatCardModule,
     HttpClientModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

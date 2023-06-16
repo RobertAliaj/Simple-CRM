@@ -1,14 +1,9 @@
-<!-- <div>
-    <span>Bitcoin Price Today: {{ bitcoinToday }}</span>
-    <br>
-    <span>Date Today: {{bitcoinDate}}</span>
-</div> -->
-
-
-
-<div>
-    <h1>Bitcoin Price</h1>
+<div class="chart-container">
+    <h1 *ngIf="!loading">Weekly Overview of Bitcoin Price</h1>
     <canvas id="myChart"></canvas>
 </div>
 
-<button (click)="getLocalStorageData()">Show Local Storage Data</button>
+<div class="loader-container" *ngIf="loading">
+    <span>Loading Bitcoin Chart</span>
+    <div class="dot-elastic"></div>
+</div>

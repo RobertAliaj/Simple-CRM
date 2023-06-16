@@ -1,17 +1,24 @@
-<mat-card class="transaction-card">
-    <h2 class="transaction-title">Transaktionsdetails</h2>
-    <mat-card-content>
-        <div class="content-row">
-            <span class="label">Name:</span>
-            <span class="value">{{ firstName }} {{ lastName }}</span>
-        </div>
-        <div class="content-row">
-            <span class="label">Amount:</span>
-            <span class="value">{{ amount }} BTC</span>
-        </div>
-        <div class="content-row">
-            <span class="label">Transaction Date:</span>
-            <span class="value">{{ date }}</span>
-        </div>
-    </mat-card-content>
-</mat-card>
+<div class="container">
+
+    <div class="title-div">
+        <h1>Transactions Overview</h1>
+    </div>
+
+    <mat-card class="transaction-card box-shadow">
+        <h2 class="transaction-title">Transaktionsdetails</h2>
+        <mat-card-content>
+            <div class="content-row">
+                <span class="label">Name:</span>
+                <span class="value">{{ firstName }} {{ lastName }}</span>
+            </div>
+            <div class="content-row">
+                <span class="label">Amount:</span>
+                <span class="value">{{ amount }} BTC</span>
+            </div>
+            <div class="content-row">
+                <span class="label">Transaction Date:</span>
+                <span class="value">{{ date }}</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

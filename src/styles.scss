@@ -1,23 +1,35 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 
-.margin-right-16{
+.margin-right-16 {
     margin-right: 16px;
 }
 
-.full-width{
+.full-width {
     width: 100%;
 }
 
-.mt-32{
+.mt-32 {
     margin-top: 32px;
 }
 
-.pt-16{
+.pt-16 {
     padding-top: 16px !important;
+}
+
+.box-shadow{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }

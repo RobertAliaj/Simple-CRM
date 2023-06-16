@@ -1,7 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { BtcDataService } from '../btc-data.service';
-import { last } from 'rxjs';
 Chart.register(...registerables);
 
 @Component({
@@ -9,20 +8,20 @@ Chart.register(...registerables);
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
 
 
   canFetch: boolean = true;
-  timePassed!: number;
   btcDataCopy: any;
+  loading: boolean = false;
 
-  constructor(private btcService: BtcDataService) {
-  }
+  constructor(private btcService: BtcDataService) { }
 
 
-  ngAfterViewInit() {
+  ngOnInit() {
+    this.loading = true;
     this.handleLastFetch();
-    this.gatherAndProcessBTCData()
+    this.gatherAndProcessBTCData();
   }
 
 
@@ -32,12 +31,7 @@ export class DashboardComponent implements AfterViewInit {
 
     if (lastFetchDateTime) {
       let elapsedSeconds = (Date.now() - lastFetchDateTime.getTime()) / 1000;
-
-      if (elapsedSeconds > 30) {
-        this.canFetch = true;
-      } else {
-        this.canFetch = false;
-      }
+      elapsedSeconds > 30 ? this.canFetch = true : this.canFetch = false;
     }
 
     let now = new Date();
@@ -50,7 +44,7 @@ export class DashboardComponent implements AfterViewInit {
   */
   async gatherAndProcessBTCData() {
     this.btcService.resetBTCData();
-    
+
     if (this.canFetch) {
       for (let i = 0; i < 7; i++) {
         let date = this.btcService.setDateFortheLastSevenDays(i)
@@ -58,14 +52,13 @@ export class DashboardComponent implements AfterViewInit {
         this.btcService.pushDataToBtcData(responseAsJSON, date);
       }
 
-      this.saveLastBTCFetchinLocalStorage();
+      this.saveLastBTCFetchInLocalStorage();
+      this.loading = false;
       this.renderChart(this.btcService.btcData.date, this.btcService.btcData.price, this.btcService.btcData.market_cap);
-
-      console.log('FETCH');
     } else {
       this.getLocalStorageData();
+      this.loading = false;
       this.renderChart(this.btcDataCopy.date, this.btcDataCopy.price, this.btcDataCopy.market_cap);
-      console.log('NO FETCH');
     }
   }
 
@@ -76,7 +69,7 @@ export class DashboardComponent implements AfterViewInit {
   }
 
 
-  saveLastBTCFetchinLocalStorage() {
+  saveLastBTCFetchInLocalStorage() {
     this.btcDataCopy = this.btcService.btcData;
     localStorage.setItem('btcDataCopy', JSON.stringify(this.btcDataCopy));
   }
