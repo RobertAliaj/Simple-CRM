@@ -40,6 +40,7 @@ export class DialogAddTransactionComponent {
     this.btcAmount = btcAmount;
   }
 
+  
   formatNumberToUSD(number: any) {
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
