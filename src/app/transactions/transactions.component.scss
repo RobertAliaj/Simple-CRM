@@ -4,6 +4,13 @@
     flex-direction: column;
     gap: 20px;
 
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+
+    }
+
 
     .title-div {
         width: 100%;
@@ -35,12 +42,13 @@
 
         .label {
             font-weight: 600;
-            color: #333;
+            color: #777;
             font-size: 1.1em;
         }
 
         .value {
-            color: #777;
+            font-weight: 600;
+            color: #333;
             font-size: 1em;
         }
 

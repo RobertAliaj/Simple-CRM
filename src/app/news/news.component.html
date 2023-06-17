@@ -1,0 +1,18 @@
+<div class="news-container">
+    <mat-card class="article-card box-shadow" *ngFor="let article of articles">
+        <mat-card-header>
+            <mat-card-title class="article-title">{{article.title}}</mat-card-title>
+            <mat-card-subtitle class="article-source">Source: <a [href]="article.source.url"
+                    target="_blank">{{article.source.name}}</a></mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="article.image" alt="Article Image">
+        <mat-card-content>
+            <p class="article-description">{{article.description}}</p>
+            <p class="article-date">Published at: {{article.publishedAt | date: 'short'}}</p>
+        </mat-card-content>
+        <mat-card-actions class="article-actions">
+            <button mat-button><a [href]="article.url" target="_blank">Read more</a></button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

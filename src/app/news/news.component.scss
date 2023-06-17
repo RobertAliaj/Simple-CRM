@@ -1,0 +1,48 @@
+$card-width: 300px;
+$card-margin: 15px;
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+
+    img{
+        object-fit: cover;
+        height: 200px
+    };
+
+    .article-card {
+        width: $card-width;
+        position: relative;
+    }
+
+    .article-title {
+        font-size: 1.25em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .article-source {
+        font-size: 0.8em;
+        color: darkgray;
+
+        a {
+            color: darkgray;
+        }
+    }
+
+    .article-description {
+        margin-top: 14px;
+        font-size: 1em;
+        line-height: 1.5em;
+        color: gray;
+        margin-bottom: 10px;
+    }
+
+    .article-date {
+        font-size: 0.8em;
+        color: darkgray;
+        margin-bottom: 10px;
+    }
+}

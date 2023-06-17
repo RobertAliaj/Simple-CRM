@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { DialogAddTransactionComponent } from './dialog-add-transaction/dialog-add-transaction.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NewsComponent } from './news/news.component';
 
 
 
@@ -49,7 +50,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DialogEditAdressComponent,
     DialogEditUserComponent,
     TransactionsComponent,
-    DialogAddTransactionComponent
+    DialogAddTransactionComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
