@@ -30,16 +30,17 @@ export class UserDetailComponent {
     this.getUser();
   }
 
+  deleteUser(){  
+  }
+
 
   getUser() {
     let result;
     const docRef = doc(this.firestore, 'users', this.userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       this.user = new User(docSnap.data());
+      console.log(this.user);
     });
-
-    // ... Später, wenn ich den Listener nicht mehr brauche
-    // unsubscribe();
   }
 
 

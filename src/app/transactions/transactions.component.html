@@ -1,26 +1,19 @@
-<div class="container">
-
-    <div class="title-div">
-        <h1 class="h1">Transactions Overview</h1>
-    </div>
-
-    <div class="card-container">
-        <mat-card class="transaction-card box-shadow" *ngFor="let transaction of transactions">
-            <!-- <h2 class="transaction-title">Transactiondetails</h2> -->
-            <mat-card-content>
-                <div class="content-row">
-                    <span class="label">Name:</span>
-                    <span class="value">{{ transaction.firstName }} {{ transaction.lastName }}</span>
-                </div>
-                <div class="content-row">
-                    <span class="label">Amount:</span>
-                    <span class="value"> {{ transaction.btcAmount }} BTC</span>
-                </div>
-                <div class="content-row">
-                    <span class="label">Transaction Date:</span>
-                    <span class="value">{{ transaction.date }}</span>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+<div class="card-container">
+    <mat-card class="transaction-card box-shadow" *ngFor="let transaction of transactions">
+        <!-- <h2 class="transaction-title">Transactiondetails</h2> -->
+        <mat-card-content>
+            <div class="content-row">
+                <span class="label">Name:</span>
+                <span class="value">{{ transaction.firstName }} {{ transaction.lastName }}</span>
+            </div>
+            <div class="content-row">
+                <span class="label">Amount:</span>
+                <span class="value"> {{ transaction.btcAmount }} BTC</span>
+            </div>
+            <div class="content-row">
+                <span class="label">Transaction Date:</span>
+                <span class="value">{{ transaction.date }}</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

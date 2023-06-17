@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Transaction } from 'src/models/transaction.class';
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 
 
 @Component({
@@ -9,13 +9,13 @@ import { collection, getDocs, onSnapshot } from "firebase/firestore";
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class TransactionsComponent implements OnInit {
+export class TransactionsComponent implements AfterContentInit {
 
   transactions: Transaction[] = [];
 
   constructor(private firestore: Firestore) { }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     this.getUsers();
   }
 

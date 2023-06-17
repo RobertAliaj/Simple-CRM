@@ -18,8 +18,10 @@
     display: flex;
     align-items: center;
 
-    img{
-        height: 56px;
+    img {
+        width: 180px;
+        height: 45px;
+        object-fit: cover;
     }
 }
 
@@ -30,13 +32,13 @@ mat-toolbar-row,
     min-height: 56px;
 }
 
-.menu-items{
+.menu-items {
     list-style-type: none;
     padding-left: 0;
     margin-top: 0;
 
 
-    li{
+    li {
         padding: 0 16px;
         height: 48px;
         cursor: pointer;
@@ -45,12 +47,12 @@ mat-toolbar-row,
         gap: 8px;
 
 
-        &:hover{
+        &:hover {
             background-color: #f5f5f5;
         }
     }
 }
 
-.router-container{
+.router-container {
     padding: 16px 56px 0 56px;
 }

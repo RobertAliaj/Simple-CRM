@@ -19,7 +19,7 @@ export class NewsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
   }
 
   apikey = '5edb8f8face96bfd5c78b9fbc761777b';
@@ -34,11 +34,6 @@ export class NewsComponent implements OnInit {
       })
       .then((data) => {
         this.articles = data.articles;
-        console.log(this.articles);
-        // for (i = 0; i < articles.length; i++) {
-        //   console.log(articles);
-        //   break;
-        // }
       });
   }
 
