@@ -15,6 +15,7 @@ $card-margin: 15px;
     .article-card {
         width: $card-width;
         position: relative;
+        border-radius: 20px;
     }
 
     .article-title {

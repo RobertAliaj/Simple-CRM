@@ -38,9 +38,9 @@ export class DialogAddTransactionComponent implements OnInit {
 
   async saveTransaction() {
     this.loading = true;
-    const usersCollection = collection(this.firestore, 'transactions');
+    const transactionsCollection = collection(this.firestore, 'transactions');
     this.saveToFireBase();
-    addDoc(usersCollection, this.transaction.toJson()).then(async (result) => {
+    addDoc(transactionsCollection, this.transaction.toJson()).then(async (result) => {
       const docSnap = await getDoc(result);
       this.loading = false;
       this.dialogRef.close();

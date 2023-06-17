@@ -17,13 +17,29 @@ export class DialogAddUserComponent {
   user: User = new User();
   birthDate!: Date;
   loading = false;
+  color!: string;
 
   constructor(private firestore: Firestore, public dialogRef: MatDialogRef<DialogAddUserComponent>) {
   }
 
 
+  getRandomLightColor() {
+    let hue = Math.floor(Math.random() * 360);
+    let saturation = Math.floor(Math.random() * 30) + 70; // Saturation im Bereich von 70% bis 100%
+    let lightness = Math.floor(Math.random() * 30) + 70; // Lightness im Bereich von 70% bis 100%
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  }
+
+  changeColor() {
+    this.color = this.getRandomLightColor();
+  }
+
+
+
+
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
+    this.user.color = this.color = this.getRandomLightColor();
     this.loading = true;
 
 
@@ -34,7 +50,4 @@ export class DialogAddUserComponent {
       this.dialogRef.close()
     });
   }
-
-
-
 }

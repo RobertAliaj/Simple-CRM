@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
+import { deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { User } from 'src/models/user.class';
 import { DialogEditAdressComponent } from '../dialog-edit-adress/dialog-edit-adress.component';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogAddTransactionComponent } from '../dialog-add-transaction/dialog-add-transaction.component';
-import { Transaction } from 'src/models/transaction.class';
 
 
 @Component({
@@ -18,10 +17,15 @@ import { Transaction } from 'src/models/transaction.class';
 export class UserDetailComponent {
   userId!: string;
   user: User = new User();
-  birthDate!:  Date;
+  birthDate!: Date;
 
-  constructor(private route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog) { }
-
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private firestore: Firestore,
+    public dialog: MatDialog
+  ) { 
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params =>
@@ -30,16 +34,18 @@ export class UserDetailComponent {
     this.getUser();
   }
 
-  deleteUser(){  
+  async deleteUser() {
+    const userRef = doc(this.firestore, 'users', this.userId);
+    await deleteDoc(userRef).then(() => {
+      this.router.navigate(['/user']);
+    })
   }
 
 
   getUser() {
-    let result;
     const docRef = doc(this.firestore, 'users', this.userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       this.user = new User(docSnap.data());
-      console.log(this.user);
     });
   }
 

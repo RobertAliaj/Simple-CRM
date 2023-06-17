@@ -7,7 +7,7 @@
         </tr>
 
         <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
-            <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <td> <div class="color-point" [style.background]="this.user.color"></div>{{ user.firstName }} {{ user.lastName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.city }}</td>
         </tr>

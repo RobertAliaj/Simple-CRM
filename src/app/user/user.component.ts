@@ -16,11 +16,11 @@ export class UserComponent {
   allUsers: any = [];
 
   constructor(public dialog: MatDialog, private firestore: Firestore) {
-    this.readData();
+    this.getAllUsers();
   }
 
 
-  readData() {
+  getAllUsers() {
     let changes;
     const collectionRef = collection(this.firestore, 'users');
     onSnapshot(collectionRef, (snapshot) => {

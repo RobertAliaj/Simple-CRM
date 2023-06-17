@@ -4,8 +4,20 @@
     right: 56px;
 }
 
+.color-point{
+    object-fit: contain;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #555;
+    position: absolute;
+    left: 18px;
+    top: 24px;
+}
+
 .card {
     width: 100%;
+    border-radius: 20px;
 }
 
 table {
@@ -16,6 +28,7 @@ table {
         border-bottom: 1px solid #ddd;
 
         td {
+            position: relative;
             height: 60px;
             padding: 8px;
             font-size: 16px;

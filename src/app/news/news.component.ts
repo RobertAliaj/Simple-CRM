@@ -19,10 +19,10 @@ export class NewsComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.getData();
+    this.getData();
   }
 
-  apikey = '5edb8f8face96bfd5c78b9fbc761777b';
+  apikey = 'ecb542685608d42c858ef57eff5b1663';
   q = 'crypto';
   url = 'https://gnews.io/api/v4/search?q=' + this.q + '&lang=en&country=us&max=10&apikey=' + this.apikey;
 
