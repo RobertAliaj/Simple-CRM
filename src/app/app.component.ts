@@ -6,9 +6,10 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'simple-crm';
 
+
+export class AppComponent {
+  
   @ViewChild('menuTitle') menuTitle!: ElementRef;
 
   constructor(public router: Router) {
@@ -19,15 +20,14 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         if (event.url === '/news') {
           this.menuTitle.nativeElement.textContent = 'News';
-        } else if(event.url === '/'){
+        } else if (event.url === '/') {
           this.menuTitle.nativeElement.textContent = 'Dashboard';
-        } else if(event.url === '/user'){
+        } else if (event.url === '/user') {
           this.menuTitle.nativeElement.textContent = 'Users';
-        }else{
+        } else {
           this.menuTitle.nativeElement.textContent = 'Transactions History';
         }
       }
     });
   }
-
 }

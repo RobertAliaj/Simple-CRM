@@ -43,3 +43,13 @@ body {
     letter-spacing: 1px;
     cursor: default;
 }
+
+.credit {
+    bottom: -50px;
+    right: 50px;
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.87);
+}

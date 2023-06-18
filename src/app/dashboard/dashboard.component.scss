@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .loader-container {
@@ -20,7 +21,6 @@
         color: #333;
     }
 }
-
 
 .dot-elastic {
     position: relative;

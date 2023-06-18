@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Type, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { BtcDataService } from '../btc-data.service';
+import { TypedAnimationService } from '../typed-animation.service';
 Chart.register(...registerables);
 
 @Component({
@@ -10,19 +11,22 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements OnInit {
 
-
   canFetch: boolean = true;
   btcDataCopy: any;
   loading: boolean = false;
+  creditLink: string = '<a href="https://www.coingecko.com/en/api" target="_blank" class="link">CoinGecko API</a>';
+  @ViewChild('typedTarget') typedTarget!: ElementRef;
 
-  constructor(private btcService: BtcDataService) { }
+
+  constructor(private btcService: BtcDataService, private animation: TypedAnimationService) { }
 
 
   ngOnInit() {
-    this.loading = true;
-    this.handleLastFetch();
-    this.gatherAndProcessBTCData();
+    // this.loading = true;
+    // this.handleLastFetch();
+    // this.gatherAndProcessBTCData();
   }
+
 
 
   handleLastFetch() {
@@ -60,6 +64,10 @@ export class DashboardComponent implements OnInit {
       this.loading = false;
       this.renderChart(this.btcDataCopy.date, this.btcDataCopy.price, this.btcDataCopy.market_cap);
     }
+
+    setTimeout(() => {
+      this.animation.splashScreen(this.creditLink, this.typedTarget);
+    }, 500);
   }
 
 

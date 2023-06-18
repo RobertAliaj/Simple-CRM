@@ -16,7 +16,7 @@ export class TransactionsComponent implements AfterViewInit {
   constructor(private firestore: Firestore) { }
 
   ngAfterViewInit() {
-    this.getUsers();
+    // this.getUsers();
   }
 
   getUsers() {
