@@ -35,17 +35,19 @@ export class DialogAddTransactionComponent implements OnInit {
   ngOnInit() {
     this.gatherAndProcessBTCData();
   }
-  
+
 
   async saveTransaction() {
-    this.loading = true;
-    const transactionsCollection = collection(this.firestore, 'transactions');
-    this.saveToFireBase();
-    addDoc(transactionsCollection, this.transaction.toJson()).then(async (result) => {
-      const docSnap = await getDoc(result);
-      this.loading = false;
-      this.dialogRef.close();
-    });
+    if (this.transaction.usdAmount) {
+      this.loading = true;
+      const transactionsCollection = collection(this.firestore, 'transactions');
+      this.saveToFireBase();
+      addDoc(transactionsCollection, this.transaction.toJson()).then(async (result) => {
+        const docSnap = await getDoc(result);
+        this.loading = false;
+        this.dialogRef.close();
+      });
+    }
   }
 
 

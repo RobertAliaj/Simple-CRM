@@ -7,11 +7,10 @@
 <div mat-dialog-content class="mat-form-field-container">
     <mat-form-field appearance="outline" class="margin-right-16">
         <mat-label>USD Amount</mat-label>
-        <input matInput placeholder="USD Amount" type="number" min="0" step="0.01" [(ngModel)]="transaction.usdAmount" (ngModelChange)="onUSDAmountChange($event)">
+        <input matInput placeholder="USD Amount" type="number" min="0" step="0.01" [(ngModel)]="transaction.usdAmount" (ngModelChange)="onUSDAmountChange($event)" required>
         <mat-hint>{{ usdAmountAsString }} = {{ btcAmount }} BTC</mat-hint>
     </mat-form-field>
 </div>
-
 
 <!-- Die Buttons von der Pop-Up Karte -->
 <div mat-dialog-actions>
