@@ -1,9 +1,7 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { Transaction } from 'src/models/transaction.class';
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { BehaviorSubject } from 'rxjs';
-import { Route } from '@angular/router';
+import { TypedAnimationService } from '../typed-animation.service';
 
 @Component({
   selector: 'app-transactions',
@@ -12,8 +10,11 @@ import { Route } from '@angular/router';
 })
 export class TransactionsComponent implements OnInit {
 
+  @ViewChild('typedTarget') typedTarget!: ElementRef;
+
+
   allTransactions: any[] = [];
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private animation: TypedAnimationService) { }
 
 
   ngOnInit() {
@@ -27,13 +28,22 @@ export class TransactionsComponent implements OnInit {
       let changes = snapshot.docs.map(doc => ({ transactionId: doc.id, ...doc.data() }));
       this.allTransactions = changes;
     });
+
+    setTimeout(() => {
+      this.animation.splashScreen(this.typedTarget);
+    }, 500);
   }
 
 
   async deleteTransaction(transactionId: string) {
     const docRef = doc(this.firestore, 'transactions', transactionId);
     await deleteDoc(docRef).then(() => {
+      if (this.allTransactions.length == 0) {
+        setTimeout(() => {
+          this.animation.splashScreen(this.typedTarget);
+        }, 500);
+      }
     })
   }
-  
+
 }

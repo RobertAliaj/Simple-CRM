@@ -20,11 +20,11 @@ export class UserDetailComponent {
   birthDate!: Date;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private firestore: Firestore,
-    public dialog: MatDialog
-  ) { 
+    public dialog: MatDialog,
+  ) {
   }
 
   ngOnInit() {
@@ -63,7 +63,7 @@ export class UserDetailComponent {
     dialog.componentInstance.userId = this.userId;
   }
 
-  
+
   openDialog(): void {
     const dialog = this.dialog.open(DialogAddTransactionComponent);
     dialog.componentInstance.user = new User(this.user.toJson());

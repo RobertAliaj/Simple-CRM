@@ -1,5 +1,8 @@
 <mat-card [style.background]="this.user.color" class="user-detail-header box-shadow">
 
+    <button mat-icon-button class="back-btn" (click)="this.router.navigate(['/user'])">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
 
     <button mat-icon-button [matMenuTriggerFor]="userMenu" class="detail-btn">
         <mat-icon>more_horiz</mat-icon>

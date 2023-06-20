@@ -33,7 +33,7 @@ export class NewsComponent implements OnInit {
       .then((data) => {
         this.articles = data.articles;
         setTimeout(() => {
-          this.animation.splashScreen(this.creditLink, this.typedTarget)
+          this.animation.splashScreen(this.typedTarget, this.creditLink)
         }, 500);
       });
   }

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { User } from 'src/models/user.class';
 import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
-
 
 
 @Component({
@@ -12,10 +10,12 @@ import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  // user: User = new User();
   allUsers: any = [];
 
-  constructor(public dialog: MatDialog, private firestore: Firestore) {
+  constructor(
+    public dialog: MatDialog,
+    private firestore: Firestore,
+    ) {
     this.getAllUsers();
   }
 

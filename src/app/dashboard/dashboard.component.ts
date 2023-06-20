@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     }
 
     setTimeout(() => {
-      this.animation.splashScreen(this.creditLink, this.typedTarget);
+      this.animation.splashScreen(this.typedTarget, this.creditLink);
     }, 500);
   }
 
