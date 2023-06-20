@@ -7,6 +7,8 @@ import { User } from 'src/models/user.class';
 import { DialogEditAdressComponent } from '../dialog-edit-adress/dialog-edit-adress.component';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogAddTransactionComponent } from '../dialog-add-transaction/dialog-add-transaction.component';
+import { GenderService } from '../gender.service';
+import { Gender } from '../gender';
 
 
 @Component({
@@ -14,18 +16,24 @@ import { DialogAddTransactionComponent } from '../dialog-add-transaction/dialog-
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
+
+
 export class UserDetailComponent {
   userId!: string;
   user: User = new User();
   birthDate!: Date;
+  avatar!: string;
+
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private firestore: Firestore,
     public dialog: MatDialog,
+    private genderService: GenderService
   ) {
   }
+
 
   ngOnInit() {
     this.route.params.subscribe(params =>
@@ -42,10 +50,16 @@ export class UserDetailComponent {
   }
 
 
-  getUser() {
+  async getUser() {
     const docRef = doc(this.firestore, 'users', this.userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       this.user = new User(docSnap.data());
+
+
+      this.genderService.getGender(this.user.firstName).subscribe((data: Gender) => {
+        const gender = data.gender;
+        this.avatar = gender === 'male' ? 'man' : 'women';
+      });
     });
   }
 

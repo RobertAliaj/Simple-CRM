@@ -30,7 +30,9 @@ export class TransactionsComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.animation.splashScreen(this.typedTarget);
+      if (this.allTransactions.length == 0) {
+        this.animation.splashScreen(this.typedTarget);
+      }
     }, 500);
   }
 
