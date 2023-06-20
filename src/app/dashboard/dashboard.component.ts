@@ -22,9 +22,9 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.loading = true;
-    // this.handleLastFetch();
-    // this.gatherAndProcessBTCData();
+    this.loading = true;
+    this.handleLastFetch();
+    this.gatherAndProcessBTCData();
   }
 
 

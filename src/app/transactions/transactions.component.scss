@@ -10,9 +10,11 @@
     }
 
     .transaction-card {
-        width: 250px;
+        box-sizing: border-box;
+        padding: 8px;
+        width: 260px;
         border-radius: 20px;
-        height: 150px;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -21,7 +23,7 @@
 
 
         &:hover {
-            background-color: #f5f5f5;
+            background-color: rgb(0 0 0 / 0.5%);
         }
 
         .content-row {
@@ -44,4 +46,10 @@
             font-size: 1em;
         }
     }
+}
+
+.no-transactions {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 20px 0;
 }

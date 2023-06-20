@@ -34,9 +34,7 @@ export class DialogAddUserComponent {
     this.color = this.getRandomLightColor();
   }
 
-
-
-
+  
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     this.user.color = this.color = this.getRandomLightColor();

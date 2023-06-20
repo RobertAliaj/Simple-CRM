@@ -63,6 +63,7 @@ export class UserDetailComponent {
     dialog.componentInstance.userId = this.userId;
   }
 
+  
   openDialog(): void {
     const dialog = this.dialog.open(DialogAddTransactionComponent);
     dialog.componentInstance.user = new User(this.user.toJson());
