@@ -59,3 +59,10 @@ $card-margin: 15px;
         bottom: -50px;
     }
 }
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

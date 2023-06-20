@@ -23,6 +23,7 @@ export class UserDetailComponent {
   user: User = new User();
   birthDate!: Date;
   avatar!: string;
+  loading: boolean = true;
 
 
   constructor(
@@ -59,6 +60,7 @@ export class UserDetailComponent {
       this.genderService.getGender(this.user.firstName).subscribe((data: Gender) => {
         const gender = data.gender;
         this.avatar = gender === 'male' ? 'man' : 'women';
+        this.loading = false;
       });
     });
   }

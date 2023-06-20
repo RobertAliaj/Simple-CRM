@@ -1,20 +1,27 @@
-<mat-card class="card box-shadow">
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>E-Mail</th>
-            <th>City</th>
-        </tr>
+<mat-spinner class="loader" *ngIf="loading"></mat-spinner>
 
-        <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
-            <td> <div class="color-point" [style.background]="this.user.color"></div>{{ user.firstName }} {{ user.lastName }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.city }}</td>
-        </tr>
-    </table>
-</mat-card>
+<div *ngIf="!loading">
+    <mat-card class="card box-shadow">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>City</th>
+            </tr>
 
-<button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"
-    matTooltipPosition="above">
-    <mat-icon>add</mat-icon>
-</button>
+            <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
+                <td>
+                    <div class="color-point" [style.background]="this.user.color"></div>{{ user.firstName }} {{
+                    user.lastName }}
+                </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.city }}</td>
+            </tr>
+        </table>
+    </mat-card>
+
+    <button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"
+        matTooltipPosition="above">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

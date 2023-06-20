@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 
 
 export class AppComponent {
-  
+
   @ViewChild('menuTitle') menuTitle!: ElementRef;
 
   constructor(public router: Router) {
@@ -24,8 +24,10 @@ export class AppComponent {
           this.menuTitle.nativeElement.textContent = 'Dashboard';
         } else if (event.url === '/user') {
           this.menuTitle.nativeElement.textContent = 'Users';
-        } else {
+        } else if (event.url === '/transactions') {
           this.menuTitle.nativeElement.textContent = 'Transactions History';
+        } else {
+          this.menuTitle.nativeElement.textContent = 'Users / User Details';
         }
       }
     });

@@ -11,6 +11,7 @@ import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
 })
 export class UserComponent {
   allUsers: any = [];
+  loading: boolean = true;
 
   constructor(
     public dialog: MatDialog,
@@ -26,6 +27,7 @@ export class UserComponent {
     onSnapshot(collectionRef, (snapshot) => {
       changes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       this.allUsers = changes;
+      this.loading = false;
     });
   }
 
