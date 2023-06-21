@@ -5,8 +5,6 @@ import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Transaction } from 'src/models/transaction.class';
 import { User } from 'src/models/user.class';
-import { NgForm } from '@angular/forms';
-
 
 
 @Component({
