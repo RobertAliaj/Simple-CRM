@@ -42,10 +42,7 @@ export class TransactionsComponent implements OnInit {
           if (event.url === '/transactions') {
             setTimeout(() => {
             this.allTransactions.forEach(transaction => {
-              // if (transaction.isNew === true) {
-                console.log(transaction.transactionId);
                 this.updateTransaction(transaction.transactionId, { isNew: false });
-              // }
             });
             }, 3000);
           }
