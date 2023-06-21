@@ -16,7 +16,6 @@ export class DialogEditAdressComponent implements OnInit {
 
   userId!: string;
   user!: User;
-  loading = false;
   userForm!: FormGroup;
 
 
@@ -37,14 +36,12 @@ export class DialogEditAdressComponent implements OnInit {
   async saveUser() {
     if (this.userForm.valid) {
       this.userForm.disable();
-      this.loading = true;
       this.user.street = this.userForm.get('street')?.value;
       this.user.zipCode = this.userForm.get('zipCode')?.value;
       this.user.city = this.userForm.get('city')?.value;
 
       const userDoc = doc(this.firestore, 'users', this.userId);
       await updateDoc(userDoc, this.user.toJson());
-      this.loading = false;
       this.userForm.enable();
       this.dialogRef.close();
     }

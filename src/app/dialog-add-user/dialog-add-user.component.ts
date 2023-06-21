@@ -16,7 +16,6 @@ export class DialogAddUserComponent implements OnInit {
 
   user: User = new User();
   birthDate!: Date;
-  loading = false;
   color!: string;
   userForm!: FormGroup;
 
@@ -48,7 +47,7 @@ export class DialogAddUserComponent implements OnInit {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
-  
+
   changeColor() {
     this.color = this.getRandomLightColor();
   }
@@ -59,7 +58,7 @@ export class DialogAddUserComponent implements OnInit {
 
       // this.user.birthDate = this.birthDate.getTime();
       this.user.color = this.color = this.getRandomLightColor();
-      this.loading = true;
+      this.userForm.disable();
 
       this.user.firstName = this.userForm.get('firstName')?.value;
       this.user.lastName = this.userForm.get('lastName')?.value;
@@ -73,7 +72,7 @@ export class DialogAddUserComponent implements OnInit {
       const usersCollection = collection(this.firestore, 'users');
       addDoc(usersCollection, this.user.toJson()).then(async (result) => {
         const docSnap = await getDoc(result);
-        this.loading = false;
+        this.userForm.enable();
         this.dialogRef.close();
       });
     }

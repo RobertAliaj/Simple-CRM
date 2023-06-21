@@ -1,7 +1,8 @@
 <div class="card-container">
 
-    <mat-card class="transaction-card box-shadow" *ngFor="let transaction of allTransactions; let index = index">
-        <h2 class="transaction-title">Transaction Nr. {{ index + 1 }}</h2>
+    <mat-card class="transaction-card box-shadow" [class.new-transaction]="transaction.isNew"
+        *ngFor="let transaction of allTransactions; let index = index">
+        <h2 class="transaction-title">Transaction Nr. {{ allTransactions.length - index }}</h2>
         <mat-card-content>
             <div class="content-row">
                 <span class="label">Name:</span>
@@ -22,6 +23,3 @@
 </div>
 
 <span class="no-transactions" *ngIf="allTransactions.length <= 0 " #typedTarget></span>
-
-
-<!-- <span class="no-transactions" >No transactions have been made yet.</span> -->

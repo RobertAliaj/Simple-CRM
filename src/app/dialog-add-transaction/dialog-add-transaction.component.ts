@@ -50,10 +50,14 @@ export class DialogAddTransactionComponent implements OnInit {
 
 
   saveToFireBase() {
+    let date = new Date();
+    let timeStamp = date.getTime();
     this.transaction.date = this.btcService.setDateFortheLastSevenDays(0);
     this.transaction.firstName = this.user.firstName;
     this.transaction.lastName = this.user.lastName;
     this.transaction.btcAmount = this.btcAmount;
+    this.transaction.timeStamp = timeStamp;
+    this.transaction.isNew = true;
   }
 
 

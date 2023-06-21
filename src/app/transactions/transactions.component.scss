@@ -26,6 +26,10 @@
             background-color: rgb(0 0 0 / 0.5%);
         }
 
+        &.new-transaction {
+            animation: blink 3s ease-out;
+        }
+
         .content-row {
             display: flex;
             width: 100%;
@@ -52,4 +56,14 @@
     font-size: 1.5em;
     text-align: center;
     margin: 20px 0;
+}
+
+
+@keyframes blink {
+    0%   { background-color: rgba(3, 169, 244, 0.2); } 
+    25%  { background-color: rgba(189, 189, 189, 0.1); } 
+    50% { background-color: rgba(3, 169, 244, 0.2); } 
+    75%  { background-color: rgba(189, 189, 189, 0); } 
+    90% { background-color: rgba(3, 169, 244, 0.2); } 
+    100% { background-color: rgba(255, 255, 255, 1); } 
 }

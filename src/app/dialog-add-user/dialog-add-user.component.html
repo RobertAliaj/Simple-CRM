@@ -68,7 +68,7 @@
 
     <!-- Die Buttons von der Pop-Up Karte -->
     <div mat-dialog-actions>
-        <button mat-button (click)="this.dialogRef.close()">Cancel</button>
-        <button type="submit" mat-button cdkFocusInitial="userForm.valid" [disabled]="userForm.invalid">Save</button>
+        <button mat-button (click)="this.dialogRef.close()" [disabled]="userForm.disabled">Cancel</button>
+        <button type="submit" mat-button cdkFocusInitial [disabled]="userForm.invalid || userForm.disabled">Save</button>
     </div>
 </form>

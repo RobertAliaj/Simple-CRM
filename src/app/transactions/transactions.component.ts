@@ -1,7 +1,10 @@
 import { OnInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { TypedAnimationService } from '../typed-animation.service';
+import { Transaction } from 'src/models/transaction.class';
+import { NavigationEnd, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-transactions',
@@ -14,7 +17,11 @@ export class TransactionsComponent implements OnInit {
 
 
   allTransactions: any[] = [];
-  constructor(private firestore: Firestore, private animation: TypedAnimationService) { }
+  constructor(
+    private firestore: Firestore,
+    private animation: TypedAnimationService,
+    private router: Router
+  ) { }
 
 
   ngOnInit() {
@@ -27,6 +34,23 @@ export class TransactionsComponent implements OnInit {
     onSnapshot(collectionRef, (snapshot) => {
       let changes = snapshot.docs.map(doc => ({ transactionId: doc.id, ...doc.data() }));
       this.allTransactions = changes;
+      this.allTransactions.sort((a, b) => b.timeStamp - a.timeStamp);
+
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          if (event.url === '/transactions') {
+            setTimeout(() => {
+            this.allTransactions.forEach(transaction => {
+              // if (transaction.isNew === true) {
+                console.log(transaction.transactionId);
+                this.updateTransaction(transaction.transactionId, { isNew: false });
+              // }
+            });
+            }, 3000);
+          }
+        }
+      });
     });
 
     setTimeout(() => {
@@ -35,6 +59,15 @@ export class TransactionsComponent implements OnInit {
       }
     }, 500);
   }
+
+
+
+
+  async updateTransaction(transactionId: string, update: Partial<Transaction>) {
+    const docRef = doc(this.firestore, 'transactions', transactionId);
+    await updateDoc(docRef, update);
+  }
+
 
 
   async deleteTransaction(transactionId: string) {
