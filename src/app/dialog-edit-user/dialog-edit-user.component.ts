@@ -14,7 +14,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DialogEditUserComponent implements OnInit {
 
   user!: User;
-  loading = false;
   birthDate!: Date;
   userId!: string;
   userForm!: FormGroup;
@@ -38,18 +37,15 @@ export class DialogEditUserComponent implements OnInit {
 
   async saveUser() {
     if (this.userForm.valid) {
-
       this.user.firstName = this.userForm.get('firstName')?.value;
       this.user.lastName = this.userForm.get('lastName')?.value;
       this.user.email = this.userForm.get('email')?.value;
       this.user.birthDate = this.userForm.get('birthDate')?.value;
 
-      this.loading = true;
       this.userForm.disable();
       const userDoc = doc(this.firestore, 'users', this.userId);
       updateDoc(userDoc, this.user.toJson()).then(() => {
         this.userForm.enable();
-        this.loading = false;
         this.dialogRef.close()
       });
     }

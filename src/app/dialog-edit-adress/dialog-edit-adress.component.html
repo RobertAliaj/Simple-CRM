@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="this.userForm.disabled" mode="indeterminate"></mat-progress-bar>
 
 <h1 mat-dialog-title>Edit Adress</h1>
 
@@ -25,6 +25,6 @@
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="this.dialogRef.close()">Cancel</button>
-        <button type="submit" mat-button cdkFocusInitial>Save</button>
+        <button [disabled]="!this.userForm.valid" type="submit" mat-button cdkFocusInitial>Save</button>
     </div>
 </form>
