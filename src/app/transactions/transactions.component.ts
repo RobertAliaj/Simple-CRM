@@ -41,9 +41,9 @@ export class TransactionsComponent implements OnInit {
         if (event instanceof NavigationEnd) {
           if (event.url === '/transactions') {
             setTimeout(() => {
-            this.allTransactions.forEach(transaction => {
+              this.allTransactions.forEach(transaction => {
                 this.updateTransaction(transaction.transactionId, { isNew: false });
-            });
+              });
             }, 3000);
           }
         }
@@ -58,13 +58,10 @@ export class TransactionsComponent implements OnInit {
   }
 
 
-
-
   async updateTransaction(transactionId: string, update: Partial<Transaction>) {
     const docRef = doc(this.firestore, 'transactions', transactionId);
     await updateDoc(docRef, update);
   }
-
 
 
   async deleteTransaction(transactionId: string) {
@@ -77,5 +74,4 @@ export class TransactionsComponent implements OnInit {
       }
     })
   }
-
 }

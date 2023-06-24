@@ -54,8 +54,14 @@
 
 .no-transactions {
     font-size: 1.5em;
+    font-weight: 600;
+    color: #333;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // Verschiebt das Element zurück um 50% seiner Höhe und Breite
+    width: 100%;
     text-align: center;
-    margin: 20px 0;
 }
 
 

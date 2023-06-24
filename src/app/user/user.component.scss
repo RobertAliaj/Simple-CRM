@@ -4,7 +4,7 @@
     right: 56px;
 }
 
-.color-point{
+.color-point {
     object-fit: contain;
     width: 10px;
     height: 10px;
@@ -54,4 +54,18 @@ table {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+
+@media(max-width: 1100px) {
+    table {
+        td:nth-child(2) {
+            display: none;
+        }
+
+        th:nth-child(2) {
+            display: none;
+        }
+    }
+
 }
