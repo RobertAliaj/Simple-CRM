@@ -1,5 +1,5 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
-  <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
+  <mat-drawer #drawer class="sidenav" [opened]="checkScreenSize" mode="side">
     <div class="logo-container">
       <a href="crm.robert-aliaj.de">
         <img src="assets/img/logo.new2.png">
@@ -7,10 +7,11 @@
     </div>
 
     <ul class="menu-items">
-      <li routerLink="/"> <mat-icon>space_dashboard</mat-icon> Dashboard</li>
-      <li routerLink="/user"> <mat-icon>person</mat-icon> User</li>
+      <li routerLink="/"> <mat-icon>bar_chart_4_bars</mat-icon> Dashboard</li>
+      <li routerLink="/user"> <mat-icon>person_outline</mat-icon> User</li>
       <li routerLink="/transactions"> <mat-icon>published_with_changes</mat-icon> Transactions</li>
       <li routerLink="/news"> <mat-icon>language</mat-icon>News</li>
+      <li routerLink="/help"> <mat-icon>info_outline</mat-icon>Help</li>
     </ul>
   </mat-drawer>
 

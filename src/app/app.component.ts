@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -6,16 +6,17 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-
-
 export class AppComponent {
+
+  checkScreenSize!: boolean;
 
   @ViewChild('menuTitle') menuTitle!: ElementRef;
 
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) { }
 
   ngOnInit() {
+    this.checkScreenSize = window.innerWidth < 1100 ? false : true;
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.url === '/news') {
@@ -26,10 +27,17 @@ export class AppComponent {
           this.menuTitle.nativeElement.textContent = 'Users';
         } else if (event.url === '/transactions') {
           this.menuTitle.nativeElement.textContent = 'Transactions History';
+        } else if (event.url === '/help') {
+          this.menuTitle.nativeElement.textContent = 'Help';
         } else {
           this.menuTitle.nativeElement.textContent = 'Users / User Details';
         }
       }
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize = event.target.innerWidth < 1100 ? false : true;
   }
 }

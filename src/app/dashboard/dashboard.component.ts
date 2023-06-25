@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Type, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { BtcDataService } from '../btc-data.service';
 import { TypedAnimationService } from '../typed-animation.service';
@@ -14,11 +14,14 @@ export class DashboardComponent implements OnInit {
   canFetch: boolean = true;
   btcDataCopy: any;
   loading: boolean = false;
+  landScapeView: boolean = true;
   creditLink: string = '<a href="https://www.coingecko.com/en/api" target="_blank" class="link">CoinGecko API</a>';
   @ViewChild('typedTarget') typedTarget!: ElementRef;
+  @ViewChild('rotate') rotate!: ElementRef;
+  @ViewChild('chart') chart!: ElementRef;
 
 
-  constructor(private btcService: BtcDataService, private animation: TypedAnimationService) { }
+  constructor(private btcService: BtcDataService, private animationService: TypedAnimationService) { }
 
 
   ngOnInit() {
@@ -26,6 +29,52 @@ export class DashboardComponent implements OnInit {
     this.handleLastFetch();
     this.gatherAndProcessBTCData();
   }
+
+
+  ngAfterViewInit() {
+    if (window.innerWidth < 800) {
+      this.landScapeView = false;
+      this.rotate.nativeElement.classList.remove('d-none');
+      this.chart.nativeElement.classList.add('d-none');
+    } else {
+      this.landScapeView = true;
+      this.rotate.nativeElement.classList.add('d-none');
+      this.chart.nativeElement.classList.remove('d-none');
+    }
+
+    this.handleOrientationPortrait();
+  }
+
+
+  @HostListener('window:orientationchange')
+  handleOrientationPortrait() {
+    const orientation = (window.screen as any).orientation;
+
+    if (orientation && orientation.type === 'portrait-primary') {
+      this.rotate.nativeElement.classList.remove('d-none');
+      this.chart.nativeElement.classList.add('d-none');
+      console.log('portrait');
+    } 
+    if(orientation && orientation.type === 'landscape-primary') {
+      this.rotate.nativeElement.classList.add('d-none');
+      this.chart.nativeElement.classList.remove('d-none');
+      console.log('landscape');
+    }
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (event.target.innerWidth < 800) {
+      this.rotate.nativeElement.classList.remove('d-none');
+      this.chart.nativeElement.classList.add('d-none');
+    } else {
+      this.rotate.nativeElement.classList.add('d-none');
+      this.chart.nativeElement.classList.remove('d-none');
+    }
+  }
+
+
 
 
 
@@ -66,7 +115,7 @@ export class DashboardComponent implements OnInit {
     }
 
     setTimeout(() => {
-      this.animation.splashScreen(this.typedTarget, this.creditLink);
+      this.animationService.splashScreen(this.typedTarget, this.creditLink);
     }, 500);
   }
 
