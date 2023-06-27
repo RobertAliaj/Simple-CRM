@@ -9,7 +9,7 @@ import { InfoComponent } from './info/info.component';
 
 const routes: Routes = [
   { path : '', component:  DashboardComponent },
-  { path : 'dashboard', component:  UserComponent },
+  // { path : 'dashboard', component:  UserComponent },
   { path : 'user', component:  UserComponent },
   { path : 'user/:id', component:  UserDetailComponent },
   { path : 'transactions', component:  TransactionsComponent },
