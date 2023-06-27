@@ -28,7 +28,7 @@ export class DialogEditAdressComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       street: [this.user.street, Validators.required],
-      zipCode: [this.user.zipCode, Validators.required],
+      zipCode: [this.user.zipCode, [Validators.required, Validators.pattern('^[0-9]*$')]],
       city: [this.user.city, Validators.required]
     });
   }

@@ -65,3 +65,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+@media(max-width: 600px){
+    .add-button{
+        bottom: 20px;
+        right: 20px;
+    }
+}

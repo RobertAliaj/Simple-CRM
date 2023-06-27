@@ -45,15 +45,13 @@ export class AppComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkScreenSize = event.target.innerWidth < 1100 ? false : true;
-    // this.logo = event.target.innerWidth < 650 ? 'logo-small.png' : 'logo.new2.png';
-    // this.logoStyle = event.target.innerWidth < 650 ? '40px' : 'unset';
 
     if (event.target.innerWidth < 700) {
       this.logo = 'logo-small.png';
       this.logoStyle = '40px';
       this.showText = true;
     } else {
-      this.logo = 'logo.new2.png';
+      this.logo = 'logo.png';
       this.logoStyle = 'unset';
       this.showText = false;
     }
@@ -63,15 +61,13 @@ export class AppComponent {
   //handle innerWidth on initialization
   handleInnerWidth() {
     this.checkScreenSize = window.innerWidth < 1100 ? false : true;
-    // this.logo = window.innerWidth < 650 ? 'logo-small.png' : 'logo.new2.png';
-    // this.logoStyle = window.innerWidth < 650 ? '40px' : 'unset';
 
     if (window.innerWidth < 700) {
       this.logo = 'logo-small.png';
       this.logoStyle = '40px';
       this.showText = true;
     } else {
-      this.logo = 'logo.new2.png';
+      this.logo = 'logo.png';
       this.logoStyle = 'unset';
       this.showText = false;
     }
