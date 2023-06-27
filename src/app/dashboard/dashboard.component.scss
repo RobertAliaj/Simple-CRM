@@ -5,7 +5,6 @@
     flex-direction: column;
     gap: 15px;
     position: relative;
-
 }
 
 .loader-container {
@@ -24,7 +23,6 @@
     font-weight: 600;
     color: #333;
 }
-
 
 .rotate {
     position: absolute;
@@ -155,6 +153,13 @@
 
     .chart-container {
         margin-top: 50px;
+    }
+}
+
+@media(max-width: 850px) {
+
+    .chart-container {
+        margin-top: 0px;
     }
 
 }

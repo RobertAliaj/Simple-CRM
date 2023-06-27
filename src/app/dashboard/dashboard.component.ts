@@ -30,9 +30,15 @@ export class DashboardComponent implements OnInit {
     this.gatherAndProcessBTCData();
   }
 
-
+  // check if Portrait or landscape mode
   ngAfterViewInit() {
-    if (window.innerWidth < 800) {
+    this.handleInnerWidth();
+  }
+
+
+  //handle innerwidth when initializing
+  handleInnerWidth() {
+    if (window.innerWidth < 650) {
       this.landScapeView = false;
       this.rotate.nativeElement.classList.remove('d-none');
       this.chart.nativeElement.classList.add('d-none');
@@ -41,31 +47,15 @@ export class DashboardComponent implements OnInit {
       this.rotate.nativeElement.classList.add('d-none');
       this.chart.nativeElement.classList.remove('d-none');
     }
-
-    this.handleOrientationPortrait();
   }
 
 
-  @HostListener('window:orientationchange')
-  handleOrientationPortrait() {
-    const orientation = (window.screen as any).orientation;
-
-    if (orientation && orientation.type === 'portrait-primary') {
-      this.rotate.nativeElement.classList.remove('d-none');
-      this.chart.nativeElement.classList.add('d-none');
-      console.log('portrait');
-    } 
-    if(orientation && orientation.type === 'landscape-primary') {
-      this.rotate.nativeElement.classList.add('d-none');
-      this.chart.nativeElement.classList.remove('d-none');
-      console.log('landscape');
-    }
-  }
-
-
+  // handle innerWidth when resizing the screen
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    if (event.target.innerWidth < 800) {
+    const orientation = (window.screen as any).orientation;
+
+    if (event.target.innerWidth < 650) {
       this.rotate.nativeElement.classList.remove('d-none');
       this.chart.nativeElement.classList.add('d-none');
     } else {
@@ -73,9 +63,6 @@ export class DashboardComponent implements OnInit {
       this.chart.nativeElement.classList.remove('d-none');
     }
   }
-
-
-
 
 
   handleLastFetch() {

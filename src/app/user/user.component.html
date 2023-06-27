@@ -10,9 +10,9 @@
             </tr>
 
             <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
-                <td class="name-color">
-                    <div class="color-point" [style.background]="this.user.color"></div>{{ user.firstName }} {{
-                    user.lastName }}
+                <td class="user-info">
+                    <div class="color-point" [style.background]="this.user.color"></div>
+                    <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
                 </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.city }}</td>

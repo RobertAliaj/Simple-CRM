@@ -67,5 +67,14 @@ table {
             display: none;
         }
     }
+}
 
+
+@media(max-width: 600px) {
+    .user-info {
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        width: 100;
+    }
 }
