@@ -152,17 +152,17 @@ export class DashboardComponent implements OnInit {
       options: {
         scales: {
           y: {
-            min: 24000, // Startpunkt der y-Achse auf 20000 setzen
+            min: 24000,
             title: {
               display: true,
               text: 'Price (USD)'
             }
           },
           y1: {
-            min: 480, // Startpunkt der y-Achse auf 20000 setzen
+            min: 480, 
             position: 'right',
             grid: {
-              drawOnChartArea: false, // nur eine Netzlinie anzeigen
+              drawOnChartArea: false, 
             },
             title: {
               display: true,

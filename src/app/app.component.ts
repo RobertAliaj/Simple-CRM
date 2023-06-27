@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  title = 'Simple CRM'
 
   checkScreenSize!: boolean;
   logo: string = ''
@@ -75,15 +76,13 @@ export class AppComponent {
 
 
   closeMenu(drawer: MatDrawer) {
-    if (window.innerWidth < 650) {
+    if (window.innerWidth < 650)
       drawer.close();
-    }
   }
 
 
   hideContent() {
-    if (window.innerWidth < 650) {
+    if (window.innerWidth < 650)
       this.showText = true;
-    }
   }
 }

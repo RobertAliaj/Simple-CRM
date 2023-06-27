@@ -42,8 +42,8 @@ export class DialogAddUserComponent implements OnInit {
 
   getRandomLightColor() {
     let hue = Math.floor(Math.random() * 360);
-    let saturation = Math.floor(Math.random() * 20) + 73; // Sättigung im Bereich von 80% bis 100%
-    let lightness = Math.floor(Math.random() * 30) + 63; // Helligkeit im Bereich von 40% bis 70%
+    let saturation = Math.floor(Math.random() * 20) + 73; 
+    let lightness = Math.floor(Math.random() * 30) + 63; 
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
@@ -56,7 +56,6 @@ export class DialogAddUserComponent implements OnInit {
   async saveUser() {
     if (this.userForm.valid) {
 
-      // this.user.birthDate = this.birthDate.getTime();
       this.user.color = this.color = this.getRandomLightColor();
       this.userForm.disable();
 
