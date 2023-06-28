@@ -33,18 +33,27 @@ export class DialogEditUserComponent implements OnInit {
   }
 
 
-  async saveUser() {
+  updateUserDetails() {
     if (this.userForm.valid) {
-      this.user.firstName = this.userForm.get('firstName')?.value;
-      this.user.lastName = this.userForm.get('lastName')?.value;
-      this.user.email = this.userForm.get('email')?.value;
-
+      this.getValuesFromInput();
       this.userForm.disable();
-      const userDoc = doc(this.firestore, 'users', this.userId);
-      updateDoc(userDoc, this.user.toJson()).then(() => {
-        this.userForm.enable();
-        this.dialogRef.close()
-      });
+      this.saveUser();
     }
+  }
+
+  
+  getValuesFromInput() {
+    this.user.firstName = this.userForm.get('firstName')?.value;
+    this.user.lastName = this.userForm.get('lastName')?.value;
+    this.user.email = this.userForm.get('email')?.value;
+  }
+
+
+  saveUser() {
+    const userDoc = doc(this.firestore, 'users', this.userId);
+    updateDoc(userDoc, this.user.toJson()).then(() => {
+      this.userForm.enable();
+      this.dialogRef.close()
+    });
   }
 }

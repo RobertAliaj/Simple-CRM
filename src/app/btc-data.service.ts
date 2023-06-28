@@ -31,8 +31,7 @@ export class BtcDataService {
   resetBTCData() {
     this.btcData = this.initializeBTCData();
   }
-
-
+  
 
   /**
  * This asynchronous function fetches data from the API based on a given date.

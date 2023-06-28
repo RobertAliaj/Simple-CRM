@@ -2,9 +2,8 @@
 
 <h1 mat-dialog-title>Edit Adress</h1>
 
-<form [formGroup]="userForm" (ngSubmit)="saveUser()">
+<form [formGroup]="userForm" (ngSubmit)="updateAdressDetails()">
     <div mat-dialog-content class="mat-form-field-container">
-        <h1 mat-dialog-title>Edit Adress</h1>
         <div>
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Street + House No.</mat-label>

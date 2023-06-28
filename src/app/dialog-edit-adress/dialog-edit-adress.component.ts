@@ -33,17 +33,27 @@ export class DialogEditAdressComponent implements OnInit {
     });
   }
 
-  async saveUser() {
+  updateAdressDetails() {
     if (this.userForm.valid) {
+      this.getValuesFromInput();
       this.userForm.disable();
-      this.user.street = this.userForm.get('street')?.value;
-      this.user.zipCode = this.userForm.get('zipCode')?.value;
-      this.user.city = this.userForm.get('city')?.value;
-
-      const userDoc = doc(this.firestore, 'users', this.userId);
-      await updateDoc(userDoc, this.user.toJson());
-      this.userForm.enable();
-      this.dialogRef.close();
+      this.saveAdress();
     }
   }
+
+
+  getValuesFromInput() {
+    this.user.street = this.userForm.get('street')?.value;
+    this.user.zipCode = this.userForm.get('zipCode')?.value;
+    this.user.city = this.userForm.get('city')?.value;
+  }
+
+
+  saveAdress() {
+    const userDoc = doc(this.firestore, 'users', this.userId);
+    updateDoc(userDoc, this.user.toJson());
+    this.userForm.enable();
+    this.dialogRef.close();
+  }
+
 }

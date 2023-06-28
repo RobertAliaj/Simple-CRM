@@ -38,18 +38,13 @@ export class DialogAddTransactionComponent implements OnInit {
   async saveTransaction() {
     if (this.transaction.usdAmount) {
       this.loading = true;
-      const transactionsCollection = collection(this.firestore, 'transactions');
-      this.saveToFireBase();
-      addDoc(transactionsCollection, this.transaction.toJson()).then(async (result) => {
-        const docSnap = await getDoc(result);
-        this.loading = false;
-        this.dialogRef.close();
-      });
+      this.getTransactionValues();
+      this.addTransaction();
     }
   }
 
 
-  saveToFireBase() {
+  getTransactionValues() {
     let date = new Date();
     let timeStamp = date.getTime();
     this.transaction.date = this.btcService.setDateFortheLastSevenDays(0);
@@ -58,6 +53,16 @@ export class DialogAddTransactionComponent implements OnInit {
     this.transaction.btcAmount = this.btcAmount;
     this.transaction.timeStamp = timeStamp;
     this.transaction.isNew = true;
+  }
+
+
+  async addTransaction() {
+    const transactionsCollection = collection(this.firestore, 'transactions');
+    addDoc(transactionsCollection, this.transaction.toJson()).then(async (result) => {
+      const docSnap = await getDoc(result);
+      this.loading = false;
+      this.dialogRef.close();
+    });
   }
 
 

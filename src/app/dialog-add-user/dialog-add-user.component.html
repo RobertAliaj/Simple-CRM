@@ -1,13 +1,13 @@
 <mat-progress-bar *ngIf="userForm.disabled" mode="indeterminate"></mat-progress-bar>
 
 
-<!-- Der Titel von der Pop-Up Karte -->
+<!-- The Title of the Dialog -->
 <h1 mat-dialog-title>Add User</h1>
 
 
 <form [formGroup]="userForm" (ngSubmit)="saveUser()">
 
-    <!-- Das Inputfeld von der Pop-Up Karte -->
+    <!-- The Input Fields of the Dialog -->
     <div mat-dialog-content class="mat-form-field-container">
 
 
@@ -59,7 +59,7 @@
     </div>
 
 
-    <!-- Die Buttons von der Pop-Up Karte -->
+    <!-- The buttons of the dialog -->
     <div mat-dialog-actions>
         <button mat-button (click)="this.dialogRef.close()" [disabled]="userForm.disabled">Cancel</button>
         <button type="submit" mat-button cdkFocusInitial [disabled]="userForm.invalid || userForm.disabled">Save</button>

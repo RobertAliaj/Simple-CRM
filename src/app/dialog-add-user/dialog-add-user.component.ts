@@ -42,8 +42,8 @@ export class DialogAddUserComponent implements OnInit {
 
   getRandomLightColor() {
     let hue = Math.floor(Math.random() * 360);
-    let saturation = Math.floor(Math.random() * 20) + 73; 
-    let lightness = Math.floor(Math.random() * 30) + 63; 
+    let saturation = Math.floor(Math.random() * 20) + 73;
+    let lightness = Math.floor(Math.random() * 30) + 63;
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
@@ -53,27 +53,34 @@ export class DialogAddUserComponent implements OnInit {
   }
 
 
-  async saveUser() {
+  saveUser() {
     if (this.userForm.valid) {
-
       this.user.color = this.color = this.getRandomLightColor();
       this.userForm.disable();
+      this.getValuesFromInput();
+      this.addUser();
 
-      this.user.firstName = this.userForm.get('firstName')?.value;
-      this.user.lastName = this.userForm.get('lastName')?.value;
-      this.user.street = this.userForm.get('street')?.value;
-      this.user.zipCode = this.userForm.get('zipCode')?.value;
-      this.user.city = this.userForm.get('city')?.value;
-      this.user.email = this.userForm.get('email')?.value;
-      this.user.birthDate = this.userForm.get('birthDate')?.value;
-
-
-      const usersCollection = collection(this.firestore, 'users');
-      addDoc(usersCollection, this.user.toJson()).then(async (result) => {
-        const docSnap = await getDoc(result);
-        this.userForm.enable();
-        this.dialogRef.close();
-      });
     }
+  }
+
+
+  getValuesFromInput() {
+    this.user.firstName = this.userForm.get('firstName')?.value;
+    this.user.lastName = this.userForm.get('lastName')?.value;
+    this.user.street = this.userForm.get('street')?.value;
+    this.user.zipCode = this.userForm.get('zipCode')?.value;
+    this.user.city = this.userForm.get('city')?.value;
+    this.user.email = this.userForm.get('email')?.value;
+    this.user.birthDate = this.userForm.get('birthDate')?.value;
+  }
+
+
+  async addUser() {
+    const usersCollection = collection(this.firestore, 'users');
+    addDoc(usersCollection, this.user.toJson()).then(async (result) => {
+      const docSnap = await getDoc(result);
+      this.userForm.enable();
+      this.dialogRef.close();
+    });
   }
 }

@@ -18,27 +18,27 @@ export class NewsComponent implements OnInit {
   loading: boolean = true;
 
   @ViewChild('typedTarget') typedTarget!: ElementRef;
+  @ViewChild('error') error!: ElementRef;
 
   constructor(private animation: TypedAnimationService) { }
 
-
-  ngOnInit() {
-    this.getData();
-  }
-
-  getData() {
-    fetch(this.url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this.articles = data.articles;
-        this.loading = false;
-        setTimeout(() => {
-          this.animation.typeAnimation(this.typedTarget, this.creditLink)
-        }, 500);
-      });
+  async ngOnInit() {
+    await this.getData();
   }
 
 
+  async getData() {
+    const response = await fetch(this.url);
+    const data = await response.json();
+    this.articles = data.articles;
+    this.loading = false;
+    this.playTypingAnimation();
+  }
+
+
+  playTypingAnimation() {
+    setTimeout(() => {
+      this.animation.typeAnimation(this.typedTarget, this.creditLink)
+    }, 500);
+  }
 }
