@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
     this.initBtcData();
   }
 
+
   ngAfterViewInit() {
     this.handleInnerWidth();
   }
@@ -82,6 +83,9 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  /**
+   * Fetch the Btc Data through the btcDataService using CoinGeckoApi
+   */
   async fetchAndRender() {
     await this.fetchData();
     this.saveLastBTCFetchInLocalStorage();
@@ -90,6 +94,9 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  /**
+   * Render the Data that has been Saved in local storage
+   */
   renderFromLocalStorage() {
     this.getLocalStorageData();
     this.loading = false;
@@ -110,7 +117,6 @@ export class DashboardComponent implements OnInit {
     let retrievedObject: any = localStorage.getItem('btcDataCopy');
     this.btcDataCopy = JSON.parse(retrievedObject);
   }
-
 
 
   playTypingAnimation() {
@@ -185,10 +191,9 @@ export class DashboardComponent implements OnInit {
   }
 
 
-
-
-
-  //handle innerwidth when initializing
+  /**
+   * Handle the InnerWidth when initializing the App
+   */
   handleInnerWidth() {
     if (window.innerWidth < 650) {
       this.landScapeView = false;
@@ -202,7 +207,10 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  // handle innerWidth when resizing the screen
+
+  /**
+  * Handle the InnerWidth when resizing the window
+  */
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     const orientation = (window.screen as any).orientation;
