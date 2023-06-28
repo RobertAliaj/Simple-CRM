@@ -27,83 +27,82 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.handleLastFetch();
-    this.gatherAndProcessBTCData();
+    this.initBtcData();
   }
 
-  // check if Portrait or landscape mode
   ngAfterViewInit() {
     this.handleInnerWidth();
   }
 
 
-  //handle innerwidth when initializing
-  handleInnerWidth() {
-    if (window.innerWidth < 650) {
-      this.landScapeView = false;
-      this.rotate.nativeElement.classList.remove('d-none');
-      this.chart.nativeElement.classList.add('d-none');
-    } else {
-      this.landScapeView = true;
-      this.rotate.nativeElement.classList.add('d-none');
-      this.chart.nativeElement.classList.remove('d-none');
-    }
-  }
-
-
-  // handle innerWidth when resizing the screen
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    const orientation = (window.screen as any).orientation;
-
-    if (event.target.innerWidth < 650) {
-      this.rotate.nativeElement.classList.remove('d-none');
-      this.chart.nativeElement.classList.add('d-none');
-    } else {
-      this.rotate.nativeElement.classList.add('d-none');
-      this.chart.nativeElement.classList.remove('d-none');
-    }
-  }
-
-
+  /**
+   * The CoinGecko Api allows only 15 calls per Minute. 
+   * Check the last Fetchtime, it is saved in localstorage, if not then its null.
+   */
   handleLastFetch() {
     let lastFetchDateTimeString = localStorage.getItem('lastFetchDateTime');
     let lastFetchDateTime = lastFetchDateTimeString ? new Date(lastFetchDateTimeString) : null;
 
+    this.checkFetchAbility(lastFetchDateTime);
+    this.updateLastFetchTime();
+  }
+
+
+  /**
+   *  Check if there has been fetched
+   * 
+   * @param lastFetchDateTime - Date of the last fetch.
+   */
+  checkFetchAbility(lastFetchDateTime: any) {
     if (lastFetchDateTime) {
       let elapsedSeconds = (Date.now() - lastFetchDateTime.getTime()) / 1000;
-      elapsedSeconds > 30 ? this.canFetch = true : this.canFetch = false;
+      this.canFetch = elapsedSeconds > 30;
     }
+  }
 
+
+  /**
+   * Set new fetch time
+   */
+  updateLastFetchTime() {
     let now = new Date();
     localStorage.setItem('lastFetchDateTime', now.toString());
   }
 
 
-  /**
-   *  This Method is used to gather and prozess the BTC Data for the last 7 days from today
-  */
-  async gatherAndProcessBTCData() {
+  async initBtcData() {
     this.btcService.resetBTCData();
 
-    if (this.canFetch) {
-      for (let i = 0; i < 7; i++) {
-        let date = this.btcService.setDateFortheLastSevenDays(i);
-        let responseAsJSON = await this.btcService.fetchApiData(date);
-        this.btcService.pushDataToBtcData(responseAsJSON, date);
-      }
+    if (this.canFetch)
+      await this.fetchAndRender();
+    else
+      this.renderFromLocalStorage();
 
-      this.saveLastBTCFetchInLocalStorage();
-      this.loading = false;
-      this.renderChart(this.btcService.btcData.date, this.btcService.btcData.price, this.btcService.btcData.market_cap);
-    } else {
-      this.getLocalStorageData();
-      this.loading = false;
-      this.renderChart(this.btcDataCopy.date, this.btcDataCopy.price, this.btcDataCopy.market_cap);
+    this.playTypingAnimation();
+  }
+
+
+  async fetchAndRender() {
+    await this.fetchData();
+    this.saveLastBTCFetchInLocalStorage();
+    this.loading = false;
+    this.renderChart(this.btcService.btcData.date, this.btcService.btcData.price, this.btcService.btcData.market_cap);
+  }
+
+
+  renderFromLocalStorage() {
+    this.getLocalStorageData();
+    this.loading = false;
+    this.renderChart(this.btcDataCopy.date, this.btcDataCopy.price, this.btcDataCopy.market_cap);
+  }
+
+
+  async fetchData() {
+    for (let i = 0; i < 7; i++) {
+      let date = this.btcService.setDateFortheLastSevenDays(i);
+      let responseAsJSON = await this.btcService.fetchApiData(date);
+      this.btcService.pushDataToBtcData(responseAsJSON, date);
     }
-
-    setTimeout(() => {
-      this.animationService.typeAnimation(this.typedTarget, this.creditLink);
-    }, 500);
   }
 
 
@@ -113,6 +112,17 @@ export class DashboardComponent implements OnInit {
   }
 
 
+
+  playTypingAnimation() {
+    setTimeout(() => {
+      this.animationService.typeAnimation(this.typedTarget, this.creditLink);
+    }, 500);
+  }
+
+
+  /**
+   * Save the last Fetch in the Local Storage
+   */
   saveLastBTCFetchInLocalStorage() {
     this.btcDataCopy = this.btcService.btcData;
     localStorage.setItem('btcDataCopy', JSON.stringify(this.btcDataCopy));
@@ -159,10 +169,10 @@ export class DashboardComponent implements OnInit {
             }
           },
           y1: {
-            min: 480, 
+            min: 480,
             position: 'right',
             grid: {
-              drawOnChartArea: false, 
+              drawOnChartArea: false,
             },
             title: {
               display: true,
@@ -172,5 +182,37 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
+  }
+
+
+
+
+
+  //handle innerwidth when initializing
+  handleInnerWidth() {
+    if (window.innerWidth < 650) {
+      this.landScapeView = false;
+      this.rotate.nativeElement.classList.remove('d-none');
+      this.chart.nativeElement.classList.add('d-none');
+    } else {
+      this.landScapeView = true;
+      this.rotate.nativeElement.classList.add('d-none');
+      this.chart.nativeElement.classList.remove('d-none');
+    }
+  }
+
+
+  // handle innerWidth when resizing the screen
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    const orientation = (window.screen as any).orientation;
+
+    if (event.target.innerWidth < 650) {
+      this.rotate.nativeElement.classList.remove('d-none');
+      this.chart.nativeElement.classList.add('d-none');
+    } else {
+      this.rotate.nativeElement.classList.add('d-none');
+      this.chart.nativeElement.classList.remove('d-none');
+    }
   }
 }

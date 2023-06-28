@@ -43,7 +43,9 @@ export class DialogAddTransactionComponent implements OnInit {
     }
   }
 
-
+  /**
+   * Save all needed Value from the User who is making a transaction
+   */
   getTransactionValues() {
     let date = new Date();
     let timeStamp = date.getTime();
@@ -66,6 +68,9 @@ export class DialogAddTransactionComponent implements OnInit {
   }
 
 
+  /**
+   * Gather BTC Data so the current price can be calculated
+   */
   async gatherAndProcessBTCData() {
     let date = this.btcService.setDateFortheLastSevenDays(0);
     this.responseAsJSON = await this.btcService.fetchApiData(date);
