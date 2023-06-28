@@ -43,6 +43,10 @@ export class UserDetailComponent {
     this.getUser();
   }
 
+
+  /**
+   * This Methode is used to delte a use from Firebase
+   */
   async deleteUser() {
     const userRef = doc(this.firestore, 'users', this.userId);
     await deleteDoc(userRef).then(() => {
@@ -51,36 +55,56 @@ export class UserDetailComponent {
   }
 
 
-  async getUser() {
+  /**
+   * This Methode is used to get one user from Firebase depending on the userId / Url
+  */
+  getUser() {
     const docRef = doc(this.firestore, 'users', this.userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       this.user = new User(docSnap.data());
 
-
-      this.genderService.getGender(this.user.firstName).subscribe((data: Gender) => {
-        const gender = data.gender;
-        this.avatar = gender === 'male' ? 'man' : 'women';
-        this.loading = false;
-      });
+      this.setProfilePic();
     });
   }
 
 
-  editAdress() {
+  /**
+   * Sets the profile picture depending on the gender of the user's first name using the Genderize API.
+   */
+  setProfilePic() {
+    this.genderService.getGender(this.user.firstName).subscribe((data: Gender) => {
+      const gender = data.gender;
+      this.avatar = gender === 'male' ? 'man' : 'women';
+      this.loading = false;
+    });
+  }
+
+
+
+  /**
+   * Open the EditAdress Dialog and pass the User Object and userId
+   */
+  openEditAdress() {
     const dialog = this.dialog.open(DialogEditAdressComponent);
     dialog.componentInstance.user = new User(this.user.toJson());
     dialog.componentInstance.userId = this.userId;
   }
 
 
-  editUserDetail() {
+  /**
+  * Open the EditAdress Dialog and pass the User Object and userId
+  */
+  openEditUserDetail() {
     const dialog = this.dialog.open(DialogEditUserComponent);
     dialog.componentInstance.user = new User(this.user.toJson());
     dialog.componentInstance.userId = this.userId;
   }
 
 
-  openDialog(): void {
+  /**
+  * Open the EditAdress Dialog and pass the User Object
+  */
+  openAddTransaction(): void {
     const dialog = this.dialog.open(DialogAddTransactionComponent);
     dialog.componentInstance.user = new User(this.user.toJson());
   }

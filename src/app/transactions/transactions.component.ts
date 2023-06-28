@@ -52,7 +52,7 @@ export class TransactionsComponent implements OnInit {
 
     setTimeout(() => {
       if (this.allTransactions.length == 0) {
-        this.animation.splashScreen(this.typedTarget);
+        this.animation.typeAnimation(this.typedTarget);
       }
     }, 500);
   }
@@ -69,7 +69,7 @@ export class TransactionsComponent implements OnInit {
     await deleteDoc(docRef).then(() => {
       if (this.allTransactions.length == 0) {
         setTimeout(() => {
-          this.animation.splashScreen(this.typedTarget);
+          this.animation.typeAnimation(this.typedTarget);
         }, 500);
       }
     })

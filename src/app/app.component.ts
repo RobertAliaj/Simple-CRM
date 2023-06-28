@@ -18,71 +18,83 @@ export class AppComponent {
   @ViewChild('wrapper') wrapper!: ElementRef;
   @ViewChild('drawer') drawer!: MatDrawer;
 
+
+  URL_TITLE_MAP = new Map([
+    ['/', 'Dashboard'],
+    ['/user', 'Users'],
+    ['/transactions', 'Transactions History'],
+    ['/news', 'News'],
+    ['/help', 'Help']
+  ]);
+
+  DEFAULT_TITLE = 'Users / User Details';
+
   constructor(public router: Router) { }
 
   ngOnInit() {
     this.handleInnerWidth();
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if (event.url === '/news') {
-          this.menuTitle.nativeElement.textContent = 'News';
-        } else if (event.url === '/') {
-          this.menuTitle.nativeElement.textContent = 'Dashboard';
-        } else if (event.url === '/user') {
-          this.menuTitle.nativeElement.textContent = 'Users';
-        } else if (event.url === '/transactions') {
-          this.menuTitle.nativeElement.textContent = 'Transactions History';
-        } else if (event.url === '/help') {
-          this.menuTitle.nativeElement.textContent = 'Help';
-        } else {
-          this.menuTitle.nativeElement.textContent = 'Users / User Details';
-        }
-      }
-    });
+    this.router.events.subscribe(event => this.onNavigationEnd(event));
   }
 
 
-  //handle innerWidth while changing window size
+  /**
+ * Handle InnerWidth when Initializing the App
+ */
+  handleInnerWidth() {
+    this.checkScreenSize = window.innerWidth < 1100 ? false : true;
+    window.innerWidth < 700 ? this.showResponsiveView() : this.showStandardView();
+  }
+
+
+  /**
+   * Verarbeitet das NavigationEnd-Event und setzt den Menütitel basierend auf der aktuellen URL.
+   *
+   * @param {NavigationEnd} event - Das NavigationEnd-Event, das die Information über die Navigation enthält.
+   */
+  onNavigationEnd(event: any) {
+    if (event instanceof NavigationEnd) {
+      this.setMenuTitleBasedOnUrl(event.url);
+    }
+  }
+
+
+  setMenuTitleBasedOnUrl(url: string) {
+    const title = this.URL_TITLE_MAP.get(url);
+    this.setMenuTitle(title || this.DEFAULT_TITLE);
+  }
+
+
+  setMenuTitle(title: string) {
+    this.menuTitle.nativeElement.textContent = title;
+  }
+
+
+  /**
+   * Handle InnerWith when Resizing Window
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkScreenSize = event.target.innerWidth < 1100 ? false : true;
-
-    if (event.target.innerWidth < 700) {
-      this.logo = 'logo-small.png';
-      this.logoStyle = '40px';
-      this.showText = true;
-    } else {
-      this.logo = 'logo.png';
-      this.logoStyle = 'unset';
-      this.showText = false;
-    }
+    event.target.innerWidth < 700 ? this.showResponsiveView() : this.showStandardView();
   }
 
 
-  //handle innerWidth on initialization
-  handleInnerWidth() {
-    this.checkScreenSize = window.innerWidth < 1100 ? false : true;
+  showResponsiveView() {
+    this.logo = 'logo-small.png';
+    this.logoStyle = '40px';
+    this.showText = true;
+  }
 
-    if (window.innerWidth < 700) {
-      this.logo = 'logo-small.png';
-      this.logoStyle = '40px';
-      this.showText = true;
-    } else {
-      this.logo = 'logo.png';
-      this.logoStyle = 'unset';
-      this.showText = false;
-    }
+
+  showStandardView() {
+    this.logo = 'logo.png';
+    this.logoStyle = 'unset';
+    this.showText = false;
   }
 
 
   closeMenu(drawer: MatDrawer) {
     if (window.innerWidth < 650)
       drawer.close();
-  }
-
-
-  hideContent() {
-    if (window.innerWidth < 650)
-      this.showText = true;
   }
 }

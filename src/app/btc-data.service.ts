@@ -23,7 +23,11 @@ export class BtcDataService {
       market_cap: []
     };
   }
+  
 
+  /**
+   * This Methode is used to reset the btcData Object before filling it again with new values;
+   */
   resetBTCData() {
     this.btcData = this.initializeBTCData();
   }
@@ -66,7 +70,7 @@ export class BtcDataService {
 
 
   /**
-   * This function is used to set a set a new Date (in this case for the last 7 days)
+   * This function is used to set a new Date (in this case for the last 7 days)
    * 
    * @param {number} i - The number of days to subtract from the current date (or the date of the previous day if the current time is before 3 a.m.).
    * @returns {string}  A string representing the Date in this format dd-mm-yyyy
@@ -111,15 +115,12 @@ export class BtcDataService {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
-    if (day < 10) {
+    if (day < 10)
       day = `0${day}`;
-    }
-    if (month < 10) {
+
+    if (month < 10)
       month = `0${month}`;
-    }
 
     return `${day}-${month}-${year}`;
   }
 }
-
-

@@ -10,9 +10,9 @@ export class NewsComponent implements OnInit {
 
   articles: any[] = [];
   apiKey2 = '5edb8f8face96bfd5c78b9fbc761777b';
-  apikey1 = 'ecb542685608d42c858ef57eff5b1663';
+  apiKey1 = 'ecb542685608d42c858ef57eff5b1663';
   q = 'crypto';
-  url = 'https://gnews.io/api/v4/search?q=' + this.q + '&lang=en&country=us&max=10&apikey=' + this.apikey1;
+  url = 'https://gnews.io/api/v4/search?q=' + this.q + '&lang=en&country=us&max=10&apikey=' + this.apiKey2;
   creditLink = '<a href="https://gnews.io/" target="_blank" class="link">Gnews API</a>';
 
   loading: boolean = true;
@@ -35,7 +35,7 @@ export class NewsComponent implements OnInit {
         this.articles = data.articles;
         this.loading = false;
         setTimeout(() => {
-          this.animation.splashScreen(this.typedTarget, this.creditLink)
+          this.animation.typeAnimation(this.typedTarget, this.creditLink)
         }, 500);
       });
   }

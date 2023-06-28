@@ -12,7 +12,7 @@ export class TypedAnimationService {
 
   constructor() { }
 
-  splashScreen(typedTarget: ElementRef, link?: string) {
+  typeAnimation(typedTarget: ElementRef, link?: string) {
     const typedString = link ? `Data provided by ${link} !` : 'The transaction record is currently empty.';
 
     const typed2 = new Typed(typedTarget.nativeElement, {

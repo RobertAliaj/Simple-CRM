@@ -16,22 +16,23 @@ export class UserComponent {
   constructor(
     public dialog: MatDialog,
     private firestore: Firestore,
-    ) {
+  ) {
     this.getAllUsers();
   }
 
-
+  /**
+   * Get all Users from Firebase
+   */
   getAllUsers() {
-    let changes;
     const collectionRef = collection(this.firestore, 'users');
     onSnapshot(collectionRef, (snapshot) => {
-      changes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      let changes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       this.allUsers = changes;
       this.loading = false;
     });
   }
 
-
+  
   openDialog(): void {
     this.dialog.open(DialogAddUserComponent);
   }

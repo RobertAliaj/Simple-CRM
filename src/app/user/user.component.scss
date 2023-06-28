@@ -72,9 +72,9 @@ table {
 
 @media(max-width: 600px) {
     .user-info {
-        display: flex !important;
-        justify-content: flex-end !important;
-        align-items: center !important;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         width: 100;
     }
 
