@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionsComponent } from './transactions.component';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('TransactionsComponent', () => {
   let component: TransactionsComponent;
@@ -8,6 +9,7 @@ describe('TransactionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ Firestore ],
       declarations: [ TransactionsComponent ]
     })
     .compileComponents();

@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Simple CRM'
+  title = 'simple-crm'
 
   checkScreenSize!: boolean;
   logo: string = ''

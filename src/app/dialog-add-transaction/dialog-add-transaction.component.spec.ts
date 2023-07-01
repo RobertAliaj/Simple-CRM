@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogAddTransactionComponent } from './dialog-add-transaction.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
 
 describe('DialogAddTransactionComponent', () => {
   let component: DialogAddTransactionComponent;
@@ -8,9 +10,10 @@ describe('DialogAddTransactionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogAddTransactionComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [DialogAddTransactionComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DialogAddTransactionComponent);
     component = fixture.componentInstance;
