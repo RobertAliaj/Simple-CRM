@@ -11,8 +11,7 @@ describe('UserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule],
-
-      declarations: [UserComponent]
+      declarations: [UserComponent],
     })
       .compileComponents();
 
