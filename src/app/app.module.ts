@@ -34,6 +34,7 @@ import { DialogAddTransactionComponent } from './dialog-add-transaction/dialog-a
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NewsComponent } from './news/news.component';
 import { InfoComponent } from './info/info.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 
 
@@ -54,7 +55,8 @@ import { InfoComponent } from './info/info.component';
     TransactionsComponent,
     DialogAddTransactionComponent,
     NewsComponent,
-    InfoComponent
+    InfoComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,

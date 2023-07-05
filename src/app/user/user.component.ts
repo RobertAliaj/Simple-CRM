@@ -20,6 +20,7 @@ export class UserComponent {
     this.getAllUsers();
   }
 
+  
   /**
    * Get all Users from Firebase
    */

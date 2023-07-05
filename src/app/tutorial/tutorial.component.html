@@ -1,0 +1,21 @@
+<mat-card class="mat-card">
+
+    <mat-card-header>
+        <div class="title-container">
+            <mat-card-title>{{ tutorial[index].title }}</mat-card-title>
+            <mat-card-subtitle>{{ tutorial[index].subtitle }}</mat-card-subtitle>
+        </div>
+    </mat-card-header>
+    <img mat-card-image class="tutorial-img" src="assets/img/{{ tutorial[index].img }}" alt="navigation">
+
+    <mat-card-content>
+        <p>{{ tutorial[index].description }}</p>
+    </mat-card-content>
+
+    <mat-card-actions class="btn-container">
+        <button *ngIf="index == 0" class="placeholder">previous</button>
+        <button mat-button *ngIf="index > 0" (click)="previous();">Previous</button>
+        <button mat-stroked-button color="warn" (click)="this.dialogRef.close()">Close</button>
+        <button mat-button (click)="next()">Next</button>
+    </mat-card-actions>
+</mat-card>

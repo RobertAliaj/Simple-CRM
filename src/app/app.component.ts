@@ -1,6 +1,8 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
+import { TutorialComponent } from './tutorial/tutorial.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -29,13 +31,25 @@ export class AppComponent {
 
   DEFAULT_TITLE = 'Users / User Details';
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.openDialogTutorial();
     this.handleInnerWidth();
     this.router.events.subscribe(event => this.onNavigationEnd(event));
   }
 
+
+  openDialogTutorial(): void {
+    let showTutorial = localStorage.getItem('showTutorial');
+    if (!showTutorial) {
+      const dialogRef = this.dialog.open(TutorialComponent, {});
+
+      dialogRef.afterClosed().subscribe(() => {
+        localStorage.setItem('showTutorial', 'false');
+      });
+    }
+  }
 
   /**
  * Handle InnerWidth when Initializing the App

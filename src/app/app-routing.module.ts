@@ -6,6 +6,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { NewsComponent } from './news/news.component';
 import { InfoComponent } from './info/info.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 const routes: Routes = [
   { path : '', component:  DashboardComponent },

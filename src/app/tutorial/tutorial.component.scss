@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+.mat-card {
+    width: 600px;
+    padding: 16px;
+}
+
+.card-header {
+    width: 100%;
+}
+
+
+.title-container {
+    width: 100%;
+    text-align: center;
+}
+
+
+.tutorial-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border: 1px solid rgb(0 0 0 / 20%);
+    border-radius: 5px;
+    margin: 16px 0px;
+}
+
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
+.placeholder {
+    color: transparent !important;
+    border: 1px solid blue !important;
+    background: transparent !important;
+}
