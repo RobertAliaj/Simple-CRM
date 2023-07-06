@@ -102,7 +102,7 @@ export class AppComponent {
 
 
   showResponsiveView() {
-    this.logo = 'logo-small.png';
+    this.logo = 'logo-small.webp';
     this.logoStyle = '40px';
     this.showText = true;
   }
