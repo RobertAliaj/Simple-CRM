@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BtcDataService } from '../btc-data.service';
-import { addDoc, collection, getDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Transaction } from 'src/models/transaction.class';
@@ -21,6 +21,7 @@ export class DialogAddTransactionComponent implements OnInit {
   transaction: Transaction = new Transaction();
   user!: User;
   loading: boolean = false;
+  userId!: string;
 
   constructor(
     private btcService: BtcDataService,
@@ -34,14 +35,35 @@ export class DialogAddTransactionComponent implements OnInit {
     this.gatherAndProcessBTCData();
   }
 
+  async updateUserBtcAmount() {
+    let addedBtcAmount = parseFloat(this.btcAmount);
+    const docRef = doc(this.firestore, 'users', this.userId);
+    const docSnap = await getDoc(docRef);
+
+    const currentUser = new User(docSnap.data());
+    const currentBtcAmount = currentUser.btcAmount;
+    if (currentBtcAmount) {
+      const updatedBtcAmount = currentBtcAmount + addedBtcAmount;
+      await updateDoc(docRef, {
+        btcAmount: updatedBtcAmount
+      });
+    } else {
+      await updateDoc(docRef, {
+        btcAmount: addedBtcAmount
+      });
+    }
+  }
+
 
   async saveTransaction() {
     if (this.transaction.usdAmount) {
       this.loading = true;
       this.getTransactionValues();
       this.addTransaction();
+      this.updateUserBtcAmount()
     }
   }
+
 
   /**
    * Save all needed Value from the User who is making a transaction

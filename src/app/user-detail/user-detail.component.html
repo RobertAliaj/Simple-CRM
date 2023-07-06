@@ -21,7 +21,9 @@
         <div class="user-details">
             <h2>{{ user.firstName }} {{ user.lastName }}</h2>
             {{ user.email }}
+            <!-- <p>BTC Amount: {{ user.btcAmount }}</p> -->
         </div>
+
 
     </mat-card>
 
@@ -47,8 +49,21 @@
 
     </mat-card>
 
-    <button (click)="openAddTransaction()" mat-fab color="primary" class="add-button" matTooltip="Send BTC"
-        matTooltipPosition="above">
-        <mat-icon>send</mat-icon>
-    </button>
+    <mat-card class="mat-mdc-card mdc-card mt-32 detail-card amount-card box-shadow">
+
+        <mat-card-header>
+            <mat-card-title>Bitcoin Amount</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="amount">
+            <p>Bitcoins received up to now: <b>{{ user.btcAmount }} ₿.</b></p>
+        </mat-card-content>
+
+        <div class="add-button">
+            <button (click)="openAddTransaction()" mat-fab color="primary" matTooltip="Send BTC"
+                matTooltipPosition="above">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </mat-card>
 </div>

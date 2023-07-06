@@ -9,7 +9,7 @@
         alt="navigation">
 
     <mat-card-content>
-        <p [class.special-description]="this.index == 0 || this.index == this.tutorial.length - 1">{{ tutorial[index].description }}</p>
+        <p [class.special-description]="this.index == 0 || this.index == this.tutorial.length - 1" class="description">{{ tutorial[index].description }}</p>
     </mat-card-content>
 
     <mat-card-actions class="btn-container">

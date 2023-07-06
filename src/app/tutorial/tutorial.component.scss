@@ -3,13 +3,15 @@
 }
 
 .mat-card {
-    width: 600px;
-    height: 500px;
+    width: clamp(620px, 206.9565217391305px + 51.63043478260869vw, 1000px);
+    min-height: 600px;
     padding: 16px;
+    cursor: default;
+
 }
 
-.mat-card-intro-outro{
-    min-height: 500px;
+.mat-card-intro-outro {
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -22,14 +24,19 @@
 .title-container {
     width: 100%;
     text-align: center;
+
+    mat-card-title {
+        font-size: clamp(1.25rem, 1.1678200692041523rem + 0.34602076124567477vw, 1.5rem) !important;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgb(0 0 0 / 20%);
+    }
 }
 
 .tutorial-img {
     width: 100%;
-    height: 300px;
+    height: 400px;
     object-fit: contain;
-    border: 1px solid rgb(0 0 0 / 20%);
-    border-radius: 5px;
+    border-bottom: 1px solid rgb(0 0 0 / 20%);
     margin: 16px 0px;
 }
 
@@ -37,6 +44,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 16px;
+    border-top: 1px solid rgb(0 0 0 / 20%);
+    padding-top: 10px;
 }
 
 .flex-spacer {
@@ -48,23 +57,34 @@
     cursor: default;
 }
 
-@keyframes zoomIn {
-    0%   {transform: scale(0.9); opacity: 0;}
-    100% {transform: scale(1); opacity: 1;}
+.description {
+    font-weight: 400;
+    font-size: clamp(1rem, 0.9383650519031141rem + 0.25951557093425603vw, 1.1875rem);;
+    text-align: center;
+    line-height: 30px;
 }
 
 .special-description {
-    font-weight: 500; 
-    padding-left: 15px;
-    text-align: center;
+    font-weight: 400;
     animation: zoomIn 0.6s ease-out;
 }
 
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
 
-@media(max-width: 800px){
-    .mat-card{
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+@media(max-width: 800px) {
+    .mat-card {
         width: 100%;
-        min-height: 500px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -74,5 +94,15 @@
         object-fit: contain;
         height: unset;
     }
+}
 
+
+@media(max-width: 380px) {
+    .mat-card-intro-outro{
+        min-height: 600px !important;
+    }
+
+    .description {
+        line-height: 25px;
+    }
 }

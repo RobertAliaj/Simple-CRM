@@ -7,6 +7,7 @@ export class User {
     city!: string;
     email!: string;
     color!: string;
+    btcAmount!: number;
 
 
     constructor(obj?: any) {
@@ -18,6 +19,7 @@ export class User {
         this.city = obj ? obj.city : '';
         this.email = obj ? obj.email : '';
         this.color = obj ? obj.color : '';
+        this.btcAmount = obj ? obj.btcAmount : '';
     }
 
     public toJson() {
@@ -30,6 +32,7 @@ export class User {
             city: this.city,
             email: this.email,
             color: this.color,
+            btcAmount: this.btcAmount,
         }
     }
 }
