@@ -10,6 +10,8 @@ import { TutorialService } from '../tutorial.service';
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.scss']
 })
+
+
 export class TutorialComponent {
 
   index: number = 0;
@@ -24,16 +26,11 @@ export class TutorialComponent {
   }
 
   next() {
-    if (this.index < this.tutorial.length - 1)
+    if (this.index <= this.tutorial.length - 1)
       this.index++;
-
-    if (this.index == this.tutorial.length - 1)
-      this.dialogRef.close();
   }
 
   previous() {
     this.index--;
   }
-
-
 }

@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AppComponent {
   title = 'simple-crm'
 
+  showTutorial!: any;
   checkScreenSize!: boolean;
   logo: string = ''
   logoStyle: string = '';
@@ -41,15 +42,19 @@ export class AppComponent {
 
 
   openDialogTutorial(): void {
-    let showTutorial = localStorage.getItem('showTutorial');
-    if (!showTutorial) {
+    const showTutorialValue = localStorage.getItem('showTutorial');
+    this.showTutorial = Boolean(showTutorialValue); // convert the string to boolean
+
+    if (!this.showTutorial) {
       const dialogRef = this.dialog.open(TutorialComponent, {});
 
       dialogRef.afterClosed().subscribe(() => {
-        localStorage.setItem('showTutorial', 'false');
+        localStorage.setItem('showTutorial', 'started');
+        this.showTutorial = true;
       });
     }
   }
+
 
   /**
  * Handle InnerWidth when Initializing the App

@@ -1,21 +1,20 @@
-<mat-card class="mat-card">
+<mat-card class="mat-card" [class.mat-card-intro-outro]="this.index == 0 || this.index == this.tutorial.length - 1">
 
     <mat-card-header>
         <div class="title-container">
             <mat-card-title>{{ tutorial[index].title }}</mat-card-title>
-            <mat-card-subtitle>{{ tutorial[index].subtitle }}</mat-card-subtitle>
         </div>
     </mat-card-header>
-    <img mat-card-image class="tutorial-img" src="assets/img/{{ tutorial[index].img }}" alt="navigation">
+    <img mat-card-image *ngIf="this.index != 0 && this.index != this.tutorial.length - 1" class="tutorial-img" src="assets/img/{{ tutorial[index].img }}"
+        alt="navigation">
 
     <mat-card-content>
-        <p>{{ tutorial[index].description }}</p>
+        <p [class.special-description]="this.index == 0 || this.index == this.tutorial.length - 1">{{ tutorial[index].description }}</p>
     </mat-card-content>
 
     <mat-card-actions class="btn-container">
-        <button *ngIf="index == 0" class="placeholder">previous</button>
-        <button mat-button *ngIf="index > 0" (click)="previous();">Previous</button>
+        <button mat-stroked-button [disabled]="this.index == 0" (click)="previous();">Previous</button>
         <button mat-stroked-button color="warn" (click)="this.dialogRef.close()">Close</button>
-        <button mat-button (click)="next()">Next</button>
+        <button mat-stroked-button [disabled]="this.index == this.tutorial.length - 1" (click)="next()">Next</button>
     </mat-card-actions>
 </mat-card>

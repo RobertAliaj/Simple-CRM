@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 interface TutorialSlide {
   title: string;
-  subtitle: string;
   img: string;
   description: string;
 }
@@ -12,44 +11,47 @@ interface TutorialSlide {
 })
 export class TutorialService {
 
+
   tutorial: TutorialSlide[] = [
     {
       title: 'Welcome to my Simple CRM Web Application !',
-      subtitle: "If you're seeing this it means you're here for the first time! Let me explain to you what you can do in this App!",
       img: 'lets-go.png',
-      description: 'Click "Next" to start with the Tutorial'
+      description: "This application is a Customer Relationship Management - CRM - tool that operates with CRUD (Create, Read, Update, Delete) functionalities and is based on Angular. Firebase serves as the backend, while the user interface is designed using Angular Material, which is based on the principles of Material Design. This tutorial will guide you through the main functionalities of my web application. Let's dive in together, click Next to start the journey!"
     },
     {
       title: 'Dashboard',
-      subtitle: 'View Bitcoin Chart.',
       img: 'dashboard.png',
-      description: ''
-    }, {
+      description: 'In the dashboard, you can see the current daily price and market cap of Bitcoin.'
+    },
+    {
       title: 'User',
-      subtitle: 'Overview of all the users.',
       img: 'user.png',
-      description: 'Lorem Ipsum'
-    }, {
+      description: 'In the user section, you can add a new user to your application. You can click on a username to navigate to the user details.'
+    },
+    {
+      title: 'User Detail',
+      img: 'user-detail.png',
+      description: 'In the User Detail section, you can edit the user details and \'send\' Bitcoin!'
+    },
+    {
       title: 'Transactions',
-      subtitle: 'Overview of all available transactions.',
-      img: 'transaction.png',
-      description: 'Lorem Ipsum Transaction'
-    }, {
+      img: 'transaction1.png',
+      description: 'In the Transaction History, you can have an overview of all transactions made.'
+    },
+    {
       title: 'News',
-      subtitle: 'Daily news about crypto currency.',
       img: 'news.png',
-      description: 'Lorem Ipsum News'
-    }, {
-      title: 'Help',
-      subtitle: 'Just in case if you forget.',
-      img: 'help.png',
-      description: 'Here you can have an overview of the Functionalities of this App anytime!'
+      description: 'Stay updated with the latest Crypto World news.'
     },
     {
       title: 'Help',
-      subtitle: 'Just in case if you forget.',
       img: 'help.png',
-      description: 'Here you can have an overview of the Functionalities of this App anytime!'
+      description: 'Navigate to the Help section anytime you need an overview of the functionalities of this app.'
+    },
+    {
+      title: 'Congratulations!',
+      img: 'help.png',
+      description: 'Now you have a solid understanding of how this Simple CRM Web Application works. Remember, this tool is for demonstration purposes, so feel free to explore and test all features without hesitation. If you ever need to revisit any part of this tutorial, we\'re always here.Happy exploring!'
     }
   ];
 

@@ -12,7 +12,7 @@ export class NewsComponent implements OnInit {
   apiKey2 = '5edb8f8face96bfd5c78b9fbc761777b';
   apiKey1 = 'ecb542685608d42c858ef57eff5b1663';
   q = 'crypto';
-  url = 'https://gnews.io/api/v4/search?q=' + this.q + '&lang=en&country=us&max=10&apikey=' + this.apiKey2;
+  url = 'https://gnews.io/api/v4/search?q=' + this.q + '&lang=en&country=us&max=10&apikey=' + this.apiKey1;
   creditLink = '<a href="https://gnews.io/" target="_blank" class="link">Gnews API</a>';
 
   loading: boolean = true;

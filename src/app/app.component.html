@@ -45,7 +45,7 @@
     </mat-toolbar>
 
 
-    <div #wrapper>
+    <div #wrapper *ngIf="showTutorial">
       <div class="router-container">
         <router-outlet></router-outlet>
       </div>
