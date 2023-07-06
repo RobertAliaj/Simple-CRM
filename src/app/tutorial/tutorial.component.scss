@@ -57,3 +57,20 @@
     padding-left: 15px;
     animation: zoomIn 0.6s ease-out;
 }
+
+
+@media(max-width: 800px){
+    .mat-card{
+        width: 100%;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .tutorial-img {
+        object-fit: contain;
+        height: unset;
+    }
+
+}

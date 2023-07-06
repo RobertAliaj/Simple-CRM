@@ -35,13 +35,16 @@ export class AppComponent {
   constructor(public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.openDialogTutorial();
+    this.openTutorial();
     this.handleInnerWidth();
     this.router.events.subscribe(event => this.onNavigationEnd(event));
   }
 
 
-  openDialogTutorial(): void {
+  /**
+   * This Method is used to open the Tutorial Screen if you're using the App for the First time
+   */
+  openTutorial() {
     const showTutorialValue = localStorage.getItem('showTutorial');
     this.showTutorial = Boolean(showTutorialValue); // convert the string to boolean
 
