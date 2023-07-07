@@ -109,7 +109,7 @@ export class AppComponent {
 
 
   showStandardView() {
-    this.logo = 'logo.png';
+    this.logo = 'logo.webp';
     this.logoStyle = 'unset';
     this.showText = false;
   }

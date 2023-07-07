@@ -25,8 +25,13 @@ export class TutorialService {
     },
     {
       title: 'User',
-      img: 'user.webp',
-      description: 'To add a new user, navigate to the \'User\' area. Here, you can have an overview of all your users and you can add a new one by clicking the plus button located at the bottom right. After you have created a user, you can click on the username to go to the \'User Details\'.'
+      img: 'add-user.webp',
+      description: 'In the user area, you can have an overview of all your users and you can add a new one by clicking the plus button located at the bottom right.'
+    },
+        {
+      title: 'User',
+      img: 'openuser.webp',
+      description: 'After you have created a user, you can click on the username to go to the \'User Details\'.'
     },
     {
       title: 'User Detail',
@@ -50,7 +55,7 @@ export class TutorialService {
     },
     {
       title: 'Send Bitcoins',
-      img: 'user-detail.webp',
+      img: 'send-dialog.webp',
       description: '  Simply enter the amount of BTC you want to send and click on \'Send\'.'
     },
     {
