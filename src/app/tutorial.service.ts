@@ -16,7 +16,7 @@ export class TutorialService {
     {
       title: 'Welcome to my Simple CRM Web Application !',
       img: 'lets-go.webp',
-      description: 'Welcome to the Crypto Owners CRM! Here you can manage your users, keep track of how many bitcoins your users have, and even send them a few more. This tutorial will guide you through the main functionalities of my web application. Let\'s dive in together, click Next to start the journey!',
+      description: 'Welcome to the Crypto Owners CRM! Here you can add and manage users, keep track of how many bitcoins your users have, and even send them a few more. This tutorial will guide you through the main functionalities of my web application. Let\'s dive in together, click Next to start the journey! ',
     },
     {
       title: 'Dashboard',
@@ -28,7 +28,7 @@ export class TutorialService {
       img: 'add-user.webp',
       description: 'In the user area, you can have an overview of all your users and you can add a new one by clicking the plus button located at the bottom right.'
     },
-        {
+    {
       title: 'User',
       img: 'openuser.webp',
       description: 'After you have created a user, you can click on the username to go to the \'User Details\'.'
@@ -37,17 +37,17 @@ export class TutorialService {
       title: 'User Detail',
       img: 'user-detail.webp',
       description: 'Here, you get an overview of the user details and the amount of Bitcoin the user has received up to now.'
-    }, 
+    },
     {
       title: 'Edit User Detail',
       img: 'edit-user.webp',
       description: 'Edit Personal User Details.'
-    }, 
+    },
     {
       title: 'Delete the User',
       img: 'delete-user.webp',
       description: 'Delete the user by clicking the delete button.'
-    }, 
+    },
     {
       title: 'Send Bitcoins',
       img: 'send-bitcoin.webp',
@@ -86,5 +86,3 @@ export class TutorialService {
     return this.tutorial;
   }
 }
-
-      // description: "This application is a Customer Relationship Management - CRM - tool that operates with CRUD (Create, Read, Update, Delete) functionalities and is based on Angular. Firebase serves as the backend, while the user interface is designed using Angular Material, which is based on the principles of Material Design. This tutorial will guide you through the main functionalities of my web application. Let's dive in together, click Next to start the journey!"
