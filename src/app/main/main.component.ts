@@ -3,10 +3,9 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { TutorialComponent } from '../tutorial/tutorial.component';
 import { MatDialog } from '@angular/material/dialog';
-import { onAuthStateChanged } from '@angular/fire/auth';
-import { getAuth } from 'firebase/auth';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -46,7 +45,6 @@ export class MainComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private authService: AuthService,
   ) { }
-
 
   ngOnInit() {
     this.authSubscription = this.authService.getAuthState().subscribe(isLoggedIn => {
@@ -146,7 +144,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   logOut() {
+    this.router.navigate(['login']);
     this.authService.signOut();
-    this.router.navigate(['login']);  // Weiterleiten zur Hauptseite
   }
 }

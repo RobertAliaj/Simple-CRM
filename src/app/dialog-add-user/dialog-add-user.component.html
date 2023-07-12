@@ -1,15 +1,12 @@
 <mat-progress-bar *ngIf="userForm.disabled" mode="indeterminate"></mat-progress-bar>
 
-
 <!-- The Title of the Dialog -->
 <h1 mat-dialog-title>Add User</h1>
-
 
 <form [formGroup]="userForm" (ngSubmit)="saveUser()">
 
     <!-- The Input Fields of the Dialog -->
     <div mat-dialog-content class="mat-form-field-container">
-
 
         <div>
             <mat-form-field appearance="outline" class="margin-right-16">

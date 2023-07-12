@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { Observable } from 'rxjs';
 
 
@@ -30,20 +30,7 @@ export class AuthService {
     });
   }
 
-
-  // checkIfUserIsLoggedIn() {
-  //   return new Promise((resolve, reject) => {
-  //     onAuthStateChanged(this.auth, (user) => {
-  //       if (user) {
-  //         resolve(true);
-  //       } else {
-  //         resolve(false);
-  //       }
-  //     }, reject);
-  //   });
-  // }
-
-
+  
   async signUp(email: string, password: string) {
     return await this.afAuth.createUserWithEmailAndPassword(email, password);
   }

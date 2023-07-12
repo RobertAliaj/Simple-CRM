@@ -1,7 +1,55 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+
 <mat-card class="login-card">
+
+    <button mat-icon-button class="back-btn" (click)="this.router.navigate([''])">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+
     <mat-card-title>Sign Up</mat-card-title>
 
     <form class="login-form" [formGroup]="signUpFormValid" (ngSubmit)="signUp()">
+
+        <div class="input-container">
+            <mat-form-field >
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" placeholder="First Name">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" placeholder="Last Name">
+            </mat-form-field>
+        </div>
+
+        <div class="full-width">
+            <mat-form-field  class="full-width">
+                <mat-label>Birth Date</mat-label>
+                <input matInput formControlName="birthDate" [matDatepicker]="picker1" placeholder="Date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="input-container">
+            <mat-form-field>
+                <mat-label>Street + House No.</mat-label>
+                <input matInput formControlName="street" placeholder="Adress">
+            </mat-form-field>
+            
+            <mat-form-field >
+                <mat-label>Zip Code</mat-label>
+                <input matInput formControlName="zipCode" placeholder="Zip Code">
+            </mat-form-field>
+        </div>
+        
+        <div class="full-width">
+            <mat-form-field class="full-width">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" placeholder="City">
+            </mat-form-field>
+        </div>
 
         <div class="input-container">
             <mat-form-field>
@@ -15,8 +63,11 @@
             </mat-form-field>
         </div>
 
+
         <div mat-dialog-actions class="button-container">
-            <button [disabled]="this.signUpFormValid.invalid" type="submit" mat-raised-button>Register</button>
+            <button color="primary" [disabled]="this.signUpFormValid.invalid || this.signUpFormValid.disabled"
+                type="submit" mat-raised-button>Register</button>
         </div>
+
     </form>
 </mat-card>

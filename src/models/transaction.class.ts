@@ -1,6 +1,8 @@
 export class Transaction {
     firstName!: string;
     lastName!: string;
+    senderName!: string;
+    senderLastname!: string;
     usdAmount!: number;
     btcAmount!: string;
     date!: string;

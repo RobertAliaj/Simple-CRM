@@ -1,4 +1,4 @@
-.center-forms{
+.center-forms {
     height: calc(100vh - 56px);
     display: flex;
     justify-content: center;
@@ -8,6 +8,12 @@
 
 .mat-drawer-container {
     height: 100vh;
+
+    hr {
+        border: none;
+        background-color: rgb(0 0 0 / 20%);
+        height: 1px;
+    }
 }
 
 
