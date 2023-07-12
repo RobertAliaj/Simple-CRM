@@ -1,7 +1,4 @@
-<app-main></app-main>
-
-
-<!-- <mat-drawer-container class="mat-drawer-container" autosize>
+<mat-drawer-container class="mat-drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" [opened]="checkScreenSize" mode="side">
     <div class="logo-container">
       <a href="">
@@ -10,31 +7,36 @@
     </div>
 
     <ul class="menu-items">
-      
-      <li routerLink="/" (click)="closeMenu(drawer)">
+
+      <li routerLink="/dashboard" (click)="closeMenu(drawer)">
         <mat-icon>bar_chart_4_bars</mat-icon>
         <span [class.d-none]="showText"> Dashboard</span>
       </li>
-      
+
       <li routerLink="/user" (click)="closeMenu(drawer)">
         <mat-icon>person_outline</mat-icon>
         <span [class.d-none]="showText"> User</span>
       </li>
-      
+
       <li routerLink="/transactions" (click)="closeMenu(drawer)">
         <mat-icon>published_with_changes</mat-icon>
         <span [class.d-none]="showText"> Transactions</span>
       </li>
-      
+
       <li routerLink="/news" (click)="closeMenu(drawer)">
         <mat-icon>language</mat-icon>
         <span [class.d-none]="showText"> News</span>
       </li>
-
+      
+      <br>
+      <hr>
+      <br>
+      
       <li routerLink="/help" (click)="closeMenu(drawer)">
         <mat-icon>info_outline</mat-icon>
         <span [class.d-none]="showText"> Help</span>
       </li>
+
 
       <li (click)="logOut()">
         <mat-icon>logout</mat-icon>
@@ -53,7 +55,7 @@
     </mat-toolbar>
 
 
-    <div #wrapper *ngIf="showTutorial">
+    <div #wrapper *ngIf="showTutorial" [class.center-forms]="router.url == '/' || router.url =='/signUp' || router.url =='/login'">
       <div class="router-container">
         <router-outlet></router-outlet>
       </div>
@@ -61,4 +63,7 @@
 
 
   </div>
-</mat-drawer-container> -->
+</mat-drawer-container>
+
+<!-- [ngStyle]="{pointerEvents: 'none'}" -->
+<!-- [routerLink]="isUserLoggedIn ? '/user' : ''"  -->

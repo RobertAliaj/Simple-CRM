@@ -1,0 +1,28 @@
+<mat-card class="login-card" [@shake]="shakeState">
+  <mat-card-title>Log in</mat-card-title>
+
+  <form class="login-form" [formGroup]="userLoginValid" (ngSubmit)="proceed()">
+
+    <div class="input-container">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" autocomplete="on">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="on">
+      </mat-form-field>
+    </div>
+
+
+    <div mat-dialog-actions class="button-container">
+      <button color="primary" [disabled]="this.userLoginValid.invalid" type="submit" mat-raised-button>Login</button>
+    </div>
+  </form>
+
+  <div>
+    <span style="font-weight: 500;"> Not a user ?</span>
+    <button mat-button color="primary" (click)="navigateToSignUp()">Sign Up</button>
+  </div>
+</mat-card>

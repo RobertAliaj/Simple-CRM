@@ -59,7 +59,6 @@ export class DialogAddUserComponent implements OnInit {
       this.userForm.disable();
       this.getValuesFromInput();
       this.addUser();
-
     }
   }
 

@@ -17,11 +17,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -35,9 +35,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NewsComponent } from './news/news.component';
 import { InfoComponent } from './info/info.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
-
-
-
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { MainComponent } from './main/main.component';
 
 
 
@@ -56,7 +57,10 @@ import { TutorialComponent } from './tutorial/tutorial.component';
     DialogAddTransactionComponent,
     NewsComponent,
     InfoComponent,
-    TutorialComponent
+    TutorialComponent,
+    LoginComponent,
+    MainComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,9 +86,12 @@ import { TutorialComponent } from './tutorial/tutorial.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
-    ],
-  providers: [],
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth())
+  ],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
