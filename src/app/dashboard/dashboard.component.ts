@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('typedTarget') typedTarget!: ElementRef;
   @ViewChild('rotate') rotate!: ElementRef;
   @ViewChild('chart') chart!: ElementRef;
+  myChart!: any;
 
 
   constructor(private btcService: BtcDataService, private animationService: TypedAnimationService) { }
@@ -143,7 +144,8 @@ export class DashboardComponent implements OnInit {
    * @param {Array} market_cap - An array of market cap values corresponding to each date. Each market cap should correlate to a date and price in the other arrays.
    */
   renderChart(date: any, price: any, market_cap: any) {
-    const myChart = new Chart('myChart', {
+    if (this.myChart) this.myChart.destroy(); //destroy prev chart instance
+    this.myChart = new Chart('myChart', {
       type: 'bar',
       data: {
         labels: date.reverse(),

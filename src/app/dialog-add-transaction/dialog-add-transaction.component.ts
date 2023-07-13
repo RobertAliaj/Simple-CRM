@@ -40,6 +40,29 @@ export class DialogAddTransactionComponent implements OnInit {
     this.getCurrentLoggedUser();
   }
 
+
+  /**
+ * Gather BTC Data so the current price can be calculated
+ */
+  async gatherAndProcessBTCData() {
+    let date = this.btcService.setDateFortheLastSevenDays(0);
+    this.responseAsJSON = await this.btcService.fetchApiData(date);
+  }
+
+
+  async getCurrentLoggedUser() {
+    this.currentLoggedUser = await this.authService.getCurrentLoggedInEmail();
+
+    const usersCollectionRef = collection(this.firestore, 'users');
+    const userQuery = query(usersCollectionRef, where("email", "==", this.currentLoggedUser));
+
+    const userQuerySnapshot = await getDocs(userQuery);
+    userQuerySnapshot.forEach((doc) => {
+      this.sender = new User(doc.data());
+    });
+  }
+
+
   async updateUserBtcAmount() {
     let addedBtcAmount = parseFloat(this.btcAmount);
     const docRef = doc(this.firestore, 'users', this.userId);
@@ -60,34 +83,13 @@ export class DialogAddTransactionComponent implements OnInit {
   }
 
 
-
-  async getCurrentLoggedUser() {
-    this.currentLoggedUser = await this.authService.getCurrentLoggedInUser();
-
-    const usersCollectionRef = collection(this.firestore, 'users');
-    const userQuery = query(usersCollectionRef, where("email", "==", this.currentLoggedUser));
-
-    const userQuerySnapshot = await getDocs(userQuery);
-    userQuerySnapshot.forEach((doc) => {
-      this.sender = new User(doc.data());
-      this.userId = doc.id;
-    });
-  }
-
-
-
-  // async getCurrentLoggedUser(){
-  //   this.currentLoggedUser = await this.authService.getCurrentLoggedInUser();
-  // }
-
-
   async saveTransaction() {
     if (this.transaction.usdAmount) {
       this.loading = true;
       this.getCurrentLoggedUser();
       this.getTransactionValues();
       this.addTransaction();
-      this.updateUserBtcAmount()
+      this.updateUserBtcAmount();
     }
   }
 
@@ -116,15 +118,6 @@ export class DialogAddTransactionComponent implements OnInit {
       this.loading = false;
       this.dialogRef.close();
     });
-  }
-
-
-  /**
-   * Gather BTC Data so the current price can be calculated
-   */
-  async gatherAndProcessBTCData() {
-    let date = this.btcService.setDateFortheLastSevenDays(0);
-    this.responseAsJSON = await this.btcService.fetchApiData(date);
   }
 
 

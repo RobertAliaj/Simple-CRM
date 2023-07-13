@@ -9,6 +9,8 @@ import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.co
 import { DialogAddTransactionComponent } from '../dialog-add-transaction/dialog-add-transaction.component';
 import { GenderService } from '../gender.service';
 import { Gender } from '../gender';
+import { AuthService } from '../auth.service';
+import { getAuth, deleteUser } from "firebase/auth";
 
 
 @Component({
@@ -24,6 +26,7 @@ export class UserDetailComponent {
   birthDate!: Date;
   avatar!: string;
   loading: boolean = true;
+  currentLoggedUser!: any;
 
 
   constructor(
@@ -31,7 +34,8 @@ export class UserDetailComponent {
     private route: ActivatedRoute,
     private firestore: Firestore,
     public dialog: MatDialog,
-    private genderService: GenderService
+    private genderService: GenderService,
+    private authService: AuthService
   ) {
   }
 
@@ -45,20 +49,28 @@ export class UserDetailComponent {
 
 
   /**
-   * This Methode is used to delte a use from Firebase
-   */
+ * This Methode is used to delte a user from Firebase
+ */
   async deleteUser() {
     const userRef = doc(this.firestore, 'users', this.userId);
     await deleteDoc(userRef).then(() => {
-      this.router.navigate(['/user']);
+      this.authService.deleteLoggedInUser();
     })
+    // if (this.currentLoggedUser !== this.user.email) {
+    //   await deleteDoc(userRef).then(() => {
+    //     this.router.navigate(['/user']);
+    //   })
+    // }
+    // else {
+    // }
   }
 
 
   /**
    * This Methode is used to get one user from Firebase depending on the userId / Url
   */
-  getUser() {
+  async getUser() {
+    this.currentLoggedUser = await this.authService.getCurrentLoggedInEmail();
     const docRef = doc(this.firestore, 'users', this.userId);
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       this.user = new User(docSnap.data());
@@ -85,9 +97,9 @@ export class UserDetailComponent {
    * Open the EditAdress Dialog and pass the User Object and userId
    */
   openEditAdress() {
-    const dialog = this.dialog.open(DialogEditAdressComponent);
-    dialog.componentInstance.user = new User(this.user.toJson());
-    dialog.componentInstance.userId = this.userId;
+      const dialog = this.dialog.open(DialogEditAdressComponent);
+      dialog.componentInstance.user = new User(this.user.toJson());
+      dialog.componentInstance.userId = this.userId;
   }
 
 
@@ -95,9 +107,9 @@ export class UserDetailComponent {
   * Open the EditAdress Dialog and pass the User Object and userId
   */
   openEditUserDetail() {
-    const dialog = this.dialog.open(DialogEditUserComponent);
-    dialog.componentInstance.user = new User(this.user.toJson());
-    dialog.componentInstance.userId = this.userId;
+      const dialog = this.dialog.open(DialogEditUserComponent);
+      dialog.componentInstance.user = new User(this.user.toJson());
+      dialog.componentInstance.userId = this.userId;
   }
 
 
@@ -105,8 +117,8 @@ export class UserDetailComponent {
   * Open the EditAdress Dialog and pass the User Object
   */
   openAddTransaction(): void {
-    const dialog = this.dialog.open(DialogAddTransactionComponent);
-    dialog.componentInstance.user = new User(this.user.toJson());
-    dialog.componentInstance.userId = this.userId;
+      const dialog = this.dialog.open(DialogAddTransactionComponent);
+      dialog.componentInstance.user = new User(this.user.toJson());
+      dialog.componentInstance.userId = this.userId;
   }
 }

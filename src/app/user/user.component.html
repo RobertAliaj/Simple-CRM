@@ -12,7 +12,7 @@
             <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
                 <td class="user-info">
                     <div class="color-point" [style.background]="this.user.color"></div>
-                    <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
+                    <div class="user-name">{{ user.firstName }} {{ user.lastName }} <b>{{ currentLoggedUser === user.email ? '(You)' : '' }}</b> </div>
                 </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.city }}</td>
@@ -20,8 +20,8 @@
         </table>
     </mat-card>
 
-    <button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"
+    <!-- <button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"
         matTooltipPosition="above">
         <mat-icon>add</mat-icon>
-    </button>
+    </button> -->
 </div>

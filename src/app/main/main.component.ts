@@ -49,8 +49,6 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.authSubscription = this.authService.getAuthState().subscribe(isLoggedIn => {
     //   this.isUserLoggedIn = isLoggedIn;
-    //   console.log('isUser', this.isUserLoggedIn);
-    //   console.log('Response', isLoggedIn);
     // });
     this.openTutorial();
     this.handleInnerWidth();

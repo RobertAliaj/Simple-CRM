@@ -70,7 +70,6 @@ export class SignUpComponent {
 
   async register() {
     const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userSignUp.email);
-    console.log(methods);
     if (methods.length === 0) {
       this.authService.signUp(this.userSignUp.email, this.userSignUp.password)
         .then(response => {

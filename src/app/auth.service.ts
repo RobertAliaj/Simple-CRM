@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Router } from '@angular/router';
+import { deleteUser, getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 @Injectable({
@@ -9,11 +10,23 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, private auth: Auth) {
+  constructor(public afAuth: AngularFireAuth, private auth: Auth, private router: Router) {
   }
 
 
-  getCurrentLoggedInUser() {
+  deleteLoggedInUser(){
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      deleteUser(currentUser).then(() => {
+        this.signOut();
+        this.router.navigate(['login']);
+      });
+    }
+  }
+
+
+  getCurrentLoggedInEmail() {
     return new Promise((resolve) => {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
