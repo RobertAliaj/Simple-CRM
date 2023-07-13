@@ -23,14 +23,19 @@
         <span [class.d-none]="showText"> Transactions</span>
       </li>
 
+      <li routerLink="/transaction-chart" (click)="closeMenu(drawer)">
+        <mat-icon>insert_chart_outlined</mat-icon>
+        <span [class.d-none]="showText"> Transaction Chart</span>
+      </li>
+
       <li routerLink="/news" (click)="closeMenu(drawer)">
         <mat-icon>language</mat-icon>
         <span [class.d-none]="showText"> News</span>
       </li>
-      
+
       <br>
       <hr>
-      
+
       <li routerLink="/help" (click)="closeMenu(drawer)">
         <mat-icon>info_outline</mat-icon>
         <span [class.d-none]="showText"> Help</span>
@@ -54,7 +59,8 @@
     </mat-toolbar>
 
 
-    <div #wrapper *ngIf="showTutorial" [class.center-forms]="router.url == '/' || router.url =='/signUp' || router.url =='/login'">
+    <div #wrapper *ngIf="showTutorial"
+      [class.center-forms]="router.url == '/' || router.url =='/signUp' || router.url =='/login'">
       <div class="router-container">
         <router-outlet></router-outlet>
       </div>

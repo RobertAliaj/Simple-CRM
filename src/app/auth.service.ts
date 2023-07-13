@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { onAuthStateChanged } from 'firebase/auth';
-import { Observable } from 'rxjs';
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 @Injectable({
@@ -15,22 +13,18 @@ export class AuthService {
   }
 
 
-  getAuthState(): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      const unsubscribe = onAuthStateChanged(this.auth, user => {
+  getCurrentLoggedInUser() {
+    return new Promise((resolve) => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
         if (user) {
-          observer.next(true);
-        } else {
-          observer.next(false);
+          resolve(user.email);
         }
       });
-
-      // Gibt eine Aufräumfunktion zurück, die den Beobachter abmeldet, wenn er nicht mehr benötigt wird
-      return unsubscribe;
     });
   }
 
-  
+
   async signUp(email: string, password: string) {
     return await this.afAuth.createUserWithEmailAndPassword(email, password);
   }
@@ -45,3 +39,24 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 }
+
+
+
+
+
+
+
+// getAuthState(): Observable < boolean > {
+//   return new Observable<boolean>(observer => {
+//     const unsubscribe = onAuthStateChanged(this.auth, user => {
+//       if (user) {
+//         observer.next(true);
+//       } else {
+//         observer.next(false);
+//       }
+//     });
+
+//     // Gibt eine Aufräumfunktion zurück, die den Beobachter abmeldet, wenn er nicht mehr benötigt wird
+//     return unsubscribe;
+//   });
+// }

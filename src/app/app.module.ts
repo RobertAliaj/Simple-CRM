@@ -39,6 +39,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { MainComponent } from './main/main.component';
+import { TransactionChartComponent } from './transaction-chart/transaction-chart.component';
 
 
 
@@ -61,6 +62,7 @@ import { MainComponent } from './main/main.component';
     LoginComponent,
     MainComponent,
     SignUpComponent,
+    TransactionChartComponent,
   ],
   imports: [
     BrowserModule,

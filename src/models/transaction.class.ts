@@ -2,7 +2,7 @@ export class Transaction {
     firstName!: string;
     lastName!: string;
     senderName!: string;
-    senderLastname!: string;
+    senderLastName!: string;
     usdAmount!: number;
     btcAmount!: string;
     date!: string;
@@ -17,6 +17,8 @@ export class Transaction {
             this.date = obj ? obj.date : '',
             this.timeStamp = obj ? obj.timeStamp : '',
             this.isNew = obj ? obj.isNew : ''
+        this.senderName = obj ? obj.senderName : ''
+        this.senderLastName = obj ? obj.senderLastName : ''
     }
 
     public toJson() {
@@ -27,7 +29,9 @@ export class Transaction {
             btcAmount: this.btcAmount,
             date: this.date,
             timeStamp: this.timeStamp,
-            isNew: this.isNew
+            isNew: this.isNew,
+            senderName: this.senderName,
+            senderLastName: this.senderLastName
 
         }
     }

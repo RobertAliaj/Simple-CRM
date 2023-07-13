@@ -54,8 +54,6 @@ export class LoginComponent {
 
 
   async login() {
-    const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userLogin.email);
-    if (methods.length === 0) {
       this.authService.signIn(this.userLogin.email, this.userLogin.password)
         .then(response => {
           this.router.navigate(['/dashboard']);
@@ -65,7 +63,6 @@ export class LoginComponent {
         .catch(error => {
           // Behandeln Sie hier Fehler, z.B. indem Sie eine Fehlermeldung anzeigen
         });
-    }
   }
 
   navigateToSignUp() {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BtcDataService } from '../btc-data.service';
-import { addDoc, collection, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, updateDoc, where, query } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Transaction } from 'src/models/transaction.class';
 import { User } from 'src/models/user.class';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -20,19 +21,23 @@ export class DialogAddTransactionComponent implements OnInit {
   responseAsJSON: any;
   transaction: Transaction = new Transaction();
   user!: User;
+  sender!: User;
   loading: boolean = false;
   userId!: string;
+  currentLoggedUser!: any;
 
   constructor(
     private btcService: BtcDataService,
     private firestore: Firestore,
     public dialogRef: MatDialogRef<DialogAddTransactionComponent>,
+    private authService: AuthService
   ) {
   }
 
 
   ngOnInit() {
     this.gatherAndProcessBTCData();
+    this.getCurrentLoggedUser();
   }
 
   async updateUserBtcAmount() {
@@ -55,9 +60,31 @@ export class DialogAddTransactionComponent implements OnInit {
   }
 
 
+
+  async getCurrentLoggedUser() {
+    this.currentLoggedUser = await this.authService.getCurrentLoggedInUser();
+
+    const usersCollectionRef = collection(this.firestore, 'users');
+    const userQuery = query(usersCollectionRef, where("email", "==", this.currentLoggedUser));
+
+    const userQuerySnapshot = await getDocs(userQuery);
+    userQuerySnapshot.forEach((doc) => {
+      this.sender = new User(doc.data());
+      this.userId = doc.id;
+    });
+  }
+
+
+
+  // async getCurrentLoggedUser(){
+  //   this.currentLoggedUser = await this.authService.getCurrentLoggedInUser();
+  // }
+
+
   async saveTransaction() {
     if (this.transaction.usdAmount) {
       this.loading = true;
+      this.getCurrentLoggedUser();
       this.getTransactionValues();
       this.addTransaction();
       this.updateUserBtcAmount()
@@ -77,6 +104,8 @@ export class DialogAddTransactionComponent implements OnInit {
     this.transaction.btcAmount = this.btcAmount;
     this.transaction.timeStamp = timeStamp;
     this.transaction.isNew = true;
+    this.transaction.senderName = this.sender.firstName;
+    this.transaction.senderLastName = this.sender.lastName;
   }
 
 

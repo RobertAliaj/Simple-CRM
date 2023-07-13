@@ -11,6 +11,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { STRING_TYPE } from '@angular/compiler';
+import { TransactionChartComponent } from './transaction-chart/transaction-chart.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -47,7 +48,14 @@ const routes: Routes = [
     component: TransactionsComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
-  }, {
+  }, 
+  {
+    path: 'transaction-chart',
+    component: TransactionChartComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  }, 
+  {
     path: 'news',
     component: NewsComponent,
     canActivate: [AngularFireAuthGuard],
