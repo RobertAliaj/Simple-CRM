@@ -14,7 +14,7 @@ export class AuthService {
   }
 
 
-  deleteLoggedInUser(){
+  deleteLoggedInUser() {
     const auth = getAuth();
     const currentUser = auth.currentUser;
     if (currentUser) {
@@ -43,9 +43,22 @@ export class AuthService {
   }
 
 
+
   async signIn(email: string, password: string) {
-      return await this.afAuth.signInWithEmailAndPassword(email, password);
+    try {
+      // versuche mich einzuloggen
+      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      // wenn es kein Fehler ist, dann gib das Resultat zurück
+      return { user: result.user, error: null };
+    } catch (error: any) {
+      // wenn ein Fehler auftritt, dann gib den Fehler zurück
+      return { user: null, error: error };
+    }
   }
+
+  // async signIn(email: string, password: string) {
+  //     return await this.afAuth.signInWithEmailAndPassword(email, password);
+  // }
 
 
   async signOut() {

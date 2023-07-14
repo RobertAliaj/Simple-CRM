@@ -30,6 +30,7 @@ export class LoginComponent {
   ) { }
 
 
+
   guestLogIn() {
     this.userLogin.email = 'guest@mail.com';
     this.userLogin.password = '123456';
@@ -44,7 +45,7 @@ export class LoginComponent {
     });
   }
 
-  
+
   proceed() {
     if (this.userLoginValid.valid) {
       this.loading = true;
@@ -54,7 +55,6 @@ export class LoginComponent {
     }
   }
 
-
   getValuesFromInput() {
     this.userLogin.email = this.userLoginValid.get('email')?.value;
     this.userLogin.password = this.userLoginValid.get('password')?.value;
@@ -63,18 +63,29 @@ export class LoginComponent {
 
   async login() {
     const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userLogin.email);
-    if (methods.length === 0) {
-      this.userLoginValid.enable();
-      this.loading = false;
-      console.log('Kein Benutzer mit dieser E-Mail gefunden');
-    } else {
-      this.authService.signIn(this.userLogin.email, this.userLogin.password)
-        .then(response => {
-          this.router.navigate(['/dashboard']);
-          this.loading = false;
-          this.userLoginValid.enable();
-        })
-    }
+    let wrongEmail = methods.length === 0;
+    if (wrongEmail) this.handleWrongEmail(); else this.tryToLogin();
+  }
+
+
+  async tryToLogin() {
+    const result = await this.authService.signIn(this.userLogin.email, this.userLogin.password);
+    let canLoginIn = result.user;
+    let derFehlerderNichtGezeigtWerdenSoll = result.error
+    if (canLoginIn) this.handleSuccsessfulLogin(); else console.log(derFehlerderNichtGezeigtWerdenSoll);
+  }
+
+
+  handleSuccsessfulLogin() {
+    this.router.navigate(['/dashboard']);
+    this.loading = false;
+    this.userLoginValid.enable();
+  }
+
+  handleWrongEmail() {
+    this.userLoginValid.enable();
+    this.loading = false;
+    console.log('Kein Benutzer mit dieser E-Mail gefunden');
   }
 
 
