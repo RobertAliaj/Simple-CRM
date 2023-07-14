@@ -15,32 +15,8 @@ export class TransactionChartComponent {
   // @ViewChild('transactionChart') chart!: ElementRef;
   myChart!: any;
   allUsers!: any;
-
   userData!: any;
   users!: any;
-
-  chartData = [
-    {
-      "name": "Objekt 1",
-      "zahl": 1
-    },
-    {
-      "name": "Objekt 2",
-      "zahl": 2
-    },
-    {
-      "name": "Objekt 3",
-      "zahl": 3
-    },
-    {
-      "name": "Objekt 4",
-      "zahl": 4
-    },
-    {
-      "name": "Objekt 5",
-      "zahl": 5
-    }
-  ];
 
 
   constructor(private firestore: Firestore, private router: Router) {
@@ -49,7 +25,8 @@ export class TransactionChartComponent {
   initializeUserData() {
     return {
       name: [],
-      amount: []
+      amount: [],
+      color: []
     };
   }
 
@@ -57,6 +34,14 @@ export class TransactionChartComponent {
   ngAfterViewInit() {
     if (this.router.url == '/transaction-chart')
       this.getAllUsers();
+  }
+
+
+  getRandomLightColor() {
+    let hue = Math.floor(Math.random() * 360);
+    let saturation = Math.floor(Math.random() * 20) + 73;
+    let lightness = Math.floor(Math.random() * 30) + 63;
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
 
@@ -69,8 +54,7 @@ export class TransactionChartComponent {
       let changes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       this.allUsers = changes;
       this.sortDataForChart();
-      console.log(this.userData);
-      this.renderChart(this.userData.name, this.userData.amount);
+      this.renderChart(this.userData.name, this.userData.amount, this.userData.color);
     });
   }
 
@@ -81,13 +65,15 @@ export class TransactionChartComponent {
       const element = this.allUsers[i];
       let fullName = element.firstName + ' ' + element.lastName;
       let amount = element.btcAmount;
+      let color = element.color;
       this.userData.amount.push(amount);
       this.userData.name.push(fullName);
+      this.userData.color.push(color);
     }
   }
 
 
-  renderChart(names: any, amount: any) {
+  renderChart(names: any, amount: any, color: any) {
     if (this.myChart) this.myChart.destroy();
     if (this.router.url == '/transaction-chart') {
       this.myChart = new Chart('transactionChart', {
@@ -95,16 +81,20 @@ export class TransactionChartComponent {
         data: {
           labels: names,
           datasets: [{
-            label: 'Bitcoin Amount',
             data: amount,
             yAxisID: 'y',
-            backgroundColor: 'rgba(255, 99, 132, 0.8)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: color,
+            borderColor: color,
             borderWidth: 2
           }]
         },
         options: {
           indexAxis: 'y',
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
         }
       });
     }

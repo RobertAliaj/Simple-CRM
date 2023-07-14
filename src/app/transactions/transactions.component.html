@@ -5,16 +5,15 @@
         <h2 class="transaction-title">Transaction Nr. {{ allTransactions.length - index }}</h2>
         <mat-card-content>
             <div class="content-row">
-                <div class="sender-receiver">
                     <span class="label">From:</span>
                     <span class="value">{{ transaction.senderName }} {{ transaction.senderLastName }}</span>
-                </div>
+            </div>
 
-                <div class="sender-receiver">
+            <div class="content-row">
                     <span class="label">To:</span>
                     <span class="value">{{ transaction.firstName }} {{ transaction.lastName }}</span>
-                </div>
             </div>
+
             <div class="content-row">
                 <span class="label">Amount:</span>
                 <span class="value"> {{ transaction.btcAmount }} BTC</span>
@@ -25,7 +24,7 @@
             </div>
         </mat-card-content>
 
-        <button mat-flat-button color="warn" (click)="deleteTransaction(transaction.transactionId)">Delete</button>
+        <button mat-stroked-button color="warn" (click)="deleteTransaction(transaction.transactionId)">Delete</button>
     </mat-card>
 </div>
 

@@ -20,7 +20,7 @@ export class SignUpComponent {
   signUpFormValid!: FormGroup;
   loading: boolean = false;
   user: User = new User();
-  color: string= '';
+  color: string = '';
 
   constructor(
     private authService: AuthService,
@@ -51,7 +51,6 @@ export class SignUpComponent {
       this.getValuesFromInput();
       this.copyUserInformation();
       this.register();
-      this.addUser();
     }
   }
 
@@ -73,6 +72,7 @@ export class SignUpComponent {
     if (methods.length === 0) {
       this.authService.signUp(this.userSignUp.email, this.userSignUp.password)
         .then(response => {
+          this.addUser();
           this.authService.signOut();
           this.router.navigate(['login']);
           this.signUpFormValid.enable();
@@ -81,20 +81,22 @@ export class SignUpComponent {
     } else {
       this.signUpFormValid.enable();
       this.loading = false;
-      alert("The email address is already in use");
+      this.signUpFormValid.patchValue({
+        email: ''
+      });
     }
   }
 
 
-    copyUserInformation() {
-      this.user.firstName = this.userSignUp.firstName;
-      this.user.lastName = this.userSignUp.lastName;
-      this.user.street = this.userSignUp.street;
-      this.user.zipCode = this.userSignUp.zipCode;
-      this.user.city = this.userSignUp.city;
-      this.user.email = this.userSignUp.email;
-      this.user.birthDate = this.userSignUp.birthDate;
-      this.user.color = this.color = this.getRandomLightColor();
+  copyUserInformation() {
+    this.user.firstName = this.userSignUp.firstName;
+    this.user.lastName = this.userSignUp.lastName;
+    this.user.street = this.userSignUp.street;
+    this.user.zipCode = this.userSignUp.zipCode;
+    this.user.city = this.userSignUp.city;
+    this.user.email = this.userSignUp.email;
+    this.user.birthDate = this.userSignUp.birthDate;
+    this.user.color = this.color = this.getRandomLightColor();
   }
 
 
@@ -127,7 +129,7 @@ export class SignUpComponent {
 
 
   // try {
-  // } 
+  // }
   // catch (error: any) {
   //   if (error.code == "auth/invalid-email") {
   //     alert("The email address is not valid.");

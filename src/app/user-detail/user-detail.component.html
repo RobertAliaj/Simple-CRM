@@ -12,8 +12,8 @@
         </button>
 
         <mat-menu #userMenu="matMenu">
-            <button mat-menu-item (click)="openEditUserDetail()">Edit</button>
-            <button mat-menu-item (click)="deleteUser()">Delete</button>
+            <button mat-menu-item (click)="openEditUserDetail()">Edit Name</button>
+            <button *ngIf="user.email != 'guest@mail.com' " mat-menu-item (click)="deleteUser()">Delete</button>
         </mat-menu>
 
         <img src="assets/img/{{ avatar }}.webp">

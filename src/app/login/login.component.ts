@@ -30,6 +30,12 @@ export class LoginComponent {
   ) { }
 
 
+  guestLogIn() {
+    this.userLogin.email = 'guest@mail.com';
+    this.userLogin.password = '123456';
+    this.login();
+  }
+
 
   ngOnInit() {
     this.userLoginValid = this.fb.group({
@@ -38,6 +44,7 @@ export class LoginComponent {
     });
   }
 
+  
   proceed() {
     if (this.userLoginValid.valid) {
       this.loading = true;
@@ -47,6 +54,7 @@ export class LoginComponent {
     }
   }
 
+
   getValuesFromInput() {
     this.userLogin.email = this.userLoginValid.get('email')?.value;
     this.userLogin.password = this.userLoginValid.get('password')?.value;
@@ -54,16 +62,21 @@ export class LoginComponent {
 
 
   async login() {
+    const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userLogin.email);
+    if (methods.length === 0) {
+      this.userLoginValid.enable();
+      this.loading = false;
+      console.log('Kein Benutzer mit dieser E-Mail gefunden');
+    } else {
       this.authService.signIn(this.userLogin.email, this.userLogin.password)
         .then(response => {
           this.router.navigate(['/dashboard']);
           this.loading = false;
           this.userLoginValid.enable();
         })
-        .catch(error => {
-          // Behandeln Sie hier Fehler, z.B. indem Sie eine Fehlermeldung anzeigen
-        });
+    }
   }
+
 
   navigateToSignUp() {
     this.router.navigate(['/signUp']);
@@ -74,13 +87,3 @@ export class LoginComponent {
     this.dialog.open(DialogAddUserComponent);
   }
 }
-
-
-
-
-  // async addUser() {
-  //   const usersCollection = collection(this.firestore, 'users');
-  //   addDoc(usersCollection, this.userLogin.toJson()).then(async (result) => {
-  //     const docSnap = await getDoc(result);
-  //   });
-  // }

@@ -19,12 +19,18 @@
 
 
     <div mat-dialog-actions class="button-container">
-      <button color="primary" [disabled]="this.userLoginValid.invalid || this.userLoginValid.disabled" type="submit" mat-raised-button>Login</button>
+      <button color="primary" [disabled]="this.userLoginValid.invalid || this.userLoginValid.disabled" type="submit"
+        mat-raised-button>Login</button>
     </div>
   </form>
 
-  <div>
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <span style="font-weight: 500;"> Not a user ?</span>
-    <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="navigateToSignUp()">Sign Up</button>
+    <div>
+      <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="navigateToSignUp()">Sign Up</button>
+      <span> - </span>
+      <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="guestLogIn()">Guest Login</button>
+    </div>
   </div>
+
 </mat-card>

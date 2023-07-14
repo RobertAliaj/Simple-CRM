@@ -28,7 +28,7 @@ export class DialogEditUserComponent implements OnInit {
     this.userForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
-      email: [this.user.email, Validators.required],
+      // email: [this.user.email, Validators.required],
     });
   }
 
@@ -45,7 +45,7 @@ export class DialogEditUserComponent implements OnInit {
   getValuesFromInput() {
     this.user.firstName = this.userForm.get('firstName')?.value;
     this.user.lastName = this.userForm.get('lastName')?.value;
-    this.user.email = this.userForm.get('email')?.value;
+    // this.user.email = this.userForm.get('email')?.value;
   }
 
 
