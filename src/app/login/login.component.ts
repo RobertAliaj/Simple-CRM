@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 import { LoginForm } from 'src/models/login-form.class';
@@ -21,6 +21,8 @@ export class LoginComponent {
   userLoginValid!: FormGroup;
   shakeState: boolean = false;
   loading: boolean = false;
+  emailDoesntExist: boolean = false;
+  wrongPass: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -28,7 +30,6 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
   ) { }
-
 
 
   guestLogIn() {
@@ -41,19 +42,19 @@ export class LoginComponent {
   ngOnInit() {
     this.userLoginValid = this.fb.group({
       email: [this.userLogin.email, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: [this.userLogin.password, Validators.required],
+      password: [this.userLogin.password, [Validators.required, Validators.minLength(6)]],
     });
   }
 
 
   proceed() {
-    if (this.userLoginValid.valid) {
+    if (this.userLoginValid.valid)
       this.loading = true;
-      this.userLoginValid.disable();
-      this.getValuesFromInput();
-      this.login();
-    }
+    this.userLoginValid.disable();
+    this.getValuesFromInput();
+    this.login();
   }
+
 
   getValuesFromInput() {
     this.userLogin.email = this.userLoginValid.get('email')?.value;
@@ -63,16 +64,24 @@ export class LoginComponent {
 
   async login() {
     const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userLogin.email);
-    let wrongEmail = methods.length === 0;
-    if (wrongEmail) this.handleWrongEmail(); else this.tryToLogin();
+    this.emailDoesntExist = methods.length === 0;
+    if (this.emailDoesntExist) this.handleWrongEmail(); else this.tryToLogin();
   }
 
 
   async tryToLogin() {
     const result = await this.authService.signIn(this.userLogin.email, this.userLogin.password);
-    let canLoginIn = result.user;
-    let derFehlerderNichtGezeigtWerdenSoll = result.error
-    if (canLoginIn) this.handleSuccsessfulLogin(); else console.log(derFehlerderNichtGezeigtWerdenSoll);
+    let canLogin = result.user;
+    if (canLogin) this.handleSuccsessfulLogin(); else this.handleWrongPassword();
+  }
+
+
+  handleWrongPassword() {
+    this.wrongPass = true;
+    this.userLoginValid.enable();
+    this.loading = false;
+    this.userLoginValid.patchValue({ password: '' });
+    setTimeout(() => this.wrongPass = false, 3000);
   }
 
 
@@ -83,9 +92,10 @@ export class LoginComponent {
   }
 
   handleWrongEmail() {
-    this.userLoginValid.enable();
     this.loading = false;
-    console.log('Kein Benutzer mit dieser E-Mail gefunden');
+    this.userLoginValid.enable();
+    this.userLoginValid.patchValue({ email: '' });
+    setTimeout(() => this.emailDoesntExist = false, 3000);
   }
 
 
@@ -97,4 +107,5 @@ export class LoginComponent {
   openDialog(): void {
     this.dialog.open(DialogAddUserComponent);
   }
+
 }

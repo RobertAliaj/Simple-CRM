@@ -40,6 +40,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { MainComponent } from './main/main.component';
 import { TransactionChartComponent } from './transaction-chart/transaction-chart.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 
 
@@ -63,6 +65,8 @@ import { TransactionChartComponent } from './transaction-chart/transaction-chart
     MainComponent,
     SignUpComponent,
     TransactionChartComponent,
+    ImprintComponent,
+    PrivacyComponent,
   ],
   imports: [
     BrowserModule,

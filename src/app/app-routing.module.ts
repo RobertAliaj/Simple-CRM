@@ -12,6 +12,8 @@ import { redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-g
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { STRING_TYPE } from '@angular/compiler';
 import { TransactionChartComponent } from './transaction-chart/transaction-chart.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -48,13 +50,13 @@ const routes: Routes = [
     component: TransactionsComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
-  }, 
+  },
   {
     path: 'transaction-chart',
     component: TransactionChartComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
-  }, 
+  },
   {
     path: 'news',
     component: NewsComponent,
@@ -63,6 +65,18 @@ const routes: Routes = [
   }, {
     path: 'help',
     component: InfoComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'imprint',
+    component: ImprintComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },

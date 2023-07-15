@@ -21,6 +21,7 @@ export class SignUpComponent {
   loading: boolean = false;
   user: User = new User();
   color: string = '';
+  emailInUse: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -33,13 +34,13 @@ export class SignUpComponent {
   ngOnInit() {
     this.signUpFormValid = this.fb.group({
       email: [this.userSignUp.email, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: [this.userSignUp.password, [Validators.required, Validators.minLength(6)]],
+      password: [this.userSignUp.password, [Validators.required, Validators.minLength(4)]],
       firstName: [this.userSignUp.firstName, [Validators.required, Validators.minLength(4)]],
       lastName: [this.userSignUp.lastName, [Validators.required, Validators.minLength(4)]],
-      birthDate: [this.userSignUp.birthDate, [Validators.required, Validators.minLength(6)]],
-      street: [this.userSignUp.street, [Validators.required, Validators.minLength(6)]],
-      zipCode: [this.userSignUp.zipCode, [Validators.required, Validators.minLength(6)]],
-      city: [this.userSignUp.city, [Validators.required, Validators.minLength(6)]],
+      birthDate: [this.userSignUp.birthDate, Validators.required],
+      street: [this.userSignUp.street, [Validators.required, Validators.minLength(4)]],
+      zipCode: [this.userSignUp.zipCode, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      city: [this.userSignUp.city, [Validators.required, Validators.minLength(4)]],
     });
   }
 
@@ -81,9 +82,13 @@ export class SignUpComponent {
     } else {
       this.signUpFormValid.enable();
       this.loading = false;
+      this.emailInUse= true;
       this.signUpFormValid.patchValue({
         email: ''
       });
+      setTimeout(() => {
+        this.emailInUse = false;
+      }, 3000);
     }
   }
 
@@ -114,6 +119,11 @@ export class SignUpComponent {
     let lightness = Math.floor(Math.random() * 30) + 63;
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
 }
 
 
