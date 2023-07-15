@@ -14,6 +14,8 @@ import { STRING_TYPE } from '@angular/compiler';
 import { TransactionChartComponent } from './transaction-chart/transaction-chart.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { FormGroupDirective } from '@angular/forms';
+import { DialogForgotPasswordComponent } from './dialog-forgot-password/dialog-forgot-password.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);

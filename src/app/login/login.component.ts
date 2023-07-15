@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { shakeAnimation } from "src/animation";
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogForgotPasswordComponent } from '../dialog-forgot-password/dialog-forgot-password.component';
 
 
 @Component({
@@ -44,6 +45,8 @@ export class LoginComponent {
       email: [this.userLogin.email, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [this.userLogin.password, [Validators.required, Validators.minLength(6)]],
     });
+
+    this.openForgotPassword();
   }
 
 
@@ -104,13 +107,17 @@ export class LoginComponent {
   }
 
 
-  openDialog(): void {
-    this.dialog.open(DialogAddUserComponent);
-  }
-
-
   resetPassword(email: string){
     this.authService.resetPassword(email);
   }
+
+
+
+  openForgotPassword(): void {
+    const dialog = this.dialog.open(DialogForgotPasswordComponent);
+    // dialog.componentInstance.user = new User(this.user.toJson());
+    // dialog.componentInstance.userId = this.userId;
+}
+
 
 }

@@ -42,6 +42,7 @@ import { MainComponent } from './main/main.component';
 import { TransactionChartComponent } from './transaction-chart/transaction-chart.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { DialogForgotPasswordComponent } from './dialog-forgot-password/dialog-forgot-password.component';
 
 
 
@@ -67,6 +68,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     TransactionChartComponent,
     ImprintComponent,
     PrivacyComponent,
+    DialogForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
