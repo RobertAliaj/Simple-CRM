@@ -1,5 +1,13 @@
 <mat-spinner class="loader" *ngIf="loading"></mat-spinner>
 
+
+<mat-form-field style="position: absolute; right: 0; top: 8px;">
+    <mat-label>Suchfeld</mat-label>
+    <input matInput type="search" placeholder="Suchen">
+</mat-form-field>   
+
+
+
 <div *ngIf="!loading">
     <mat-card class="card box-shadow">
         <table>

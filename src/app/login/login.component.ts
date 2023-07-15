@@ -108,4 +108,9 @@ export class LoginComponent {
     this.dialog.open(DialogAddUserComponent);
   }
 
+
+  resetPassword(email: string){
+    this.authService.resetPassword(email);
+  }
+
 }
