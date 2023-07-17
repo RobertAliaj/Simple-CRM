@@ -34,7 +34,9 @@ export class MainComponent implements OnInit, OnDestroy {
     ['/user', 'Users'],
     ['/transactions', 'Transactions History'],
     ['/news', 'News'],
-    ['/help', 'Help']
+    ['/help', 'Help'],
+    ['/privacy', 'Privacy Policy'],
+    ['/imprint', 'Imprint']
   ]);
 
   DEFAULT_TITLE = 'Users / User Details';
@@ -85,7 +87,8 @@ export class MainComponent implements OnInit, OnDestroy {
  * Handle InnerWidth when Initializing the App
  */
   handleInnerWidth() {
-    this.checkScreenSize = window.innerWidth < 1100 ? false : true;
+    if (window.innerWidth < 1100 || this.router.url == '/login' || this.router.url == '/') this.checkScreenSize = false; else this.checkScreenSize = true;
+    // this.checkScreenSize = window.innerWidth < 1100 || this.router.url == '/login' || this.router.url == '/' ? false : true;
     window.innerWidth < 700 ? this.showResponsiveView() : this.showStandardView();
   }
 
@@ -98,6 +101,7 @@ export class MainComponent implements OnInit, OnDestroy {
   onNavigationEnd(event: any) {
     if (event instanceof NavigationEnd) {
       this.setMenuTitleBasedOnUrl(event.url);
+      if (event.url == '/login' ||  event.url == '/' || event.url == '/signUp') this.checkScreenSize = false; else this.checkScreenSize = true;
     }
   }
 

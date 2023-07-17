@@ -14,62 +14,61 @@ export class AuthService {
   }
 
 
-  resetPassword(email: string){
+  resetPassword(email: string) {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
-    .then(() => {
-      // Password reset email sent!
-      // ..
-    })
-    .catch ((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
+      .then(() => {
+        // Password reset email sent!
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   }
-    
-
-deleteLoggedInUser() {
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
-  if (currentUser) {
-    deleteUser(currentUser).then(() => {
-      this.signOut();
-      this.router.navigate(['login']);
-    });
-  }
-}
 
 
-getCurrentLoggedInEmail() {
-  return new Promise((resolve) => {
+  deleteLoggedInUser() {
     const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        resolve(user.email);
-      }
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      deleteUser(currentUser).then(() => {
+        this.signOut();
+        this.router.navigate(['login']);
+      });
+    }
+  }
+
+
+  getCurrentLoggedInEmail() {
+    return new Promise((resolve) => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          resolve(user.email);
+        }
+      });
     });
-  });
-}
+  }
 
 
   async signUp(email: string, password: string) {
-  return await this.afAuth.createUserWithEmailAndPassword(email, password);
-}
+    return await this.afAuth.createUserWithEmailAndPassword(email, password);
+  }
 
 
 
   async signIn(email: string, password: string) {
-  try {
-    // versuche mich einzuloggen
-    const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-    // wenn es kein Fehler ist, dann gib das Resultat zurück
-    return { user: result.user, error: null };
-  } catch (error: any) {
-    // wenn ein Fehler auftritt, dann gib den Fehler zurück
-    return { user: null, error: error };
+    try {
+      // versuche mich einzuloggen
+      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      // wenn es kein Fehler ist, dann gib das Resultat zurück
+      return { user: result.user, error: null };
+    } catch (error: any) {
+      // wenn ein Fehler auftritt, dann gib den Fehler zurück
+      return { user: null, error: error };
+    }
   }
-}
 
   // async signIn(email: string, password: string) {
   //     return await this.afAuth.signInWithEmailAndPassword(email, password);
@@ -77,8 +76,8 @@ getCurrentLoggedInEmail() {
 
 
   async signOut() {
-  return this.afAuth.signOut();
-}
+    return this.afAuth.signOut();
+  }
 }
 
 

@@ -46,7 +46,7 @@ export class LoginComponent {
       password: [this.userLogin.password, [Validators.required, Validators.minLength(6)]],
     });
 
-    this.openForgotPassword();
+    // this.openForgotPassword();
   }
 
 
@@ -107,7 +107,7 @@ export class LoginComponent {
   }
 
 
-  resetPassword(email: string){
+  resetPassword(email: string) {
     this.authService.resetPassword(email);
   }
 
@@ -117,7 +117,7 @@ export class LoginComponent {
     const dialog = this.dialog.open(DialogForgotPasswordComponent);
     // dialog.componentInstance.user = new User(this.user.toJson());
     // dialog.componentInstance.userId = this.userId;
-}
+  }
 
 
 }

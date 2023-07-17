@@ -23,13 +23,23 @@
     flex-direction: column
 }
 
-.button-container {
+.btn-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-    margin-top: 8px;
+    align-items: center;
+
+    a {
+        font-weight: 500;
+        margin-top: 10px;
+        cursor: pointer;
+
+        &:hover{
+            color: rgb(0 0 0 / 80%);
+        }
+    }
 }
 
-.sign-up-container{
+.sign-up-container {
     margin-top: 16px;
 }

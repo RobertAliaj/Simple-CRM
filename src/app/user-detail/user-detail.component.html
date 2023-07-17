@@ -1,6 +1,6 @@
 <mat-spinner class="loader" *ngIf="loading"></mat-spinner>
 
-<div *ngIf="avatar">
+<div *ngIf="avatar && !loading">
     <mat-card [style.background]="this.user.color" class="user-detail-header box-shadow">
 
         <button mat-icon-button class="back-btn" (click)="this.router.navigate(['/user'])">

@@ -11,7 +11,7 @@
         <input matInput type="email" formControlName="email" autocomplete="on" autofocus>
         <mat-error>
           <span *ngIf="!emailDoesntExist">Please enter a valid email</span>
-          <span *ngIf="emailDoesntExist">Email doesn't exist</span>
+          <span *ngIf="emailDoesntExist">We couldn't find your email</span>
         </mat-error>
       </mat-form-field>
 
@@ -26,14 +26,13 @@
     </div>
 
 
-    <div mat-dialog-actions class="button-container">
+    <div mat-dialog-actions>
       <button color="primary" [disabled]="this.userLoginValid.invalid || this.userLoginValid.disabled" type="submit"
         mat-raised-button>Login</button>
     </div>
   </form>
 
-  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <span style="font-weight: 500;"> Not a user ?</span>
+  <div class="btn-container full-width">
     <div>
       <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="navigateToSignUp()">Sign
         Up</button>
@@ -41,9 +40,11 @@
       <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="guestLogIn()">Guest
         Login</button>
     </div>
-    
-    <button mat-button color="primary" (click)="openForgotPassword()">
-      Reset Password</button>
+
+    <a (click)="openForgotPassword()">
+      Forgot Password ?</a>
   </div>
+
+
 
 </mat-card>

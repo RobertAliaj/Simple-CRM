@@ -53,16 +53,11 @@ export class UserDetailComponent {
  */
   async deleteUser() {
     const userRef = doc(this.firestore, 'users', this.userId);
+    this.loading = true;
     await deleteDoc(userRef).then(() => {
       this.authService.deleteLoggedInUser();
+      this.loading = false;
     })
-    // if (this.currentLoggedUser !== this.user.email) {
-    //   await deleteDoc(userRef).then(() => {
-    //     this.router.navigate(['/user']);
-    //   })
-    // }
-    // else {
-    // }
   }
 
 
@@ -97,9 +92,9 @@ export class UserDetailComponent {
    * Open the EditAdress Dialog and pass the User Object and userId
    */
   openEditAdress() {
-      const dialog = this.dialog.open(DialogEditAdressComponent);
-      dialog.componentInstance.user = new User(this.user.toJson());
-      dialog.componentInstance.userId = this.userId;
+    const dialog = this.dialog.open(DialogEditAdressComponent);
+    dialog.componentInstance.user = new User(this.user.toJson());
+    dialog.componentInstance.userId = this.userId;
   }
 
 
@@ -107,9 +102,9 @@ export class UserDetailComponent {
   * Open the EditAdress Dialog and pass the User Object and userId
   */
   openEditUserDetail() {
-      const dialog = this.dialog.open(DialogEditUserComponent);
-      dialog.componentInstance.user = new User(this.user.toJson());
-      dialog.componentInstance.userId = this.userId;
+    const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = new User(this.user.toJson());
+    dialog.componentInstance.userId = this.userId;
   }
 
 
@@ -117,8 +112,8 @@ export class UserDetailComponent {
   * Open the EditAdress Dialog and pass the User Object
   */
   openAddTransaction(): void {
-      const dialog = this.dialog.open(DialogAddTransactionComponent);
-      dialog.componentInstance.user = new User(this.user.toJson());
-      dialog.componentInstance.userId = this.userId;
+    const dialog = this.dialog.open(DialogAddTransactionComponent);
+    dialog.componentInstance.user = new User(this.user.toJson());
+    dialog.componentInstance.userId = this.userId;
   }
 }
