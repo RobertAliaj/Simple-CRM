@@ -67,7 +67,7 @@ export class DialogAddTransactionComponent implements OnInit {
     let addedBtcAmount = parseFloat(this.btcAmount);
     const docRef = doc(this.firestore, 'users', this.userId);
     const docSnap = await getDoc(docRef);
-
+    
     const currentUser = new User(docSnap.data());
     const currentBtcAmount = currentUser.btcAmount;
     if (currentBtcAmount) {

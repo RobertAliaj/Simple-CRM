@@ -1,8 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { collection, onSnapshot } from 'firebase/firestore';
+
+Chart.register(ChartDataLabels);
 
 
 @Component({
@@ -62,10 +65,10 @@ export class TransactionChartComponent {
   sortDataForChart() {
     this.userData = this.initializeUserData();
     for (let i = 0; i < this.allUsers.length; i++) {
-      const element = this.allUsers[i];
-      let fullName = element.firstName + ' ' + element.lastName;
-      let amount = element.btcAmount;
-      let color = element.color;
+      const user = this.allUsers[i];
+      let fullName = user.firstName + ' ' + user.lastName;
+      let amount = user.btcAmount.toFixed(2);
+      let color = user.color;
       this.userData.amount.push(amount);
       this.userData.name.push(fullName);
       this.userData.color.push(color);
@@ -81,6 +84,7 @@ export class TransactionChartComponent {
         data: {
           labels: names,
           datasets: [{
+            label: 'Bitcoin Amount',
             data: amount,
             yAxisID: 'y',
             backgroundColor: color,
@@ -92,7 +96,28 @@ export class TransactionChartComponent {
           indexAxis: 'y',
           plugins: {
             legend: {
-              display: false
+              display: false,
+            },
+            datalabels: {
+              display: true,
+            }
+          },
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Username'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'BTC Amount'
+              }
             }
           }
         }

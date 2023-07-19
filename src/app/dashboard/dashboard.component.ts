@@ -2,7 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular
 import { Chart, registerables } from 'chart.js';
 import { BtcDataService } from '../btc-data.service';
 import { TypedAnimationService } from '../typed-animation.service';
+
 Chart.register(...registerables);
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -74,13 +77,10 @@ export class DashboardComponent implements OnInit {
 
   async initBtcData() {
     this.btcService.resetBTCData();
-
-    if (this.canFetch)
-      await this.fetchAndRender();
-    else
-      this.renderFromLocalStorage();
-
+    if (this.canFetch) await this.fetchAndRender(); else this.renderFromLocalStorage();
     this.playTypingAnimation();
+    console.log(this.btcService.btcData);
+    console.log(this.btcDataCopy);
   }
 
 
@@ -155,7 +155,7 @@ export class DashboardComponent implements OnInit {
           yAxisID: 'y',
           backgroundColor: 'rgba(255, 99, 132, 0.8)',
           borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 2
+          borderWidth: 2,
         },
         {
           label: 'Bitcoin MarketCap',
@@ -163,7 +163,7 @@ export class DashboardComponent implements OnInit {
           yAxisID: 'y1',
           backgroundColor: 'rgba(54, 162, 235, 0.8)',
           borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 2
+          borderWidth: 2,
         }
         ]
       },
@@ -187,6 +187,10 @@ export class DashboardComponent implements OnInit {
               text: 'MarketCap (Billion USD)'
             }
           }
+        },
+        animation: {
+          duration: 1000, // Dauer der Animation in Millisekunden
+          easing: 'easeOutBounce', // Typ der Animation
         }
       }
     });
