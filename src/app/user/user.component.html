@@ -1,14 +1,16 @@
 <mat-spinner class="loader" *ngIf="loading"></mat-spinner>
 
-
-<!-- <mat-form-field style="position: absolute; right: 0; top: 8px;">
-    <mat-label>Suchfeld</mat-label>
-    <input matInput type="search" placeholder="Suchen">
-</mat-form-field>    -->
-
+<div class="search-form-container">
+    <form class="search-form" role="search">
+        <input class="search-input" type="text" placeholder="Search..." autofocus required (keyup)="filterByNames(filterByName.value)" #filterByName />
+        <button class="submit-button" *ngIf="filteredUsers.length != 1" type="submit">{{ filteredUsers.length }} Results</button>
+        <button class="submit-button" *ngIf="filteredUsers.length == 1" type="submit">1 Result</button>
+    </form>
+</div>
 
 
 <div *ngIf="!loading">
+
     <mat-card class="card box-shadow">
         <table>
             <tr>
@@ -17,19 +19,15 @@
                 <th>City</th>
             </tr>
 
-            <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
+            <tr *ngFor="let user of filteredUsers" [routerLink]="['/user', user.id]">
                 <td class="user-info">
                     <div class="color-point" [style.background]="this.user.color"></div>
-                    <div class="user-name">{{ user.firstName }} {{ user.lastName }} <b>{{ currentLoggedUser === user.email ? '(You)' : '' }}</b> </div>
+                    <div class="user-name">{{ user.firstName }} {{ user.lastName }} <b>{{ currentLoggedUser ===
+                            user.email ? '(You)' : '' }}</b> </div>
                 </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.city }}</td>
             </tr>
         </table>
     </mat-card>
-
-    <!-- <button (click)="openDialog()" mat-fab color="primary" class="add-button" matTooltip="Add user"
-        matTooltipPosition="above">
-        <mat-icon>add</mat-icon>
-    </button> -->
 </div>

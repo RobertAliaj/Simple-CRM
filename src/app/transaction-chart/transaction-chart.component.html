@@ -1,3 +1,15 @@
 <div class="chart-container" #chart>
     <canvas id="transactionChart"></canvas>
 </div>
+
+<div class="search-form-container">
+    <form class="search-form" role="search">
+        <input class="search-input" type="text" placeholder="Search..." autofocus required
+            (keyup)="filterUsersByFirstName(filterByName.value)" #filterByName />
+        <button class="submit-button" type="submit">Results</button>
+        <button class="submit-button" *ngIf="filteredNamesAmount.length == 0" type="submit">0 Results</button>
+        <button class="submit-button" *ngIf="filteredNamesAmount.length > 0" type="submit">{{ filteredNamesAmount.length }} Result</button>
+    </form>
+</div>
+
+

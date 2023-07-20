@@ -16,6 +16,7 @@ export class UserComponent {
   allUsers: any = [];
   loading: boolean = true;
   currentLoggedUser!: any;
+  filteredUsers: any = [];
 
   constructor(
     public dialog: MatDialog,
@@ -25,7 +26,7 @@ export class UserComponent {
     this.getAllUsers();
   }
 
-  
+
   /**
    * Get all Users from Firebase
    */
@@ -36,10 +37,14 @@ export class UserComponent {
       let changes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       this.allUsers = changes;
       this.loading = false;
+      this.filteredUsers = this.allUsers;
     });
   }
 
-  openDialog(): void {
-    this.dialog.open(DialogAddUserComponent);
+
+  filterByNames(searchValue: string) {
+    this.filteredUsers = this.allUsers.filter((user: { firstName: string; city: string; }) =>
+      user?.firstName.toLowerCase().includes(searchValue.toLowerCase()) ||
+      user?.city.toLowerCase().includes(searchValue.toLowerCase()));
   }
 }

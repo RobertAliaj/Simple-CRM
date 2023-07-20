@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
   checkFetchAbility(lastFetchDateTime: any) {
     if (lastFetchDateTime) {
       let elapsedSeconds = (Date.now() - lastFetchDateTime.getTime()) / 1000;
-      this.canFetch = elapsedSeconds > 30;
+      this.canFetch = elapsedSeconds > 60;
     }
   }
 
@@ -168,16 +168,21 @@ export class DashboardComponent implements OnInit {
         ]
       },
       options: {
+        plugins: {
+          datalabels: {
+            display: false,
+          }
+        },
         scales: {
           y: {
-            min: 24000,
+            min: 0,
             title: {
               display: true,
               text: 'Price (USD)'
             }
           },
           y1: {
-            min: 480,
+            min: 0,
             position: 'right',
             grid: {
               drawOnChartArea: false,

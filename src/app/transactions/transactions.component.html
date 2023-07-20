@@ -1,17 +1,27 @@
+<div class="search-form-container">
+    <form class="search-form" role="search">
+        <input class="search-input" type="text" placeholder="Search..." autofocus required
+            (keyup)="filterByNames(filterByName.value)" #filterByName />
+        <button class="submit-button" *ngIf="filteredTransactions.length != 1" type="submit">{{ filteredTransactions.length }}
+            Results</button>
+        <button class="submit-button" *ngIf="filteredTransactions.length == 1" type="submit">1 Result</button>
+    </form>
+</div>
+
 <div class="card-container">
 
     <mat-card class="transaction-card box-shadow" [class.new-transaction]="transaction.isNew"
-        *ngFor="let transaction of allTransactions; let index = index">
+        *ngFor="let transaction of filteredTransactions; let index = index">
         <h2 class="transaction-title">Transaction Nr. {{ allTransactions.length - index }}</h2>
         <mat-card-content>
             <div class="content-row">
-                    <span class="label">From:</span>
-                    <span class="value">{{ transaction.senderName }} {{ transaction.senderLastName }}</span>
+                <span class="label">From:</span>
+                <span class="value">{{ transaction.senderName }} {{ transaction.senderLastName }}</span>
             </div>
 
             <div class="content-row">
-                    <span class="label">To:</span>
-                    <span class="value">{{ transaction.firstName }} {{ transaction.lastName }}</span>
+                <span class="label">To:</span>
+                <span class="value">{{ transaction.firstName }} {{ transaction.lastName }}</span>
             </div>
 
             <div class="content-row">

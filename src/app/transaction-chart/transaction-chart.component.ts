@@ -20,6 +20,7 @@ export class TransactionChartComponent {
   allUsers!: any;
   userData!: any;
   users!: any;
+  filteredNamesAmount: any = 0;
 
 
   constructor(private firestore: Firestore, private router: Router) {
@@ -73,6 +74,33 @@ export class TransactionChartComponent {
       this.userData.name.push(fullName);
       this.userData.color.push(color);
     }
+  }
+
+  filterUsersByFirstName(searchValue: string) {
+    const filteredIndices = this.getFilteredIndicesBasedOnFirstName(searchValue);
+    const filteredNames = this.getFilteredData(this.userData.name, filteredIndices);
+    const filteredAmounts = this.getFilteredData(this.userData.amount, filteredIndices);
+    const filteredColors = this.getFilteredData(this.userData.color, filteredIndices);
+    filteredNames.length > 0 ? this.renderChart(filteredNames, filteredAmounts, filteredColors) : this.renderChart(this.userData.name, this.userData.amount, this.userData.color);
+    this.filteredNamesAmount = filteredNames;
+  }
+
+  
+  getFilteredIndicesBasedOnFirstName(searchValue: string): number[] {
+    let filteredIndices: number[] = [];
+
+    this.userData.name.forEach((fullName: string, index: number) => {
+      const firstName = fullName.split(' ')[0].toLowerCase();;
+      const isIncluded = firstName.includes(searchValue.toLowerCase());
+      
+      if (isIncluded) filteredIndices.push(index); });
+
+    return filteredIndices;
+  }
+
+
+  getFilteredData(data: any[], filteredIndices: number[]): any[] {
+    return filteredIndices.map((index) => data[index]);
   }
 
 

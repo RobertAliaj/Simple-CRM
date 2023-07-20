@@ -17,6 +17,8 @@ export class TransactionsComponent implements OnInit {
 
 
   allTransactions: any[] = [];
+  filteredTransactions: any[] = [];
+
   constructor(
     private firestore: Firestore,
     private animation: TypedAnimationService,
@@ -27,19 +29,20 @@ export class TransactionsComponent implements OnInit {
   ngOnInit() {
     this.getTransactions();
   }
-  
-  
+
+
   /**
    * Fetches all transaction data from the Firestore database and assigns it to the `allTransactions` array.
    * Listens in real time for any changes in the 'transactions' collection in Firestore.
   */
- getTransactions() {
-   const collectionRef = collection(this.firestore, 'transactions');
-   onSnapshot(collectionRef, (snapshot) => {
-     let changes = snapshot.docs.map(doc => ({ transactionId: doc.id, ...doc.data() }));
-     this.allTransactions = changes;
-     this.allTransactions.sort((a, b) => b.timeStamp - a.timeStamp);
-     this.highlightNewTransactions();
+  getTransactions() {
+    const collectionRef = collection(this.firestore, 'transactions');
+    onSnapshot(collectionRef, (snapshot) => {
+      let changes = snapshot.docs.map(doc => ({ transactionId: doc.id, ...doc.data() }));
+      this.allTransactions = changes;
+      this.allTransactions.sort((a, b) => b.timeStamp - a.timeStamp);
+      this.filteredTransactions = this.allTransactions;
+      this.highlightNewTransactions();
     });
 
     this.playTypingAnimation();
@@ -101,5 +104,14 @@ export class TransactionsComponent implements OnInit {
         this.animation.typeAnimation(this.typedTarget);
       }
     }, 500);
+  }
+
+
+  filterByNames(searchValue: string) {
+    this.filteredTransactions =
+      this.allTransactions.filter((transaction: { senderName: string; firstName: string; }) =>
+        transaction?.senderName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        transaction?.firstName.toLowerCase().includes(searchValue.toLowerCase())
+      );
   }
 }
