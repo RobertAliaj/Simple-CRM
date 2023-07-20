@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 500px;
+    width: clamp(320px, 256.61971830985914px + 15.845070422535212vw, 500px);
     height: 500px;
     gap: 22px;
 }
@@ -34,7 +34,7 @@
         margin-top: 10px;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             color: rgb(0 0 0 / 80%);
         }
     }
