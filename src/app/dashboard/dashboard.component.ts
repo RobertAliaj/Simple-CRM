@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    this.handleInnerWidth();
+    // this.handleInnerWidth();
   }
 
 
@@ -90,8 +90,8 @@ export class DashboardComponent implements OnInit {
   async fetchAndRender() {
     await this.fetchData();
     this.saveLastBTCFetchInLocalStorage();
-    this.loading = false;
     this.renderChart(this.btcService.btcData.date, this.btcService.btcData.price, this.btcService.btcData.market_cap);
+    this.loading = false;
   }
 
 
@@ -100,8 +100,8 @@ export class DashboardComponent implements OnInit {
    */
   renderFromLocalStorage() {
     this.getLocalStorageData();
-    this.loading = false;
     this.renderChart(this.btcDataCopy.date, this.btcDataCopy.price, this.btcDataCopy.market_cap);
+    this.loading = false;
   }
 
 
@@ -207,13 +207,13 @@ export class DashboardComponent implements OnInit {
    */
   handleInnerWidth() {
     if (window.innerWidth < 650) {
-      this.landScapeView = false;
-      this.rotate.nativeElement.classList.remove('d-none');
-      this.chart.nativeElement.classList.add('d-none');
+      // this.landScapeView = false;
+      // this.rotate.nativeElement.classList.remove('d-none');
+      // this.chart.nativeElement.classList.add('d-none');
     } else {
-      this.landScapeView = true;
-      this.rotate.nativeElement.classList.add('d-none');
-      this.chart.nativeElement.classList.remove('d-none');
+      // this.landScapeView = true;
+      // this.rotate.nativeElement.classList.add('d-none');
+      // this.chart.nativeElement.classList.remove('d-none');
     }
   }
 
@@ -227,11 +227,11 @@ export class DashboardComponent implements OnInit {
     const orientation = (window.screen as any).orientation;
 
     if (event.target.innerWidth < 650) {
-      this.rotate.nativeElement.classList.remove('d-none');
-      this.chart.nativeElement.classList.add('d-none');
+      // this.rotate.nativeElement.classList.remove('d-none');
+      // this.chart.nativeElement.classList.add('d-none');
     } else {
-      this.rotate.nativeElement.classList.add('d-none');
-      this.chart.nativeElement.classList.remove('d-none');
+      // this.rotate.nativeElement.classList.add('d-none');
+      // this.chart.nativeElement.classList.remove('d-none');
     }
   }
 }

@@ -2,9 +2,10 @@
 
 <div class="search-form-container">
     <form class="search-form" role="search">
-        <input class="search-input" type="text" placeholder="Search..." autofocus required (keyup)="filterByNames(filterByName.value)" #filterByName />
-        <button class="submit-button" *ngIf="filteredUsers.length != 1" type="submit">{{ filteredUsers.length }} Results</button>
-        <button class="submit-button" *ngIf="filteredUsers.length == 1" type="submit">1 Result</button>
+        <input class="search-input" type="text" placeholder="Search..." autofocus required
+            (keyup)="filterByNames(filterByName.value)" #filterByName />
+        <button class="submit-button" *ngIf="filteredUsers.length != 1" type="submit">{{ filteredUsers.length }} <b class="result">Results</b></button>
+        <button class="submit-button" *ngIf="filteredUsers.length == 1" type="submit"><b class="result">1 Result</b></button>
     </form>
 </div>
 

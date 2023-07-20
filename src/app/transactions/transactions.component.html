@@ -3,8 +3,8 @@
         <input class="search-input" type="text" placeholder="Search..." autofocus required
             (keyup)="filterByNames(filterByName.value)" #filterByName />
         <button class="submit-button" *ngIf="filteredTransactions.length != 1" type="submit">{{ filteredTransactions.length }}
-            Results</button>
-        <button class="submit-button" *ngIf="filteredTransactions.length == 1" type="submit">1 Result</button>
+            <b class="result">Results</b></button>
+        <button class="submit-button" *ngIf="filteredTransactions.length == 1" type="submit">1  <b class="result">Result</b> </button>
     </form>
 </div>
 

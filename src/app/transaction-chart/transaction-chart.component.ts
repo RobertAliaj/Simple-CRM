@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
@@ -85,15 +85,16 @@ export class TransactionChartComponent {
     this.filteredNamesAmount = filteredNames;
   }
 
-  
+
   getFilteredIndicesBasedOnFirstName(searchValue: string): number[] {
     let filteredIndices: number[] = [];
 
     this.userData.name.forEach((fullName: string, index: number) => {
-      const firstName = fullName.split(' ')[0].toLowerCase();;
+      const firstName = fullName.split(' ')[0].toLowerCase();
       const isIncluded = firstName.includes(searchValue.toLowerCase());
-      
-      if (isIncluded) filteredIndices.push(index); });
+
+      if (isIncluded) filteredIndices.push(index);
+    });
 
     return filteredIndices;
   }
@@ -101,6 +102,12 @@ export class TransactionChartComponent {
 
   getFilteredData(data: any[], filteredIndices: number[]): any[] {
     return filteredIndices.map((index) => data[index]);
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.renderChart(this.userData.name, this.userData.amount, this.userData.color);
   }
 
 

@@ -39,7 +39,7 @@
         }
 
 
-        .sender-receiver{
+        .sender-receiver {
             display: flex;
             justify-content: space-between;
         }
@@ -65,7 +65,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     width: 100%;
     text-align: center;
     padding: 8px;
@@ -106,12 +106,20 @@
         align-items: center;
         flex-wrap: unset;
 
-        .transaction-card{
+        .transaction-card {
             width: 100%;
         }
 
-        mat-card-content{
+        mat-card-content {
             width: 100%;
         }
+    }
+}
+
+
+@media(max-width: 400px) {
+
+    .result {
+        display: none !important;
     }
 }

@@ -1,4 +1,9 @@
+<h2 class="rotate-text">Please rotate your Phone for a better View of the Chart!</h2>
+
 <div class="chart-container" #chart>
+
+
+
     <canvas id="myChart"></canvas>
 
     <div>
@@ -7,16 +12,4 @@
 </div>
 
 
-<div class="loader-container" *ngIf="loading && landScapeView">
-    <span class="span">Loading Bitcoin Chart</span>
-    <div class="dot-elastic"></div>
-</div>
-
-
-<div #rotate class="d-none rotate">
-    <span class="span">
-        Please rotate your device to view the Chart
-    </span>
-
-    <mat-icon class="rotate-icon">screen_rotation</mat-icon>
-</div>
+<mat-spinner class="loader" *ngIf="loading"></mat-spinner>

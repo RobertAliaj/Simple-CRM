@@ -83,3 +83,10 @@ table {
         right: 20px;
     }
 }
+
+@media(max-width: 400px) {
+
+        .result {
+            display: none !important;
+        }
+}

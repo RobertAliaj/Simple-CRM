@@ -32,11 +32,12 @@ export class MainComponent implements OnInit, OnDestroy {
     ['/signUp', 'Sign Up'],
     ['/dashboard', 'Dashboard'],
     ['/user', 'Users'],
-    ['/transactions', 'Transactions History'],
+    ['/transactions', 'History'],
     ['/news', 'News'],
     ['/help', 'Help'],
     ['/privacy', 'Privacy Policy'],
-    ['/imprint', 'Imprint']
+    ['/imprint', 'Imprint'],
+    ['/transaction-chart', 'Chart']
   ]);
 
   DEFAULT_TITLE = 'Users / User Details';
@@ -101,7 +102,7 @@ export class MainComponent implements OnInit, OnDestroy {
   onNavigationEnd(event: any) {
     if (event instanceof NavigationEnd) {
       this.setMenuTitleBasedOnUrl(event.url);
-      if (event.url == '/login' ||  event.url == '/' || event.url == '/signUp') this.checkScreenSize = false; else this.checkScreenSize = true;
+      if (event.url == '/login' || event.url == '/' || event.url == '/signUp') this.checkScreenSize = false; else this.checkScreenSize = true;
     }
   }
 
@@ -123,7 +124,7 @@ export class MainComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkScreenSize = event.target.innerWidth < 1100 ? false : true;
-    event.target.innerWidth < 700 ? this.showResponsiveView() : this.showStandardView();
+    event.target.innerWidth < 800 ? this.showResponsiveView() : this.showStandardView();
   }
 
 
