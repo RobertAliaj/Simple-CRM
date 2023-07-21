@@ -82,3 +82,9 @@ mat-toolbar-row,
         width: 60px;
     }
 }
+
+@media(max-width: 380px) {
+    .mat-toolbar-row {
+        z-index: 2;
+    }
+}

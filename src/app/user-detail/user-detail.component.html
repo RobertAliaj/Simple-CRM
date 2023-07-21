@@ -61,7 +61,7 @@
 
         <div class="add-button" *ngIf="this.currentLoggedUser !== this.user.email">
             <button (click)="openAddTransaction()" mat-fab color="primary" matTooltip="Send BTC"
-                matTooltipPosition="above">
+                matTooltipPosition="above" class="send-btn">
                 <mat-icon>send</mat-icon>
             </button>
         </div>

@@ -8,7 +8,7 @@
         width: clamp(100px, 84.13379073756433px + 4.288164665523156vw, 150px);
         height: auto;
         border-radius: 50%;
-        object-fit: cover; 
+        object-fit: cover;
     }
 
     .user-details {
@@ -38,10 +38,10 @@
 }
 
 
-.amount-card{
+.amount-card {
     position: relative;
 
-    .amount{
+    .amount {
         padding-bottom: 16px;
     }
 }
@@ -73,9 +73,29 @@
     transform: translate(-50%, -50%);
 }
 
-@media(max-width: 600px){
-    .add-button{
+@media(max-width: 600px) {
+    .add-button {
         bottom: 20px;
         right: 20px;
     }
+}
+
+
+@media(max-width: 420px) {
+    .amount-card {
+        position: unset;
+        padding: 10px !important;
+    }
+
+    .add-button{
+        bottom: 5px;
+        width: 100%;
+        position: inherit;
+    }
+
+    .send-btn{
+        width: 100%;
+        border-radius: 10px !important;
+    }
+
 }
