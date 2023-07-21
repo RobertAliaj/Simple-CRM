@@ -15,7 +15,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
-import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -43,6 +42,7 @@ import { TransactionChartComponent } from './transaction-chart/transaction-chart
 import { ImprintComponent } from './imprint/imprint.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { DialogForgotPasswordComponent } from './dialog-forgot-password/dialog-forgot-password.component';
+import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 
 
 
@@ -53,9 +53,9 @@ import { DialogForgotPasswordComponent } from './dialog-forgot-password/dialog-f
     AppComponent,
     DashboardComponent,
     UserComponent,
-    DialogAddUserComponent,
     UserDetailComponent,
     DialogEditAdressComponent,
+    DialogAddUserComponent,
     DialogEditUserComponent,
     TransactionsComponent,
     DialogAddTransactionComponent,

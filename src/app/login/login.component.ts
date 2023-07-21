@@ -1,10 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 import { LoginForm } from 'src/models/login-form.class';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { shakeAnimation } from "src/animation";
-import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogForgotPasswordComponent } from '../dialog-forgot-password/dialog-forgot-password.component';
 
@@ -33,29 +32,28 @@ export class LoginComponent {
   ) { }
 
 
-  guestLogIn() {
-    this.userLogin.email = 'guest@mail.com';
-    this.userLogin.password = '123456';
-    this.login();
-  }
-
-
   ngOnInit() {
     this.userLoginValid = this.fb.group({
       email: [this.userLogin.email, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [this.userLogin.password, [Validators.required, Validators.minLength(6)]],
     });
-
-    // this.openForgotPassword();
   }
 
 
-  proceed() {
+  guestLogIn() {
+    this.userLogin.email = 'guest@mail.com';
+    this.userLogin.password = '123456';
+    this.loading = true;
+    this.checkIfEmailIsRegistered();
+  }
+
+
+  login() {
     if (this.userLoginValid.valid)
-      this.loading = true;
+    this.loading = true;
     this.userLoginValid.disable();
     this.getValuesFromInput();
-    this.login();
+    this.checkIfEmailIsRegistered();
   }
 
 
@@ -65,17 +63,17 @@ export class LoginComponent {
   }
 
 
-  async login() {
+  async checkIfEmailIsRegistered() {
     const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userLogin.email);
     this.emailDoesntExist = methods.length === 0;
-    if (this.emailDoesntExist) this.handleWrongEmail(); else this.tryToLogin();
+    this.emailDoesntExist ? this.handleWrongEmail() : this.checkIfPasswordIsCorrect();
   }
 
 
-  async tryToLogin() {
+  async checkIfPasswordIsCorrect() {
     const result = await this.authService.signIn(this.userLogin.email, this.userLogin.password);
     let canLogin = result.user;
-    if (canLogin) this.handleSuccsessfulLogin(); else this.handleWrongPassword();
+    canLogin ? this.handleSuccsessfulLogin() : this.handleWrongPassword();
   }
 
 
@@ -94,6 +92,7 @@ export class LoginComponent {
     this.userLoginValid.enable();
   }
 
+
   handleWrongEmail() {
     this.loading = false;
     this.userLoginValid.enable();
@@ -107,17 +106,7 @@ export class LoginComponent {
   }
 
 
-  resetPassword(email: string) {
-    this.authService.resetPassword(email);
-  }
-
-
-
-  openForgotPassword(): void {
+  openForgotPasswordDialog(): void {
     const dialog = this.dialog.open(DialogForgotPasswordComponent);
-    // dialog.componentInstance.user = new User(this.user.toJson());
-    // dialog.componentInstance.userId = this.userId;
   }
-
-
 }

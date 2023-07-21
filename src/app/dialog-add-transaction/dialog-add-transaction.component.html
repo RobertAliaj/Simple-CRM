@@ -1,6 +1,6 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
-<!-- Der Titel von der Pop-Up Karte -->
+<!-- Title of the Dialog -->
 <h1 mat-dialog-title>Send Bitcon</h1>
 
 <div mat-dialog-content class="mat-form-field-container">
@@ -11,7 +11,7 @@
     </mat-form-field>
 </div>
 
-<!-- Die Buttons von der Pop-Up Karte -->
+<!-- Buttons of the Dialog -->
 <div mat-dialog-actions>
     <button mat-button (click)="this.dialogRef.close()">Cancel</button>
     <button mat-button cdkFocusInitial (click)="saveTransaction()">Send</button>

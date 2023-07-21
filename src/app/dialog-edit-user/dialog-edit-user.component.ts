@@ -45,7 +45,6 @@ export class DialogEditUserComponent implements OnInit {
   getValuesFromInput() {
     this.user.firstName = this.userForm.get('firstName')?.value;
     this.user.lastName = this.userForm.get('lastName')?.value;
-    // this.user.email = this.userForm.get('email')?.value;
   }
 
 

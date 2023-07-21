@@ -1,11 +1,9 @@
-import { Component, ElementRef, HostListener, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild, OnInit } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { TutorialComponent } from '../tutorial/tutorial.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
-import { Subscription } from 'rxjs';
-
 
 
 @Component({
@@ -13,11 +11,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit {
 
   isUserLoggedIn: boolean = false;
-  showTutorial!: any;
-  checkScreenSize!: boolean;
+  canopenTutorial!: any;
+  canOpenSideNav!: boolean;
   logo: string = ''
   logoStyle: string = '';
   showText: boolean = false;
@@ -41,7 +39,6 @@ export class MainComponent implements OnInit, OnDestroy {
   ]);
 
   DEFAULT_TITLE = 'Users / User Details';
-  private authSubscription: Subscription | undefined
 
   constructor(
     public router: Router,
@@ -49,60 +46,57 @@ export class MainComponent implements OnInit, OnDestroy {
     private authService: AuthService,
   ) { }
 
+  
   ngOnInit() {
-    // this.authSubscription = this.authService.getAuthState().subscribe(isLoggedIn => {
-    //   this.isUserLoggedIn = isLoggedIn;
-    // });
-    this.openTutorial();
+    this.checkIfCanOpenTutorial();
     this.handleInnerWidth();
     this.router.events.subscribe(event => this.onNavigationEnd(event));
-  }
-
-  ngOnDestroy() {
-    // Stellt sicher, dass das Abonnement beendet wird, wenn die Komponente zerstört wird
-    if (this.authSubscription) {
-      this.authSubscription.unsubscribe();
-    }
   }
 
 
   /**
    * This Method is used to open the Tutorial Screen if you're using the App for the First time
    */
-  openTutorial() {
+  checkIfCanOpenTutorial() {
     const showTutorialValue = localStorage.getItem('showTutorial');
-    this.showTutorial = Boolean(showTutorialValue); // convert the string to boolean
+    this.canopenTutorial = Boolean(showTutorialValue); // convert the string to boolean
 
-    if (!this.showTutorial) {
-      const dialogRef = this.dialog.open(TutorialComponent, {});
+    if (!this.canopenTutorial) { this.openTutorial(); };
+  }
 
-      dialogRef.afterClosed().subscribe(() => {
-        localStorage.setItem('showTutorial', 'started');
-        this.showTutorial = true;
-      });
-    }
+
+  openTutorial() {
+    const dialogRef = this.dialog.open(TutorialComponent, {});
+
+    dialogRef.afterClosed().subscribe(() => {
+      localStorage.setItem('showTutorial', 'started');
+      this.canopenTutorial = true;
+    });
   }
 
 
   /**
- * Handle InnerWidth when Initializing the App
- */
+  * Handle InnerWidth when Initializing the App
+  */
   handleInnerWidth() {
-    if (window.innerWidth < 1100 || this.router.url == '/login' || this.router.url == '/') this.checkScreenSize = false; else this.checkScreenSize = true;
-    // this.checkScreenSize = window.innerWidth < 1100 || this.router.url == '/login' || this.router.url == '/' ? false : true;
+    if (window.innerWidth < 1100 || this.router.url == '/login' || this.router.url == '/') {
+      this.canOpenSideNav = false;
+    } else {
+      this.canOpenSideNav = true;
+    }
     window.innerWidth < 700 ? this.showResponsiveView() : this.showStandardView();
   }
 
 
   /**
-   * Verarbeitet das NavigationEnd-Event und setzt den Menütitel basierend auf der aktuellen URL.
+   * Processes the NavigationEnd event and sets the menu title based on the current URL.
    *
-   * @param {NavigationEnd} event - Das NavigationEnd-Event, das die Information über die Navigation enthält.
+   * @param {NavigationEnd} event - The NavigationEnd event containing information about the navigation.
    */
   onNavigationEnd(event: any) {
     if (event instanceof NavigationEnd) {
       this.setMenuTitleBasedOnUrl(event.url);
-      if (event.url == '/login' || event.url == '/' || event.url == '/signUp') this.checkScreenSize = false; else this.checkScreenSize = true;
+      if (event.url == '/login' || event.url == '/' || event.url == '/signUp') this.canOpenSideNav = false; else this.canOpenSideNav = true;
     }
   }
 
@@ -123,7 +117,7 @@ export class MainComponent implements OnInit, OnDestroy {
    */
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.checkScreenSize = event.target.innerWidth < 1100 ? false : true;
+    this.canOpenSideNav = event.target.innerWidth < 1100 ? false : true;
     event.target.innerWidth < 800 ? this.showResponsiveView() : this.showStandardView();
   }
 
@@ -141,10 +135,11 @@ export class MainComponent implements OnInit, OnDestroy {
     this.showText = false;
   }
 
-  closeMenu(drawer: MatDrawer) {
-    if (window.innerWidth < 650)
-      drawer.close();
+
+  closeSideNav(drawer: MatDrawer) {
+    if (window.innerWidth < 650) drawer.close();
   }
+
 
   logOut() {
     this.router.navigate(['login']);

@@ -3,8 +3,9 @@
 <mat-card class="login-card box-shadow">
   <mat-card-title>Log in</mat-card-title>
 
-  <form class="login-form" [formGroup]="userLoginValid" (ngSubmit)="proceed()">
+  <form class="login-form" [formGroup]="userLoginValid" (ngSubmit)="login()">
 
+    <!-- Email Field -->
     <div class="input-container">
       <mat-form-field>
         <mat-label>Email</mat-label>
@@ -15,6 +16,7 @@
         </mat-error>
       </mat-form-field>
 
+      <!-- Passowrd Field -->
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" autocomplete="on">
@@ -25,26 +27,27 @@
       </mat-form-field>
     </div>
 
-
+    <!-- Submit Button -->
     <div mat-dialog-actions>
-      <button color="primary" [disabled]="this.userLoginValid.invalid || this.userLoginValid.disabled" type="submit"
-        mat-raised-button>Login</button>
+      <button color="primary" [disabled]="this.userLoginValid.invalid || this.userLoginValid.disabled || loading"
+        type="submit" mat-raised-button>Login</button>
     </div>
   </form>
 
+  <!-- Blue Buttons -->
   <div class="btn-container full-width">
     <div>
-      <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="navigateToSignUp()">Sign
+      <button [disabled]="this.userLoginValid.disabled || loading" mat-button color="primary"
+        (click)="navigateToSignUp()">Sign
         Up</button>
       <span> - </span>
-      <button [disabled]="this.userLoginValid.disabled" mat-button color="primary" (click)="guestLogIn()">Guest
+      <button [disabled]="this.userLoginValid.disabled || loading" mat-button color="primary"
+        (click)="guestLogIn()">Guest
         Login</button>
     </div>
 
-    <a (click)="openForgotPassword()">
+    <!-- Forgot Password Link -->
+    <a (click)="openForgotPasswordDialog()">
       Forgot Password ?</a>
   </div>
-
-
-
 </mat-card>

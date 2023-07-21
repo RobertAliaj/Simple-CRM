@@ -1,5 +1,5 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
-  <mat-drawer #drawer class="sidenav" [opened]="checkScreenSize" mode="side">
+  <mat-drawer #drawer class="sidenav" [opened]="canOpenSideNav" mode="side">
     <div class="logo-container">
       <a href="">
         <img [style.width]="logoStyle" src="assets/img/{{ logo }}">
@@ -8,32 +8,32 @@
 
     <ul class="menu-items">
 
-      <li routerLink="/dashboard" (click)="closeMenu(drawer)">
+      <li routerLink="/dashboard" (click)="closeSideNav(drawer)">
         <mat-icon>bar_chart_4_bars</mat-icon>
         <span [class.d-none]="showText"> Dashboard</span>
       </li>
 
-      <li routerLink="/user" (click)="closeMenu(drawer)">
+      <li routerLink="/user" (click)="closeSideNav(drawer)">
         <mat-icon>person_outline</mat-icon>
         <span [class.d-none]="showText"> User</span>
       </li>
 
-      <li routerLink="/transactions" (click)="closeMenu(drawer)">
+      <li routerLink="/transactions" (click)="closeSideNav(drawer)">
         <mat-icon>published_with_changes</mat-icon>
         <span [class.d-none]="showText"> Transactions</span>
       </li>
 
-      <li routerLink="/transaction-chart" (click)="closeMenu(drawer)">
+      <li routerLink="/transaction-chart" (click)="closeSideNav(drawer)">
         <mat-icon>insert_chart_outlined</mat-icon>
         <span [class.d-none]="showText"> Transaction Chart</span>
       </li>
 
-      <li routerLink="/news" (click)="closeMenu(drawer)">
+      <li routerLink="/news" (click)="closeSideNav(drawer)">
         <mat-icon>language</mat-icon>
         <span [class.d-none]="showText"> News</span>
       </li>
 
-      <li routerLink="/help" (click)="closeMenu(drawer)">
+      <li routerLink="/help" (click)="closeSideNav(drawer)">
         <mat-icon>info_outline</mat-icon>
         <span [class.d-none]="showText"> Help</span>
       </li>
@@ -41,12 +41,12 @@
       <br>
       <hr>
 
-      <li routerLink="/privacy" (click)="closeMenu(drawer)">
+      <li routerLink="/privacy" (click)="closeSideNav(drawer)">
         <mat-icon fontSet="material-icons-outlined">verified_user_outlined</mat-icon>
         <span [class.d-none]="showText"> Privacy Policy</span>
       </li>
 
-      <li routerLink="/imprint" (click)="closeMenu(drawer)">
+      <li routerLink="/imprint" (click)="closeSideNav(drawer)">
         <mat-icon fontSet="material-icons-outlined">policy_outlined</mat-icon>
         <span [class.d-none]="showText"> Imprint</span>
       </li>
@@ -68,7 +68,7 @@
     </mat-toolbar>
 
 
-    <div #wrapper *ngIf="showTutorial"
+    <div #wrapper *ngIf="canopenTutorial"
       [class.center-forms]="router.url == '/' || router.url =='/signUp' || router.url =='/login'">
       <div class="router-container">
         <router-outlet></router-outlet>

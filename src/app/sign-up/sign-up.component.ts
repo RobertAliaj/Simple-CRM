@@ -51,7 +51,7 @@ export class SignUpComponent {
       this.signUpFormValid.disable();
       this.getValuesFromInput();
       this.copyUserInformation();
-      this.register();
+      this.checkIfUserCanRegister();
     }
   }
 
@@ -68,31 +68,42 @@ export class SignUpComponent {
   }
 
 
-  async register() {
-    const methods = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userSignUp.email);
-    if (methods.length === 0) {
-      this.authService.signUp(this.userSignUp.email, this.userSignUp.password)
-        .then(response => {
-          this.addUser();
-          this.authService.signOut();
-          this.router.navigate(['login']);
-          this.signUpFormValid.enable();
-          this.loading = false;
-        });
-    } else {
-      this.signUpFormValid.enable();
-      this.loading = false;
-      this.emailInUse= true;
-      this.signUpFormValid.patchValue({
-        email: ''
-      });
-      setTimeout(() => {
-        this.emailInUse = false;
-      }, 3000);
-    }
+  async checkIfUserCanRegister() {
+    const isEmailRegistered = await this.authService.afAuth.fetchSignInMethodsForEmail(this.userSignUp.email);
+    const canRegister = isEmailRegistered.length === 0
+    canRegister ? this.handleSuccessfulRegister() : this.handleEmailAlreadyRegistered();
   }
 
 
+  /**
+   *  Handle if an already registered email is trying to register again
+   */
+  handleEmailAlreadyRegistered() {
+    this.signUpFormValid.enable();
+    this.loading = false;
+    this.emailInUse = true;
+    this.signUpFormValid.patchValue({
+      email: ''
+    });
+    setTimeout(() => this.emailInUse = false, 3000);
+  }
+
+
+  handleSuccessfulRegister() {
+    this.authService.signUp(this.userSignUp.email, this.userSignUp.password)
+      .then(response => {
+        this.addUser();
+        this.authService.signOut();
+        this.router.navigate(['login']);
+        this.signUpFormValid.enable();
+        this.loading = false;
+      });
+  }
+
+
+  /**
+   * Copy the Data from the SignUp Form to the UserObject in order to save it to the firestore
+   */
   copyUserInformation() {
     this.user.firstName = this.userSignUp.firstName;
     this.user.lastName = this.userSignUp.lastName;
@@ -105,11 +116,13 @@ export class SignUpComponent {
   }
 
 
+  /**
+   * Add the user who got registered to the user Collection in Firestore
+   */
   async addUser() {
     const usersCollection = collection(this.firestore, 'users');
     addDoc(usersCollection, this.user.toJson()).then(async (result) => {
-      const docSnap = await getDoc(result);
-    });
+      const docSnap = await getDoc(result);});
   }
 
 
@@ -120,10 +133,10 @@ export class SignUpComponent {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   }
 
+
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
-
 }
 
 

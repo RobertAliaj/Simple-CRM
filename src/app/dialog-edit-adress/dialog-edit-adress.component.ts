@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/models/user.class';
-import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { doc, updateDoc } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,10 +19,11 @@ export class DialogEditAdressComponent implements OnInit {
 
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddUserComponent>,
+    public dialogRef: MatDialogRef<DialogEditAdressComponent>,
     private firestore: Firestore,
     private fb: FormBuilder
   ) { }
+
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -32,6 +32,7 @@ export class DialogEditAdressComponent implements OnInit {
       city: [this.user.city, Validators.required]
     });
   }
+
 
   updateAdressDetails() {
     if (this.userForm.valid) {

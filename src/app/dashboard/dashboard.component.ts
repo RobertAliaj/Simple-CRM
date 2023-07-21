@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { BtcDataService } from '../btc-data.service';
 import { TypedAnimationService } from '../typed-animation.service';
@@ -32,11 +32,6 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     this.handleLastFetch();
     this.initBtcData();
-  }
-
-
-  ngAfterViewInit() {
-    // this.handleInnerWidth();
   }
 
 
@@ -79,8 +74,6 @@ export class DashboardComponent implements OnInit {
     this.btcService.resetBTCData();
     if (this.canFetch) await this.fetchAndRender(); else this.renderFromLocalStorage();
     this.playTypingAnimation();
-    console.log(this.btcService.btcData);
-    console.log(this.btcDataCopy);
   }
 
 
@@ -144,7 +137,7 @@ export class DashboardComponent implements OnInit {
    * @param {Array} market_cap - An array of market cap values corresponding to each date. Each market cap should correlate to a date and price in the other arrays.
    */
   renderChart(date: any, price: any, market_cap: any) {
-    if (this.myChart) this.myChart.destroy(); //destroy prev chart instance
+    if (this.myChart) this.myChart.destroy();
     this.myChart = new Chart('myChart', {
       type: 'bar',
       data: {
@@ -194,44 +187,10 @@ export class DashboardComponent implements OnInit {
           }
         },
         animation: {
-          duration: 1000, // Dauer der Animation in Millisekunden
-          easing: 'easeOutBounce', // Typ der Animation
+          duration: 1000,
+          easing: 'easeOutBounce',
         }
       }
     });
-  }
-
-
-  /**
-   * Handle the InnerWidth when initializing the App
-   */
-  handleInnerWidth() {
-    if (window.innerWidth < 650) {
-      // this.landScapeView = false;
-      // this.rotate.nativeElement.classList.remove('d-none');
-      // this.chart.nativeElement.classList.add('d-none');
-    } else {
-      // this.landScapeView = true;
-      // this.rotate.nativeElement.classList.add('d-none');
-      // this.chart.nativeElement.classList.remove('d-none');
-    }
-  }
-
-
-
-  /**
-  * Handle the InnerWidth when resizing the window
-  */
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    const orientation = (window.screen as any).orientation;
-
-    if (event.target.innerWidth < 650) {
-      // this.rotate.nativeElement.classList.remove('d-none');
-      // this.chart.nativeElement.classList.add('d-none');
-    } else {
-      // this.rotate.nativeElement.classList.add('d-none');
-      // this.chart.nativeElement.classList.remove('d-none');
-    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BtcDataService } from '../btc-data.service';
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, updateDoc, where, query } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, updateDoc, where, query } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Transaction } from 'src/models/transaction.class';
@@ -52,7 +52,6 @@ export class DialogAddTransactionComponent implements OnInit {
 
   async getCurrentLoggedUser() {
     this.currentLoggedUser = await this.authService.getCurrentLoggedInEmail();
-
     const usersCollectionRef = collection(this.firestore, 'users');
     const userQuery = query(usersCollectionRef, where("email", "==", this.currentLoggedUser));
 
@@ -63,23 +62,38 @@ export class DialogAddTransactionComponent implements OnInit {
   }
 
 
-  async updateUserBtcAmount() {
+  /**
+   * Updates or initializes the BTC amount of the user, based on whether the user already has some Bitcoins or not.  
+   */
+  async updateOrInitializeUserBtcAmount() {
     let addedBtcAmount = parseFloat(this.btcAmount);
     const docRef = doc(this.firestore, 'users', this.userId);
     const docSnap = await getDoc(docRef);
-    
+
     const currentUser = new User(docSnap.data());
     const currentBtcAmount = currentUser.btcAmount;
-    if (currentBtcAmount) {
-      const updatedBtcAmount = currentBtcAmount + addedBtcAmount;
-      await updateDoc(docRef, {
-        btcAmount: updatedBtcAmount
-      });
-    } else {
-      await updateDoc(docRef, {
-        btcAmount: addedBtcAmount
-      });
-    }
+    currentBtcAmount ? await this.addTheNewAmount(currentBtcAmount, addedBtcAmount, docRef) : this.addTheFirstAmount(addedBtcAmount, docRef);
+  }
+
+
+  /**
+   * Adds the new amount to the existing amount.
+   */
+  async addTheNewAmount(currentBtcAmount: number, addedBtcAmount: number, docRef: any) {
+    const updatedBtcAmount = currentBtcAmount + addedBtcAmount;
+    await updateDoc(docRef, {
+      btcAmount: updatedBtcAmount
+    });
+  }
+
+
+  /**
+   * Adds the first Amount.
+   */
+  async addTheFirstAmount(addedBtcAmount: number, docRef: any) {
+    await updateDoc(docRef, {
+      btcAmount: addedBtcAmount
+    });
   }
 
 
@@ -89,7 +103,7 @@ export class DialogAddTransactionComponent implements OnInit {
       this.getCurrentLoggedUser();
       this.getTransactionValues();
       this.addTransaction();
-      this.updateUserBtcAmount();
+      this.updateOrInitializeUserBtcAmount();
     }
   }
 
