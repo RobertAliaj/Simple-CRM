@@ -28,7 +28,6 @@ export class DialogEditUserComponent implements OnInit {
     this.userForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
-      // email: [this.user.email, Validators.required],
     });
   }
 

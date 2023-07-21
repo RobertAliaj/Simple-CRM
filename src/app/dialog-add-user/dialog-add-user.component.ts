@@ -48,11 +48,6 @@ export class DialogAddUserComponent implements OnInit {
   }
 
 
-  // changeColor() {
-  //   this.color = this.getRandomLightColor();
-  // }
-
-
   saveUser() {
     if (this.userForm.valid) {
       this.user.color = this.color = this.getRandomLightColor();

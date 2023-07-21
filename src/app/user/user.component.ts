@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-// import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { Firestore } from '@angular/fire/firestore';
 import { AuthService } from '../auth.service';
-import { User } from 'src/models/user.class';
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, updateDoc, where, query } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 
 @Component({

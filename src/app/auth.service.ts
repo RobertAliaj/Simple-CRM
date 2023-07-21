@@ -21,9 +21,6 @@ export class AuthService {
         // Password reset email sent!
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
       });
   }
 
@@ -57,46 +54,21 @@ export class AuthService {
   }
 
 
-
   async signIn(email: string, password: string) {
     try {
-      // versuche mich einzuloggen
+      // try to log in
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      // wenn es kein Fehler ist, dann gib das Resultat zurück
+      // If theres no error, return the result
       return { user: result.user, error: null };
-    } catch (error: any) {
-      // wenn ein Fehler auftritt, dann gib den Fehler zurück
+    }
+    catch (error: any) {
+      // if there's an error, return the error
       return { user: null, error: error };
     }
   }
-
-  // async signIn(email: string, password: string) {
-  //     return await this.afAuth.signInWithEmailAndPassword(email, password);
-  // }
 
 
   async signOut() {
     return this.afAuth.signOut();
   }
 }
-
-
-
-
-
-
-
-// getAuthState(): Observable < boolean > {
-//   return new Observable<boolean>(observer => {
-//     const unsubscribe = onAuthStateChanged(this.auth, user => {
-//       if (user) {
-//         observer.next(true);
-//       } else {
-//         observer.next(false);
-//       }
-//     });
-
-//     // Gibt eine Aufräumfunktion zurück, die den Beobachter abmeldet, wenn er nicht mehr benötigt wird
-//     return unsubscribe;
-//   });
-// }

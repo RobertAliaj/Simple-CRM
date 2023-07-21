@@ -23,7 +23,7 @@ export class BtcDataService {
       market_cap: []
     };
   }
-  
+
 
   /**
    * This Methode is used to reset the btcData Object before filling it again with new values;

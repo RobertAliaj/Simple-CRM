@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 import { LoginForm } from 'src/models/login-form.class';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { shakeAnimation } from "src/animation";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogForgotPasswordComponent } from '../dialog-forgot-password/dialog-forgot-password.component';
 
@@ -12,8 +11,6 @@ import { DialogForgotPasswordComponent } from '../dialog-forgot-password/dialog-
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [shakeAnimation],
-
 })
 export class LoginComponent {
 

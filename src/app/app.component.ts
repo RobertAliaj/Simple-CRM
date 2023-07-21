@@ -1,11 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
-import { NavigationEnd, Router } from '@angular/router';
-import { TutorialComponent } from './tutorial/tutorial.component';
-import { MatDialog } from '@angular/material/dialog';
-import { onAuthStateChanged } from '@angular/fire/auth';
-import { getAuth } from 'firebase/auth';
-import { AuthService } from './auth.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

@@ -1,13 +1,17 @@
 <mat-spinner class="loader" *ngIf="loading"></mat-spinner>
 
+
 <div *ngIf="avatar && !loading">
+   
+    <!-- Profile Card -->
     <mat-card [style.background]="this.user.color" class="user-detail-header box-shadow">
 
         <button mat-icon-button class="back-btn" (click)="this.router.navigate(['/user'])">
             <mat-icon>arrow_back</mat-icon>
         </button>
 
-        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="detail-btn" *ngIf="currentLoggedUser === user.email">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="detail-btn"
+            *ngIf="currentLoggedUser === user.email">
             <mat-icon>more_horiz</mat-icon>
         </button>
 
@@ -19,15 +23,16 @@
         <img src="assets/img/{{ avatar }}.webp">
 
         <div class="user-details">
-            <h2>{{ user.firstName }} {{ user.lastName }} <b>{{ currentLoggedUser === user.email ? '(You)' : '' }}</b></h2>
+            <h2>{{ user.firstName }} {{ user.lastName }} <b>{{ currentLoggedUser === user.email ? '(You)' : '' }}</b>
+            </h2>
             {{ user.email }}
-            <!-- <p>BTC Amount: {{ user.btcAmount }}</p> -->
         </div>
 
 
     </mat-card>
 
 
+    <!-- Adress Card -->
     <mat-card class="mt-32 detail-card box-shadow">
 
         <button mat-icon-button [matMenuTriggerFor]="menu" class="detail-btn" *ngIf="currentLoggedUser === user.email">
@@ -46,9 +51,9 @@
             {{ user.street }} <br>
             {{ user.zipCode }} {{ user.city }}
         </mat-card-content>
-
     </mat-card>
 
+    <!-- Bitcoin Amount Card -->
     <mat-card class="mat-mdc-card mdc-card mt-32 detail-card amount-card box-shadow">
 
         <mat-card-header>
@@ -56,9 +61,11 @@
         </mat-card-header>
 
         <mat-card-content class="amount">
-            <p>Bitcoins received up to now: <b *ngIf="user.btcAmount">{{ user.btcAmount.toFixed(2) }} ₿.</b> <b *ngIf="!user.btcAmount">0 ₿.</b></p>
+            <p>Bitcoins received up to now: <b *ngIf="user.btcAmount">{{ user.btcAmount.toFixed(2) }} ₿.</b> <b
+                    *ngIf="!user.btcAmount">0 ₿.</b></p>
         </mat-card-content>
 
+        <!-- Send Button -->
         <div class="add-button" *ngIf="this.currentLoggedUser !== this.user.email">
             <button (click)="openAddTransaction()" mat-fab color="primary" matTooltip="Send BTC"
                 matTooltipPosition="above" class="send-btn">
@@ -66,4 +73,5 @@
             </button>
         </div>
     </mat-card>
+
 </div>

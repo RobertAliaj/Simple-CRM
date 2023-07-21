@@ -138,27 +138,3 @@ export class SignUpComponent {
     this.router.navigate(['/login']);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // try {
-  // }
-  // catch (error: any) {
-  //   if (error.code == "auth/invalid-email") {
-  //     alert("The email address is not valid.");
-  //   } else if (error.code == "auth/operation-not-allowed") {
-  //     alert("Operation not allowed.");
-  //   } else if (error.code == "auth/weak-password") {
-  //     alert("The password is too weak.");
-  //   }
-  // }
