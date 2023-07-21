@@ -1,36 +1,55 @@
 <div>
-    <h1>Welcome to my simple CRM web application!</h1>
+    <h1>Welcome to my Crypto Owners CRM!</h1>
 
-    <p>Welcome to the Crypto Owners CRM! Here, you can manage your users, keep track of how many bitcoins your users
-        own, and even send them a few more.</p>
+    <p>Welcome to the Crypto Owners CRM! This is where you can stay updated with the current BTC price, monitor the
+        Bitcoin balance of other users, and even facilitate transfers to increase their holdings.</p>
 
     <h2>The main functions of the tool are:</h2>
 
     <ul>
+        <li><b>Login:</b> Register to fully unlock all the features of the app. Alternatively, you can log in as a
+            <b> <u> guest </u> </b>, though please note that this <b> <u> limits your access to some functionalities.
+                </u> </b>
+        </li>
+        <br>
         <li><b>Dashboard:</b> Here, you can retrieve the current Bitcoin prices and market capitalizations to always
             stay up-to-date.</li>
-        <li><b>User:</b> To add a new user, navigate to the 'User' section. There, you can view all your users and add a
-            new one by clicking on the plus icon at the bottom right.
+        <br>
+        <li><b>User:</b> Overview of all users.
             <ul>
-                <li><b>User Details:</b> After you have created a user, you can click on the username to go to the 'User
-                    Details'. Here, you get an overview of the user details and the amount of Bitcoin the user has
+                <li><b>User Details:</b> Click on the username to go to the 'User Details'. Here, you get an overview of
+                    your details and the amount of Bitcoin you have
                     received so far.</li>
-                <li><b>Edit Personal Data:</b> In addition, you can change the personal data here or delete the user.
-                </li>
+                <li><b>Edit Personal Data:</b> In addition, you can change your personal data here or delete your
+                    account. (Only for registered users)</li>
                 <li><b>Send Bitcoin:</b> By clicking on the 'Send' button, an input field opens. Enter the amount of
                     Bitcoin you want to send to the user and click on 'Send'.</li>
             </ul>
         </li>
-        <li><b>Transactions:</b> In the 'Transactions' section, you can view and track all completed transactions.</li>
+        <br>
+        <li><b>Transactions:</b> In the 'Transactions' section, you can view and track all completed transactions, you
+            can view the sender and the receiver.
+        </li>
+        <br>
+        <li><b>Transactions Chart :</b>Each user's Bitcoin balance is neatly displayed in a chart.</li>
+        <br>
         <li><b>News:</b> Stay up-to-date with the 'News' section. Thanks to the integration of the Gnews API, you
             receive daily current news from the world of cryptocurrencies here.</li>
+        <br>
+        <li><b>Search:</b> Use the Search bar to search users or transactions.</li>
     </ul>
+
 
     <h2>Note:</h2>
 
     <p>This application is a Customer Relationship Management (CRM) tool that operates with CRUD (Create, Read, Update,
         Delete) functionalities and is based on Angular. Firebase serves as the backend, while the user interface is
         designed using Angular Material, which is based on the principles of Material Design.</p>
+
+    <p>Die App ist durch <b><u> AuthGuard</u></b> geschützt. Das bedeutet, dass man selbst, über den direkten Link nicht
+        auf interne
+        Seiten der App zugreifen kann ohne sich anzumelden.</p>
+
 
     <p>This tool mainly serves for demonstration and illustration of my skills; no real transactions or actions are
         possible. Enjoy exploring and testing!</p>
