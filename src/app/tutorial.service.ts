@@ -20,8 +20,13 @@ export class TutorialService {
     },
     {
       title: 'Login',
-      img: 'lets-go.webp',
-      description: 'Register to fully unlock all the features of the app. Alternatively, you can log in as a guest , though please note that this limits your access to some functionalities.',
+      img: 'signUp.webp',
+      description: 'Register and login to fully unlock all the features of the app. Alternatively, you can log in as a guest, though please note that this limits your access to some functionalities.',
+    },
+    {
+      title: 'Guest Login',
+      img: 'guest-login.webp',
+      description: 'Alternatively, you can log in as a guest, though please note that this limits your access to some functionalities.',
     },
     {
       title: 'Dashboard',
@@ -29,23 +34,18 @@ export class TutorialService {
       description: 'Here you can retrieve the current Bitcoin prices and market capitalizations to stay up to date.'
     },
     {
-      title: 'User',
-      img: 'add-user.webp',
+      title: 'Users',
+      img: 'users.webp',
       description: 'Overview of all users.'
     },
     {
       title: 'User',
-      img: 'openuser.webp',
+      img: 'open-user.webp',
       description: 'You can click on the username to go to the \'User Details\'.'
     },
     {
-      title: 'Search',
-      img: 'openuser.webp',
-      description: 'Utilize the search bar to find specific users or transactions.'
-    },
-    {
       title: 'User Detail',
-      img: 'user-detail.webp',
+      img: 'user-details.webp',
       description: ' Here, you get an overview of your details and the amount of Bitcoin you have received so far.'
     },
     {
@@ -54,14 +54,14 @@ export class TutorialService {
       description: 'You can change your personal data here.'
     },
     {
-      title: 'Delete the User',
+      title: 'Delete User',
       img: 'delete-user.webp',
       description: 'Or delete your account. (Only for registered users)'
     },
     {
       title: 'Send Bitcoins',
       img: 'send-bitcoin.webp',
-      description: ' Click on the \'Send\' button at the bottom right to perform a transaction.'
+      description: 'If you go to another user, you can click on the \'Send\' button at the bottom right to perform a transaction.'
     },
     {
       title: 'Send Bitcoins',
@@ -70,12 +70,12 @@ export class TutorialService {
     },
     {
       title: 'Transactions',
-      img: 'transaction1.webp',
+      img: 'transactions.webp',
       description: 'In the \'Transactions\' section, you can review and follow every completed transaction, observing both the sender and the receiver.'
     },
     {
       title: 'Transaction Chart',
-      img: 'transaction1.webp',
+      img: 'transaction-chart.webp',
       description: 'Each user\'s Bitcoin balance is neatly displayed in a chart.'
     },
     {
@@ -87,6 +87,11 @@ export class TutorialService {
       title: 'Help',
       img: 'help.webp',
       description: 'Navigate to the Help section anytime you need an overview of the functionalities of this app.'
+    },
+    {
+      title: 'Log Out',
+      img: 'log-out.webp',
+      description: 'Simply click on \'Log Out\' to log out of the page.'
     },
     {
       title: 'Congratulations!',
