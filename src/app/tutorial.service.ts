@@ -21,7 +21,7 @@ export class TutorialService {
     {
       title: 'Login',
       img: 'signUp.webp',
-      description: 'Register and login to fully unlock all the features of the app. Alternatively, you can log in as a guest, though please note that this limits your access to some functionalities.',
+      description: 'Register and login to fully unlock all the features of the app.',
     },
     {
       title: 'Guest Login',
